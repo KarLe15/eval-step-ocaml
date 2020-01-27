@@ -1,0 +1,19 @@
+
+<div class="container-fluid" >
+  <div class="row  mr-0">
+    <div class="col-md-9">
+      <app-editor (saisir)="onChange($event)"></app-editor>
+
+      <div class="d-flex justify-content-center">
+        <button (click)="onClick()" type="button" class="btn btn-default">Evaluer</button>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <app-options></app-options>
+    </div>
+  </div>
+
+  <div class="row m-5 border-top">
+    <h3>{{data |json}}</h3>
+  </div>
+</div>

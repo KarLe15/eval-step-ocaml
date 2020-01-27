@@ -1,0 +1,7 @@
+<div class="d-flex justify-content-start">
+  <p class="lead border-bottom"> Saisir votre code en Ocaml </p> <i class="fi flaticon-data ml-4"></i>
+</div>
+<div>
+  <ngx-monaco-editor class="my-code-editor" (keyup)="onKeyUp()"  [options]="editorOptions" [(ngModel)]="code"></ngx-monaco-editor>
+</div>
+
