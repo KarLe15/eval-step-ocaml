@@ -7,6 +7,7 @@ import { FormsModule} from '@angular/forms';
 import {MonacoEditorModule} from 'ngx-monaco-editor';
 import { ResultComponent } from './result/result.component';
 import {ScrollToModule} from '@nicky-lenaers/ngx-scroll-to';
+import { UiSwitchModule } from 'ngx-ui-switch';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import {ScrollToModule} from '@nicky-lenaers/ngx-scroll-to';
     CommonModule,
     FormsModule,
     MonacoEditorModule,
+    UiSwitchModule,
     ScrollToModule.forRoot()
   ]
 })

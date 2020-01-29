@@ -11,8 +11,8 @@ export class EditorComponent implements OnInit {
   @Output('changeFun') changeFun = new EventEmitter();
 
   editorOptions = {theme: 'vs-dark', fontSize: '18px', autoIndent: 'full', language: 'fsharp'};
-  codeFun = ' let x = 1 in x + 1 ';
-  codeMain = 'let _ = ';
+  codeFun = ' let f a = a + 1;';
+  codeMain = 'let _ = f 5';
   constructor() { }
 
   ngOnInit() {

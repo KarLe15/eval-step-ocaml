@@ -8,14 +8,25 @@
 
   </div>
 
-  <div class="card-body card-body-cascade pb-0">
-    <div class="custom-control custom-switch">
-      <input type="checkbox" class="custom-control-input" id="customBoolean">
-      <label class="custom-control-label" for="customBoolean">Evaluation Boolean</label>
+  <div class="card-body card-body-cascade pb-0 ml-4 mr-5">
+    <div class="d-flex justify-content-between align-self-center">
+      <p class="labelOption">Evaluation Boolean</p>
+      <ui-switch
+        color="#0099CC" size="small"
+        checkedLabel="On" uncheckedLabel="Off"
+        [(ngModel)]="evalBoolean"
+        (valueChange)="onValueChange($event)"
+      ></ui-switch>
     </div>
-    <div class="custom-control custom-switch">
-      <input type="checkbox" class="custom-control-input" id="customSwitches">
-      <label class="custom-control-label" for="customSwitches">Evaluation Boolean</label>
+
+    <div class="d-flex justify-content-between align-self-center">
+      <p class="labelOption">Evaluation Condition</p>
+      <ui-switch color="#0099CC" size="small" checkedLabel="On" uncheckedLabel="Off"></ui-switch>
+    </div>
+
+    <div class="d-flex justify-content-between align-self-center">
+      <p class="labelOption">Substition Fonction</p>
+      <ui-switch color="#0099CC" size="small" checkedLabel="On" uncheckedLabel="Off"></ui-switch>
     </div>
 
   </div>
