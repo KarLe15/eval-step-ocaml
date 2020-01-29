@@ -10,14 +10,15 @@ export class EditorComponent implements OnInit {
   @Output('saisir') change = new EventEmitter();
 
   editorOptions = {theme: 'vs-dark', language: 'fsharp'};
-  code = ' let x = 1 in x + 1 ';
+  codeFun = ' let x = 1 in x + 1 ';
+  codeMain = 'let _ = '
   constructor() { }
 
   ngOnInit() {
   }
 
   onKeyUp() {
-    this.change.emit(this.code);
+    this.change.emit(this.codeFun);
   }
 
 
