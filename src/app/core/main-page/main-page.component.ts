@@ -6,20 +6,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./main-page.component.scss']
 })
 export class MainPageComponent implements OnInit {
-  private data: string;
+  private defFun: string;
   evaluate = false;
+  private defMain: string;
   constructor() { }
 
   ngOnInit() {
   }
 
   onClick() {
-    console.log(this.data);
     this.evaluate = true;
   }
 
-  onChange(eventArgs) {
-    this.data = eventArgs;
+  onChangeFun(eventArgs) {
+    this.defFun = eventArgs;
   }
 
+  onChangeMain(eventArgs) {
+    this.defMain = eventArgs;
+  }
 }

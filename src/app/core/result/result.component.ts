@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-result',
@@ -6,20 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./result.component.scss']
 })
 export class ResultComponent implements OnInit {
-  env = `
-    "env0": {
-          "fact": {
-            "corec": [],
-            "expr": {
-              "expr":
-                "fun n ->\\n  let rec loop n rep = match n with | 0 -> rep | _ -> loop (n - 1) (n * rep) in\\n  loop n 1"
-            }
-          }
-        }
-  `;
-  expr = `
-    ((fact 5)[@env0 ])
-  `
+  // tslint:disable-next-line:no-input-rename
+  @Input('defFuns') defFuns: string;
+  // tslint:disable-next-line:no-input-rename
+  @Input('defMain') defMain: string;
   constructor() { }
 
   ngOnInit() {
