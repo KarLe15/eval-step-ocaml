@@ -1,0 +1,30 @@
+<div class="container-fluid mt-5">
+  <div class="row">
+    <!-- Expression -->
+    <div class="col-sm-8 mb-3 mb-md-0">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Étape 01</h5>
+          <p class="card-text">{{expr}}</p>
+        </div>
+      </div>
+
+      <!-- Buttons Next and Previous -->
+      <div class="d-flex justify-content-between mt-4 ">
+        <i class="fi flaticon-back ml-4" (click)="onPrevious()" > </i>
+        <i class="fi flaticon-next mr-4" (click)="onNext()" > </i>
+      </div>
+    </div>
+
+    <!-- Environnement -->
+    <div class="col-sm-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Environement</h5>
+          <p class="card-text">{{env}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

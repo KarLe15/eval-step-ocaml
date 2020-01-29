@@ -6,8 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./main-page.component.scss']
 })
 export class MainPageComponent implements OnInit {
-
   private data: string;
+  evaluate = false;
   constructor() { }
 
   ngOnInit() {
@@ -15,6 +15,7 @@ export class MainPageComponent implements OnInit {
 
   onClick() {
     console.log(this.data);
+    this.evaluate = true;
   }
 
   onChange(eventArgs) {

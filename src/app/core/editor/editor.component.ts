@@ -9,9 +9,9 @@ export class EditorComponent implements OnInit {
   // tslint:disable-next-line:no-output-rename
   @Output('saisir') change = new EventEmitter();
 
-  editorOptions = {theme: 'vs-dark', language: 'fsharp'};
+  editorOptions = {theme: 'vs-dark', fontSize: '18px', autoIndent: 'full', language: 'fsharp'};
   codeFun = ' let x = 1 in x + 1 ';
-  codeMain = 'let _ = '
+  codeMain = 'let _ = ';
   constructor() { }
 
   ngOnInit() {

@@ -5,12 +5,15 @@ import { OptionsComponent } from './options/options.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { FormsModule} from '@angular/forms';
 import {MonacoEditorModule} from 'ngx-monaco-editor';
+import { ResultComponent } from './result/result.component';
+import {ScrollToModule} from '@nicky-lenaers/ngx-scroll-to';
 
 @NgModule({
   declarations: [
     EditorComponent,
     OptionsComponent,
-    MainPageComponent
+    MainPageComponent,
+    ResultComponent
   ],
   exports: [
     EditorComponent,
@@ -20,7 +23,8 @@ import {MonacoEditorModule} from 'ngx-monaco-editor';
   imports: [
     CommonModule,
     FormsModule,
-    MonacoEditorModule
+    MonacoEditorModule,
+    ScrollToModule.forRoot()
   ]
 })
 export class CoreModule { }

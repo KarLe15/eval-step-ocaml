@@ -4,8 +4,16 @@
     <div class="col-md-9">
       <app-editor (saisir)="onChange($event)"></app-editor>
 
-      <div class="d-flex justify-content-center">
-        <button (click)="onClick()" type="button" class="btn btn-default">Evaluer</button>
+      <div class="d-flex justify-content-center mb-4">
+        <button
+          (click)="onClick()"
+          type="button"
+          [ngx-scroll-to]="'#destination'"
+          class="btn btn-outline-primary waves-effect mt-4 d-flex align-items-center rounded-pill"
+        >
+          <i class="fi flaticon-analyze"></i>
+          <span class="lead">Evaluer</span>
+        </button>
       </div>
     </div>
     <div class="col-md-3">
@@ -13,7 +21,9 @@
     </div>
   </div>
 
-  <div class="row m-5 border-top">
-    <h3>{{data |json}}</h3>
+  <div *ngIf="evaluate" g class="row mt-2 mr-4 ml-4 border-top">
+    <div class="col-12" id="destination" #destinationRef>
+      <app-result></app-result>
+    </div>
   </div>
 </div>
