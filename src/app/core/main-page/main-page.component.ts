@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {EvalService} from '../../services/eval.service';
 
 @Component({
   selector: 'app-main-page',
@@ -8,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class MainPageComponent implements OnInit {
 
   private data: string;
-  constructor() { }
+  constructor(private evaluator: EvalService) { }
 
   ngOnInit() {
   }

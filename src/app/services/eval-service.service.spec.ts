@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { EvalServiceService } from './eval-service.service';
+import { EvalService } from './eval.service';
 
 describe('EvalServiceService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: EvalServiceService = TestBed.get(EvalServiceService);
+    const service: EvalService = TestBed.get(EvalService);
     expect(service).toBeTruthy();
   });
 });
