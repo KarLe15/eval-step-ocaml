@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./options.component.scss']
 })
 export class OptionsComponent implements OnInit {
+  evalBoolean = true;
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  onValueChange(value: boolean) {
+    console.log(value);
+  }
 }

@@ -5,13 +5,20 @@ import { OptionsComponent } from './options/options.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { FormsModule} from '@angular/forms';
 import {MonacoEditorModule} from 'ngx-monaco-editor';
+
 import {EvalService} from '../services/eval.service';
+
+import { ResultComponent } from './result/result.component';
+import {ScrollToModule} from '@nicky-lenaers/ngx-scroll-to';
+import { UiSwitchModule } from 'ngx-ui-switch';
+
 
 @NgModule({
   declarations: [
     EditorComponent,
     OptionsComponent,
-    MainPageComponent
+    MainPageComponent,
+    ResultComponent
   ],
   exports: [
     EditorComponent,
@@ -24,7 +31,10 @@ import {EvalService} from '../services/eval.service';
     MonacoEditorModule
   ],
   providers: [
-    EvalService
+    EvalService,
+    MonacoEditorModule,
+    UiSwitchModule,
+    ScrollToModule.forRoot()
   ]
 })
 export class CoreModule { }

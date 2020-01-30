@@ -1,0 +1,38 @@
+<div class="container-fluid mt-5">
+  <div class="row">
+    <!-- Expression -->
+    <div class="col-sm-8 mb-3 mb-md-0">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-title d-flex justify-content-between">
+            <h5 class="">
+              Étape 01
+            </h5>
+            <i class="fi flaticon-test symbol"></i>
+          </div>
+          <p class="card-text">{{defMain}}</p>
+        </div>
+      </div>
+
+      <!-- Buttons Next and Previous -->
+      <div class="d-flex justify-content-between mt-4 ">
+        <i class="fi flaticon-back ml-4" (click)="onPrevious()" > </i>
+        <i class="fi flaticon-next mr-4" (click)="onNext()" > </i>
+      </div>
+    </div>
+
+    <!-- Environnement -->
+    <div class="col-sm-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-title d-flex justify-content-between">
+            <h5 class="card-title">Environement</h5>
+            <i class="fi flaticon-technical-support symbol"></i>
+          </div>
+          <p class="card-text text-env">{{defFuns}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

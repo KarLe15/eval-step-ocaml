@@ -7,19 +7,24 @@ import {EvalService} from '../../services/eval.service';
   styleUrls: ['./main-page.component.scss']
 })
 export class MainPageComponent implements OnInit {
+  private defFun: string;
+  evaluate = false;
+  private defMain: string;
 
   private data: string;
   constructor(private evaluator: EvalService) { }
-
   ngOnInit() {
   }
 
   onClick() {
-    console.log(this.data);
+    this.evaluate = true;
   }
 
-  onChange(eventArgs) {
-    this.data = eventArgs;
+  onChangeFun(eventArgs) {
+    this.defFun = eventArgs;
   }
 
+  onChangeMain(eventArgs) {
+    this.defMain = eventArgs;
+  }
 }
