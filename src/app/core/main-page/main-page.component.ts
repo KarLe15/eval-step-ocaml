@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {EvalService} from '../../services/eval.service';
+import IEvaluation from '../../structures/IEvaluation';
+import {Subject} from 'rxjs';
+
 
 @Component({
   selector: 'app-main-page',
@@ -10,14 +13,17 @@ export class MainPageComponent implements OnInit {
   private defFun: string;
   evaluate = false;
   private defMain: string;
-
   private data: string;
+  private eventSubject: Subject<void> = new Subject<void>();
+  private expressions: IEvaluation;
   constructor(private evaluator: EvalService) { }
   ngOnInit() {
   }
 
   onClick() {
     this.evaluate = true;
+    this.expressions = this.evaluator.getDataStructure();
+    this.emitEventToChild();
   }
 
   onChangeFun(eventArgs) {
@@ -26,5 +32,8 @@ export class MainPageComponent implements OnInit {
 
   onChangeMain(eventArgs) {
     this.defMain = eventArgs;
+  }
+  emitEventToChild() {
+    this.eventSubject.next();
   }
 }

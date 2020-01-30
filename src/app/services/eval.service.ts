@@ -140,6 +140,9 @@ export class EvalService {
     // return this.parseJSONToIEvaluation(stringOfJson, '@mock : first expression');
      return this.jsonToIEvaluation(jsonSteps, '@mock : first expression');
   }
+  public getFirstStep(evaluations: IEvaluation): IStep {
+    return evaluations.firstStep;
+  }
   public getNextStep(current: IStep): IStep | null {
     let next: IStep | null = null;
     if (current.nexts !== null) {

@@ -10,7 +10,7 @@
             </h5>
             <i class="fi flaticon-test symbol"></i>
           </div>
-          <p class="card-text">{{defMain}}</p>
+          <p class="card-text">{{currentStep.currentExpression.toString}}</p>
         </div>
       </div>
 
@@ -29,7 +29,7 @@
             <h5 class="card-title">Environement</h5>
             <i class="fi flaticon-technical-support symbol"></i>
           </div>
-          <p class="card-text text-env">{{defFuns}}</p>
+          <p class="card-text text-env">{{currentStep.currentExpression.environements | json}}</p>
         </div>
       </div>
     </div>

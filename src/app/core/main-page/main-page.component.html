@@ -22,7 +22,7 @@
 
   <div *ngIf="evaluate" g class="row mt-2 mr-4 ml-4 border-top">
     <div class="col-12" id="destination" #destinationRef>
-      <app-result [defFuns]="defFun" [defMain]="defMain" ></app-result>
+      <app-result [expressions]="expressions" [events]="eventSubject.asObservable()" ></app-result>
     </div>
   </div>
 </div>

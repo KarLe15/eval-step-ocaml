@@ -13,6 +13,8 @@ import {ScrollToModule} from '@nicky-lenaers/ngx-scroll-to';
 import { UiSwitchModule } from 'ngx-ui-switch';
 
 
+// @ts-ignore
+// @ts-ignore
 @NgModule({
   declarations: [
     EditorComponent,
@@ -28,13 +30,12 @@ import { UiSwitchModule } from 'ngx-ui-switch';
   imports: [
     CommonModule,
     FormsModule,
-    MonacoEditorModule
+    MonacoEditorModule,
+    ScrollToModule.forRoot(),
+    UiSwitchModule
   ],
   providers: [
     EvalService,
-    MonacoEditorModule,
-    UiSwitchModule,
-    ScrollToModule.forRoot()
   ]
 })
 export class CoreModule { }

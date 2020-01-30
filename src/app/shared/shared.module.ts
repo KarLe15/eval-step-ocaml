@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { FooterComponent } from './footer/footer.component';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
+import {ParticlesModule} from 'angular-particle';
 
 
 
@@ -17,8 +18,8 @@ import { NotFoundPageComponent } from './not-found-page/not-found-page.component
     FooterComponent,
     NotFoundPageComponent
   ],
-  imports: [
-    CommonModule
-  ]
+    imports: [
+        CommonModule,
+    ]
 })
 export class SharedModule { }
