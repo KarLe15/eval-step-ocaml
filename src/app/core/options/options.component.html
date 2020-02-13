@@ -9,25 +9,18 @@
   </div>
 
   <div class="card-body card-body-cascade pb-0 ml-4 mr-5">
-    <div class="d-flex justify-content-between align-self-center">
-      <p class="labelOption">Evaluation Boolean</p>
+
+    <div *ngFor="let item of options | keyvalue" class="d-flex justify-content-between align-self-center">
+      <p class="labelOption">{{item.key}}</p>
       <ui-switch
         color="#0099CC" size="small"
         checkedLabel="On" uncheckedLabel="Off"
-        [(ngModel)]="evalBoolean"
-        (valueChange)="onValueChange($event)"
+        (change)="onChangeOption()"
+        [(ngModel)]="item.value.valueDefault"
+        (valueChange)="onValueChange($event, item.value.name)"
       ></ui-switch>
     </div>
 
-    <div class="d-flex justify-content-between align-self-center">
-      <p class="labelOption">Evaluation Condition</p>
-      <ui-switch color="#0099CC" size="small" checkedLabel="On" uncheckedLabel="Off"></ui-switch>
-    </div>
-
-    <div class="d-flex justify-content-between align-self-center">
-      <p class="labelOption">Substition Fonction</p>
-      <ui-switch color="#0099CC" size="small" checkedLabel="On" uncheckedLabel="Off"></ui-switch>
-    </div>
 
   </div>
 

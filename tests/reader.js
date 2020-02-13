@@ -17,7 +17,7 @@ process.stdin.on('keypress', (str, key) => {
     if (
       json[i].step[] === "MoveDownSubst" &&
       json[i+1].step[] === "Match"       &&
-      json[i+2].step[] === "SubstCombine" 
+      json[i+2].step[] === "SubstCombine"
       ) {
       i += 3;
     }
@@ -25,7 +25,7 @@ process.stdin.on('keypress', (str, key) => {
     if (
       json[i].step[] === "ApplyFunRuntime"   &&
       json[i+1].step[] === "ApplyFunRuntime" &&
-      json[i+2].step[] === "SubstFun" 
+      json[i+2].step[] === "SubstFun"
       ) {
       i += 3;
     }
@@ -81,11 +81,11 @@ function mapStepToEnum (step)  {
         return 'b';
       case  "SubstVar" :
         return 'c';
-      case  "SubstFun" : 
+      case  "SubstFun" :
         return 'd';
-      case  "If" : 
+      case  "If" :
         return 'e';
-      case  "Let" : 
+      case  "Let" :
         return 'f';
       case  "Match" :
         return 'g';
@@ -103,7 +103,7 @@ function mapStepToEnum (step)  {
         return 'm';
       case "ApplyFun":
         return 'n';
-      default : 
+      default :
         return 'z'
     };
 };
