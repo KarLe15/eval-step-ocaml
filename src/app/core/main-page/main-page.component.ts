@@ -27,9 +27,9 @@ export class MainPageComponent implements OnInit {
   }
 
   onClick() {
-    this.evaluate = true;
     this.expressions = this.evaluator.getDataStructure();
     this.emitEventToChild();
+    this.evaluate = true;
   }
 
   onChangeFun(eventArgs) {
