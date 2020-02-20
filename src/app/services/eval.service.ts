@@ -3,7 +3,7 @@ import IEvaluation from '../structures/IEvaluation';
 import IStep from '../structures/IStep';
 import {IEnvironment} from '../structures/IEnvironement';
 import IExpression from '../structures/IExpression';
-import * as jsonSteps from './fact_tr.json';
+import * as jsonSteps from './fact.json';
 
 @Injectable({
   providedIn: 'root'

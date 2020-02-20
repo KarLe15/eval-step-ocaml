@@ -10,13 +10,13 @@
             </h5>
             <i class="fi flaticon-test symbol"></i>
           </div>
-          <p class="card-text">{{currentStep.currentExpression.toString}}</p>
+          <p class="card-text result" >{{currentStep.currentExpression.toString | replaceN }}</p>
         </div>
       </div>
 
       <!-- Buttons Next and Previous -->
       <div class="d-flex justify-content-between mt-4 ">
-        <i class="fi flaticon-back ml-4" (click)="onPrevious()" > </i>
+        <i class="fi flaticon-back ml-4"  (click)="onPrevious()" > </i>
         <i class="fi flaticon-next mr-4" (click)="onNext()" > </i>
       </div>
     </div>
@@ -29,7 +29,7 @@
             <h5 class="card-title">Environement</h5>
             <i class="fi flaticon-technical-support symbol"></i>
           </div>
-          <p class="card-text text-env">{{currentStep.currentExpression.environements | json}}</p>
+          <p class="card-text text-env">{{currentStep.currentExpression.environements | json }}</p>
         </div>
       </div>
     </div>

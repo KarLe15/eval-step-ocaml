@@ -14,6 +14,7 @@ process.stdin.on('keypress', (str, key) => {
   if (key.ctrl && key.name === 'c') {
     process.exit();
   } else {
+
     // if (
     //   json[i].step[0] === "MoveDownSubst" &&
     //   json[i+1].step[0] === "Match"       &&
@@ -36,7 +37,23 @@ process.stdin.on('keypress', (str, key) => {
     // ||  step === "ApplyFunComplete"){
     //   i++;
     // }
+      /*
+    if (
+      json[i].step[] === "MoveDownSubst" &&
+      json[i+1].step[] === "Match"       &&
+      json[i+2].step[] === "SubstCombine"
+      ) {
+      i += 3;
+    }
 
+    if (
+      json[i].step[] === "ApplyFunRuntime"   &&
+      json[i+1].step[] === "ApplyFunRuntime" &&
+      json[i+2].step[] === "SubstFun"
+      ) {
+      i += 3;
+    }
+      */
     let step = json[i].step[0];
     if(isSubstFunOf(json,i, "fact")){
       console.log("a");

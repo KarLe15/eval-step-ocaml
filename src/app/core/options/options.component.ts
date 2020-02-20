@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {OptionsService} from '../../services/options.service';
+import IOption from '../../structures/IOption';
 
 @Component({
   selector: 'app-options',
@@ -6,14 +8,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./options.component.scss']
 })
 export class OptionsComponent implements OnInit {
-  evalBoolean = true;
+  @Input('options') options: Map<string, IOption>;
+  @Output('changeOptions') changeOptions = new EventEmitter();
+  MoveDownSubst: true;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
   }
 
-  onValueChange(value: boolean) {
-    console.log(value);
+
+  /* changement de l'option */
+  onValueChange(value: boolean, key: string ) {
+    this.options.get(key).valueDefault = value;
+  }
+
+  onChangeOption() {
+    this.changeOptions.emit(this.options);
   }
 }

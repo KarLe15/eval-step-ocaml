@@ -1,11 +1,11 @@
 <div class="container-fluid mb-5" >
-  <div class="row  mr-0">
+  <div class="row mr-0">
     <div class="col-md-9">
-      <app-editor (changeFun)="onChangeFun($event)" (changeMain)="onChangeMain($event)"></app-editor>
+      <app-editor (changeFun)="onChangeFun($event)" (changeMain)="onChangeMain($event)" ></app-editor>
 
       <div class="d-flex justify-content-center mb-4">
         <button
-          (click)="onClick()"
+          (mouseup)="onClick()"
           type="button"
           [ngx-scroll-to]="'#destination'"
           class="btn btn-outline-primary waves-effect mt-4 d-flex align-items-center rounded-pill"
@@ -16,13 +16,13 @@
       </div>
     </div>
     <div class="col-md-3">
-      <app-options></app-options>
+      <app-options [options]="options" (changeOptions)="recuperateOption($event)" ></app-options>
     </div>
   </div>
 
   <div *ngIf="evaluate" g class="row mt-2 mr-4 ml-4 border-top">
     <div class="col-12" id="destination" #destinationRef>
-      <app-result [expressions]="expressions" [events]="eventSubject.asObservable()" ></app-result>
+      <app-result [options]="options"  [expressions]="expressions" [events]="eventSubject.asObservable()" ></app-result>
     </div>
   </div>
 </div>

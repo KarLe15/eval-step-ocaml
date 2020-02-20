@@ -2,6 +2,8 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {EvalService} from '../../services/eval.service';
 import IEvaluation from '../../structures/IEvaluation';
 import {Subject} from 'rxjs';
+import IOption from '../../structures/IOption';
+import {OptionsService} from '../../services/options.service';
 
 
 @Component({
@@ -16,14 +18,18 @@ export class MainPageComponent implements OnInit {
   private data: string;
   private eventSubject: Subject<void> = new Subject<void>();
   private expressions: IEvaluation;
-  constructor(private evaluator: EvalService) { }
+
+  private options: Map<string, IOption>;
+
+  constructor(private evaluator: EvalService, private OptService: OptionsService) { }
   ngOnInit() {
+    this.options = this.OptService.getOptions();
   }
 
   onClick() {
-    this.evaluate = true;
     this.expressions = this.evaluator.getDataStructure();
     this.emitEventToChild();
+    this.evaluate = true;
   }
 
   onChangeFun(eventArgs) {
@@ -33,6 +39,11 @@ export class MainPageComponent implements OnInit {
   onChangeMain(eventArgs) {
     this.defMain = eventArgs;
   }
+
+  recuperateOption(eventArgs) {
+    this.options = eventArgs;
+  }
+
   emitEventToChild() {
     this.eventSubject.next();
   }

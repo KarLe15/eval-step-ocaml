@@ -1,0 +1,1697 @@
+[
+  {
+    "current_expression": {
+      "expr": "((fact 5)[@env0 ])",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((fact)[@env0 ]) 5",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((fun x -> if x = 0 then 1 else x * (fact (x - 1)))[@env0 ]) 5",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> ((if x = 0 then 1 else x * (fact (x - 1)))[@env0 ])) 5",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> if x = 0 then 1 else ((x * (fact (x - 1)))[@env0 ])) 5",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((if x = 0 then 1 else ((x * (fact (x - 1)))[@env0 ]))[@env1 ])",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        },
+        "env1": { "x": { "corec": [], "expr": { "expr": "5", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "if ((x = 0)[@env2 ]) then 1 else ((x * (fact (x - 1)))[@env1 ][@env0 ])",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        },
+        "env1": { "x": { "corec": [], "expr": { "expr": "5", "envs": {} } } },
+        "env2": { "x": { "corec": [], "expr": { "expr": "5", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "if ((x)[@env2 ]) = 0 then 1 else ((x * (fact (x - 1)))[@env1 ][@env0 ])",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        },
+        "env1": { "x": { "corec": [], "expr": { "expr": "5", "envs": {} } } },
+        "env2": { "x": { "corec": [], "expr": { "expr": "5", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr": "if 5 = 0 then 1 else ((x * (fact (x - 1)))[@env1 ][@env0 ])",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        },
+        "env1": { "x": { "corec": [], "expr": { "expr": "5", "envs": {} } } }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr": "if false then 1 else ((x * (fact (x - 1)))[@env1 ][@env0 ])",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        },
+        "env1": { "x": { "corec": [], "expr": { "expr": "5", "envs": {} } } }
+      }
+    },
+    "step": [ "If" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((x * (fact (x - 1)))[@env1 ][@env0 ])",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        },
+        "env1": { "x": { "corec": [], "expr": { "expr": "5", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstCombine" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((x * (fact (x - 1)))[@env0 ])",
+      "envs": {
+        "env0": {
+          "x": { "corec": [], "expr": { "expr": "5", "envs": {} } },
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((x)[@env0 ]) * ((fact (x - 1))[@env1 ])",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "5", "envs": {} } } },
+        "env1": {
+          "x": { "corec": [], "expr": { "expr": "5", "envs": {} } },
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((x)[@env0 ]) * (((fact)[@env2 ]) ((x - 1)[@env1 ]))",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "5", "envs": {} } } },
+        "env1": { "x": { "corec": [], "expr": { "expr": "5", "envs": {} } } },
+        "env2": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((x)[@env0 ]) * (((fact)[@env2 ]) (((x)[@env1 ]) - 1))",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "5", "envs": {} } } },
+        "env1": { "x": { "corec": [], "expr": { "expr": "5", "envs": {} } } },
+        "env2": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr": "5 * (((fact)[@env1 ]) (((x)[@env0 ]) - 1))",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "5", "envs": {} } } },
+        "env1": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr": "5 * (((fact)[@env0 ]) (5 - 1))",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr": "5 * (((fact)[@env0 ]) 4)",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "5 * (((fun x -> if x = 0 then 1 else x * (fact (x - 1)))[@env0 ]) 4)",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "5 * ((fun x -> ((if x = 0 then 1 else x * (fact (x - 1)))[@env0 ])) 4)",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "5 * ((fun x -> if x = 0 then 1 else ((x * (fact (x - 1)))[@env0 ])) 4)",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "5 * ((if x = 0 then 1 else ((x * (fact (x - 1)))[@env0 ]))[@env1 ])",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        },
+        "env1": { "x": { "corec": [], "expr": { "expr": "4", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "5 * (if ((x = 0)[@env2 ]) then 1 else ((x * (fact (x - 1)))[@env1 ][@env0 ]))",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        },
+        "env1": { "x": { "corec": [], "expr": { "expr": "4", "envs": {} } } },
+        "env2": { "x": { "corec": [], "expr": { "expr": "4", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "5 * (if ((x)[@env2 ]) = 0 then 1 else ((x * (fact (x - 1)))[@env1 ][@env0 ]))",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        },
+        "env1": { "x": { "corec": [], "expr": { "expr": "4", "envs": {} } } },
+        "env2": { "x": { "corec": [], "expr": { "expr": "4", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "5 * (if 4 = 0 then 1 else ((x * (fact (x - 1)))[@env1 ][@env0 ]))",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        },
+        "env1": { "x": { "corec": [], "expr": { "expr": "4", "envs": {} } } }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "5 * (if false then 1 else ((x * (fact (x - 1)))[@env1 ][@env0 ]))",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        },
+        "env1": { "x": { "corec": [], "expr": { "expr": "4", "envs": {} } } }
+      }
+    },
+    "step": [ "If" ]
+  },
+  {
+    "current_expression": {
+      "expr": "5 * ((x * (fact (x - 1)))[@env1 ][@env0 ])",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        },
+        "env1": { "x": { "corec": [], "expr": { "expr": "4", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstCombine" ]
+  },
+  {
+    "current_expression": {
+      "expr": "5 * ((x * (fact (x - 1)))[@env0 ])",
+      "envs": {
+        "env0": {
+          "x": { "corec": [], "expr": { "expr": "4", "envs": {} } },
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "5 * (((x)[@env0 ]) * ((fact (x - 1))[@env1 ]))",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "4", "envs": {} } } },
+        "env1": {
+          "x": { "corec": [], "expr": { "expr": "4", "envs": {} } },
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "5 * (((x)[@env0 ]) * (((fact)[@env2 ]) ((x - 1)[@env1 ])))",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "4", "envs": {} } } },
+        "env1": { "x": { "corec": [], "expr": { "expr": "4", "envs": {} } } },
+        "env2": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "5 * (((x)[@env0 ]) * (((fact)[@env2 ]) (((x)[@env1 ]) - 1)))",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "4", "envs": {} } } },
+        "env1": { "x": { "corec": [], "expr": { "expr": "4", "envs": {} } } },
+        "env2": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr": "5 * (4 * (((fact)[@env1 ]) (((x)[@env0 ]) - 1)))",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "4", "envs": {} } } },
+        "env1": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr": "5 * (4 * (((fact)[@env0 ]) (4 - 1)))",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr": "5 * (4 * (((fact)[@env0 ]) 3))",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "5 * (4 * (((fun x -> if x = 0 then 1 else x * (fact (x - 1)))[@env0 ]) 3))",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "5 * (4 * ((fun x -> ((if x = 0 then 1 else x * (fact (x - 1)))[@env0 ])) 3))",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "5 * (4 * ((fun x -> if x = 0 then 1 else ((x * (fact (x - 1)))[@env0 ])) 3))",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "5 * (4 * ((if x = 0 then 1 else ((x * (fact (x - 1)))[@env0 ]))[@env1 ]))",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        },
+        "env1": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "5 *\n  (4 *\n     (if ((x = 0)[@env2 ]) then 1 else ((x * (fact (x - 1)))[@env1 ][@env0 ])))",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        },
+        "env1": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env2": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "5 *\n  (4 *\n     (if ((x)[@env2 ]) = 0 then 1 else ((x * (fact (x - 1)))[@env1 ][@env0 ])))",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        },
+        "env1": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env2": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "5 * (4 * (if 3 = 0 then 1 else ((x * (fact (x - 1)))[@env1 ][@env0 ])))",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        },
+        "env1": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "5 * (4 * (if false then 1 else ((x * (fact (x - 1)))[@env1 ][@env0 ])))",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        },
+        "env1": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } }
+      }
+    },
+    "step": [ "If" ]
+  },
+  {
+    "current_expression": {
+      "expr": "5 * (4 * ((x * (fact (x - 1)))[@env1 ][@env0 ]))",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        },
+        "env1": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstCombine" ]
+  },
+  {
+    "current_expression": {
+      "expr": "5 * (4 * ((x * (fact (x - 1)))[@env0 ]))",
+      "envs": {
+        "env0": {
+          "x": { "corec": [], "expr": { "expr": "3", "envs": {} } },
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "5 * (4 * (((x)[@env0 ]) * ((fact (x - 1))[@env1 ])))",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "x": { "corec": [], "expr": { "expr": "3", "envs": {} } },
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "5 * (4 * (((x)[@env0 ]) * (((fact)[@env2 ]) ((x - 1)[@env1 ]))))",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env2": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "5 * (4 * (((x)[@env0 ]) * (((fact)[@env2 ]) (((x)[@env1 ]) - 1))))",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env2": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr": "5 * (4 * (3 * (((fact)[@env1 ]) (((x)[@env0 ]) - 1))))",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr": "5 * (4 * (3 * (((fact)[@env0 ]) (3 - 1))))",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr": "5 * (4 * (3 * (((fact)[@env0 ]) 2)))",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "5 *\n  (4 * (3 * (((fun x -> if x = 0 then 1 else x * (fact (x - 1)))[@env0 ]) 2)))",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "5 *\n  (4 *\n     (3 * ((fun x -> ((if x = 0 then 1 else x * (fact (x - 1)))[@env0 ])) 2)))",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "5 *\n  (4 *\n     (3 * ((fun x -> if x = 0 then 1 else ((x * (fact (x - 1)))[@env0 ])) 2)))",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "5 *\n  (4 * (3 * ((if x = 0 then 1 else ((x * (fact (x - 1)))[@env0 ]))[@env1 ])))",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        },
+        "env1": { "x": { "corec": [], "expr": { "expr": "2", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "5 *\n  (4 *\n     (3 *\n        (if ((x = 0)[@env2 ])\n         then 1\n         else ((x * (fact (x - 1)))[@env1 ][@env0 ]))))",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        },
+        "env1": { "x": { "corec": [], "expr": { "expr": "2", "envs": {} } } },
+        "env2": { "x": { "corec": [], "expr": { "expr": "2", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "5 *\n  (4 *\n     (3 *\n        (if ((x)[@env2 ]) = 0\n         then 1\n         else ((x * (fact (x - 1)))[@env1 ][@env0 ]))))",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        },
+        "env1": { "x": { "corec": [], "expr": { "expr": "2", "envs": {} } } },
+        "env2": { "x": { "corec": [], "expr": { "expr": "2", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "5 * (4 * (3 * (if 2 = 0 then 1 else ((x * (fact (x - 1)))[@env1 ][@env0 ]))))",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        },
+        "env1": { "x": { "corec": [], "expr": { "expr": "2", "envs": {} } } }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "5 * (4 * (3 * (if false then 1 else ((x * (fact (x - 1)))[@env1 ][@env0 ]))))",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        },
+        "env1": { "x": { "corec": [], "expr": { "expr": "2", "envs": {} } } }
+      }
+    },
+    "step": [ "If" ]
+  },
+  {
+    "current_expression": {
+      "expr": "5 * (4 * (3 * ((x * (fact (x - 1)))[@env1 ][@env0 ])))",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        },
+        "env1": { "x": { "corec": [], "expr": { "expr": "2", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstCombine" ]
+  },
+  {
+    "current_expression": {
+      "expr": "5 * (4 * (3 * ((x * (fact (x - 1)))[@env0 ])))",
+      "envs": {
+        "env0": {
+          "x": { "corec": [], "expr": { "expr": "2", "envs": {} } },
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "5 * (4 * (3 * (((x)[@env0 ]) * ((fact (x - 1))[@env1 ]))))",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "2", "envs": {} } } },
+        "env1": {
+          "x": { "corec": [], "expr": { "expr": "2", "envs": {} } },
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "5 * (4 * (3 * (((x)[@env0 ]) * (((fact)[@env2 ]) ((x - 1)[@env1 ])))))",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "2", "envs": {} } } },
+        "env1": { "x": { "corec": [], "expr": { "expr": "2", "envs": {} } } },
+        "env2": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "5 * (4 * (3 * (((x)[@env0 ]) * (((fact)[@env2 ]) (((x)[@env1 ]) - 1)))))",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "2", "envs": {} } } },
+        "env1": { "x": { "corec": [], "expr": { "expr": "2", "envs": {} } } },
+        "env2": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr": "5 * (4 * (3 * (2 * (((fact)[@env1 ]) (((x)[@env0 ]) - 1)))))",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "2", "envs": {} } } },
+        "env1": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr": "5 * (4 * (3 * (2 * (((fact)[@env0 ]) (2 - 1)))))",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr": "5 * (4 * (3 * (2 * (((fact)[@env0 ]) 1))))",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "5 *\n  (4 *\n     (3 *\n        (2 * (((fun x -> if x = 0 then 1 else x * (fact (x - 1)))[@env0 ]) 1))))",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "5 *\n  (4 *\n     (3 *\n        (2 *\n           ((fun x -> ((if x = 0 then 1 else x * (fact (x - 1)))[@env0 ])) 1))))",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "5 *\n  (4 *\n     (3 *\n        (2 *\n           ((fun x -> if x = 0 then 1 else ((x * (fact (x - 1)))[@env0 ])) 1))))",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "5 *\n  (4 *\n     (3 *\n        (2 * ((if x = 0 then 1 else ((x * (fact (x - 1)))[@env0 ]))[@env1 ]))))",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        },
+        "env1": { "x": { "corec": [], "expr": { "expr": "1", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "5 *\n  (4 *\n     (3 *\n        (2 *\n           (if ((x = 0)[@env2 ])\n            then 1\n            else ((x * (fact (x - 1)))[@env1 ][@env0 ])))))",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        },
+        "env1": { "x": { "corec": [], "expr": { "expr": "1", "envs": {} } } },
+        "env2": { "x": { "corec": [], "expr": { "expr": "1", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "5 *\n  (4 *\n     (3 *\n        (2 *\n           (if ((x)[@env2 ]) = 0\n            then 1\n            else ((x * (fact (x - 1)))[@env1 ][@env0 ])))))",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        },
+        "env1": { "x": { "corec": [], "expr": { "expr": "1", "envs": {} } } },
+        "env2": { "x": { "corec": [], "expr": { "expr": "1", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "5 *\n  (4 *\n     (3 * (2 * (if 1 = 0 then 1 else ((x * (fact (x - 1)))[@env1 ][@env0 ])))))",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        },
+        "env1": { "x": { "corec": [], "expr": { "expr": "1", "envs": {} } } }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "5 *\n  (4 *\n     (3 * (2 * (if false then 1 else ((x * (fact (x - 1)))[@env1 ][@env0 ])))))",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        },
+        "env1": { "x": { "corec": [], "expr": { "expr": "1", "envs": {} } } }
+      }
+    },
+    "step": [ "If" ]
+  },
+  {
+    "current_expression": {
+      "expr": "5 * (4 * (3 * (2 * ((x * (fact (x - 1)))[@env1 ][@env0 ]))))",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        },
+        "env1": { "x": { "corec": [], "expr": { "expr": "1", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstCombine" ]
+  },
+  {
+    "current_expression": {
+      "expr": "5 * (4 * (3 * (2 * ((x * (fact (x - 1)))[@env0 ]))))",
+      "envs": {
+        "env0": {
+          "x": { "corec": [], "expr": { "expr": "1", "envs": {} } },
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "5 * (4 * (3 * (2 * (((x)[@env0 ]) * ((fact (x - 1))[@env1 ])))))",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "1", "envs": {} } } },
+        "env1": {
+          "x": { "corec": [], "expr": { "expr": "1", "envs": {} } },
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "5 * (4 * (3 * (2 * (((x)[@env0 ]) * (((fact)[@env2 ]) ((x - 1)[@env1 ]))))))",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "1", "envs": {} } } },
+        "env1": { "x": { "corec": [], "expr": { "expr": "1", "envs": {} } } },
+        "env2": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "5 *\n  (4 * (3 * (2 * (((x)[@env0 ]) * (((fact)[@env2 ]) (((x)[@env1 ]) - 1))))))",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "1", "envs": {} } } },
+        "env1": { "x": { "corec": [], "expr": { "expr": "1", "envs": {} } } },
+        "env2": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "5 * (4 * (3 * (2 * (1 * (((fact)[@env1 ]) (((x)[@env0 ]) - 1))))))",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "1", "envs": {} } } },
+        "env1": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr": "5 * (4 * (3 * (2 * (1 * (((fact)[@env0 ]) (1 - 1))))))",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr": "5 * (4 * (3 * (2 * (1 * (((fact)[@env0 ]) 0)))))",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "5 *\n  (4 *\n     (3 *\n        (2 *\n           (1 *\n              (((fun x -> if x = 0 then 1 else x * (fact (x - 1)))[@env0 ]) 0)))))",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "5 *\n  (4 *\n     (3 *\n        (2 *\n           (1 *\n              ((fun x -> ((if x = 0 then 1 else x * (fact (x - 1)))[@env0 ]))\n                 0)))))",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "5 *\n  (4 *\n     (3 *\n        (2 *\n           (1 *\n              ((fun x -> if x = 0 then 1 else ((x * (fact (x - 1)))[@env0 ]))\n                 0)))))",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "5 *\n  (4 *\n     (3 *\n        (2 *\n           (1 * ((if x = 0 then 1 else ((x * (fact (x - 1)))[@env0 ]))\n              [@env1 ])))))",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        },
+        "env1": { "x": { "corec": [], "expr": { "expr": "0", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "5 *\n  (4 *\n     (3 *\n        (2 *\n           (1 *\n              (if ((x = 0)[@env2 ])\n               then 1\n               else ((x * (fact (x - 1)))[@env1 ][@env0 ]))))))",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        },
+        "env1": { "x": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env2": { "x": { "corec": [], "expr": { "expr": "0", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "5 *\n  (4 *\n     (3 *\n        (2 *\n           (1 *\n              (if ((x)[@env2 ]) = 0\n               then 1\n               else ((x * (fact (x - 1)))[@env1 ][@env0 ]))))))",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        },
+        "env1": { "x": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env2": { "x": { "corec": [], "expr": { "expr": "0", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "5 *\n  (4 *\n     (3 *\n        (2 *\n           (1 * (if 0 = 0 then 1 else ((x * (fact (x - 1)))[@env1 ][@env0 ]))))))",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        },
+        "env1": { "x": { "corec": [], "expr": { "expr": "0", "envs": {} } } }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "5 *\n  (4 *\n     (3 *\n        (2 *\n           (1 * (if true then 1 else ((x * (fact (x - 1)))[@env1 ][@env0 ]))))))",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [ "fact" ],
+            "expr": {
+              "expr": "fun x -> if x = 0 then 1 else x * (fact (x - 1))",
+              "envs": {}
+            }
+          }
+        },
+        "env1": { "x": { "corec": [], "expr": { "expr": "0", "envs": {} } } }
+      }
+    },
+    "step": [ "If" ]
+  },
+  {
+    "current_expression": {
+      "expr": "5 * (4 * (3 * (2 * (1 * 1))))",
+      "envs": {}
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": { "expr": "5 * (4 * (3 * (2 * 1)))", "envs": {} },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": { "expr": "5 * (4 * (3 * 2))", "envs": {} },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": { "expr": "5 * (4 * 6)", "envs": {} },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": { "expr": "5 * 24", "envs": {} },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  { "current_expression": { "expr": "120", "envs": {} }, "step": [] }
+]

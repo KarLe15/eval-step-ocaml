@@ -11,6 +11,8 @@ import {EvalService} from '../services/eval.service';
 import { ResultComponent } from './result/result.component';
 import {ScrollToModule} from '@nicky-lenaers/ngx-scroll-to';
 import { UiSwitchModule } from 'ngx-ui-switch';
+import {AppModule} from '../app.module';
+import {ReplaceNPipe} from '../pipes/replace-n.pipe';
 
 
 // @ts-ignore
@@ -20,22 +22,25 @@ import { UiSwitchModule } from 'ngx-ui-switch';
     EditorComponent,
     OptionsComponent,
     MainPageComponent,
-    ResultComponent
+    ResultComponent,
+    ReplaceNPipe
   ],
   exports: [
     EditorComponent,
     OptionsComponent,
-    MainPageComponent
+    MainPageComponent,
+    ReplaceNPipe
   ],
   imports: [
     CommonModule,
     FormsModule,
     MonacoEditorModule,
     ScrollToModule.forRoot(),
-    UiSwitchModule
+    UiSwitchModule,
   ],
   providers: [
     EvalService,
+    ReplaceNPipe
   ]
 })
 export class CoreModule { }

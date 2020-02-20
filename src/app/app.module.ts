@@ -8,10 +8,11 @@ import {SharedModule} from './shared/shared.module';
 import {MonacoEditorModule} from 'ngx-monaco-editor';
 import {FormsModule} from '@angular/forms';
 import {ParticlesModule} from 'angular-particle';
+import { ReplaceNPipe } from './pipes/replace-n.pipe';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
