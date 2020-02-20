@@ -2,7 +2,7 @@ const fs = require("fs");
 const readline = require('readline');
 
 
-const text = fs.readFileSync("./fact_tr.json");
+const text = fs.readFileSync("./jsons/example_cours/cours3/length_tr.ml.json");
 const json = JSON.parse(text);
 
 
@@ -14,35 +14,75 @@ process.stdin.on('keypress', (str, key) => {
   if (key.ctrl && key.name === 'c') {
     process.exit();
   } else {
-    if (
-      json[i].step[] === "MoveDownSubst" &&
-      json[i+1].step[] === "Match"       &&
-      json[i+2].step[] === "SubstCombine" 
-      ) {
-      i += 3;
-    }
+    // if (
+    //   json[i].step[0] === "MoveDownSubst" &&
+    //   json[i+1].step[0] === "Match"       &&
+    //   json[i+2].step[0] === "SubstCombine"
+    //   ) {
+    //   i += 3;
+    // }
 
-    if (
-      json[i].step[] === "ApplyFunRuntime"   &&
-      json[i+1].step[] === "ApplyFunRuntime" &&
-      json[i+2].step[] === "SubstFun" 
-      ) {
-      i += 3;
-    }
+    // if (
+    //   json[i].step[0] === "ApplyFunRuntime"   &&
+    //   json[i+1].step[0] === "ApplyFunRuntime" &&
+    //   json[i+2].step[0] === "SubstFun"
+    //   ) {
+    //   i += 3;
+    // }
+    // while(step === "MoveDownSubst"
+    // ||  step === "SubstCombine"
+    // ||  step === "SubstVar"
+    // ||  step === "SubstFun"
+    // ||  step === "ApplyFunComplete"){
+    //   i++;
+    // }
 
     let step = json[i].step[0];
-    while (step === "MoveDownSubst" ) {
-      i++;
-      step = json[i].step[0];
+    if(isSubstFunOf(json,i, "fact")){
+      console.log("a");
+      while (step !== "SubstFun" ) {
+        i++;
+        step = json[i].step[0];
+      }  
     }
-    console.log(step);
+    else if(! onlyRuntimeLeft(json, i, "fact")){
+      while ((!onlyRuntimeLeft(json, i, "fact")) ) {
+        i++;
+        step = json[i].step[0];
+      }  
+    }
+
+    // console.log(step);
     console.log("==================================================");
     console.log(json[i].current_expression.expr);
+    // console.log(json[i].current_expression.envs.env0);
+    console.log(json[i].step);
     console.log("==================================================");
     i++;
   }
 });
 console.log('Press any key...');
+
+
+
+function isSubstFunOf(jsons, index, func){
+  for (let i = index; i < jsons.length; i++) {
+    if(jsons[i].step[0] === "SubstFun"){
+      return true;
+    } 
+  }
+  return false;
+}
+
+function onlyRuntimeLeft(jsons, index, func){
+  let res = true;
+  for (let i = index;  res && i < jsons.length-1; i++) {
+    res = res &&  jsons[i].step[0] === "ApplyFunRuntime";
+  }
+  return res;
+}
+
+
 
 // let steps = [];
 // for (let i = 0; i< json.length; i++) {
@@ -81,11 +121,11 @@ function mapStepToEnum (step)  {
         return 'b';
       case  "SubstVar" :
         return 'c';
-      case  "SubstFun" : 
+      case  "SubstFun" :
         return 'd';
-      case  "If" : 
+      case  "If" :
         return 'e';
-      case  "Let" : 
+      case  "Let" :
         return 'f';
       case  "Match" :
         return 'g';
@@ -103,11 +143,16 @@ function mapStepToEnum (step)  {
         return 'm';
       case "ApplyFun":
         return 'n';
-      default : 
+      default :
         return 'z'
     };
 };
 
 
 
+
+
+// modes : 
+// retirer les moveDownSubst
+// Aller de subtFun en SubtFun et ApplyFunRuntime 
 

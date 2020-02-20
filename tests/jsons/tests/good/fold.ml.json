@@ -1,0 +1,1958 @@
+[
+  {
+    "current_expression": {
+      "expr":
+        "let rec fold_right f a l =\n  match l with | p::q -> f (fold_right f a q) p | [] -> a in\nlet id l = fold_right (fun acc -> fun x -> x :: acc) [] l in id [1; 2; 3]",
+      "envs": {}
+    },
+    "step": [ "Let" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((let id l = fold_right (fun acc -> fun x -> x :: acc) [] l in id [1; 2; 3])\n[@env0 ])",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "let id = ((fun l -> fold_right (fun acc -> fun x -> x :: acc) [] l)[@env0 ]) in\nid [1; 2; 3]",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "let id l = ((fold_right (fun acc -> fun x -> x :: acc) [] l)[@env0 ]) in\nid [1; 2; 3]",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "let id l = ((fold_right)[@env0 ]) (fun acc -> fun x -> x :: acc) [] l in\nid [1; 2; 3]",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "Let" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((id [1; 2; 3])[@env0 ])",
+      "envs": {
+        "env0": {
+          "id": {
+            "corec": [],
+            "expr": {
+              "expr":
+                "fun l -> ((fold_right)[@env1 ]) (fun acc -> fun x -> x :: acc) [] l",
+              "envs": {
+                "env1": {
+                  "fold_right": {
+                    "corec": [ "fold_right" ],
+                    "expr": {
+                      "expr":
+                        "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+                      "envs": {}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((id)[@env0 ]) [1; 2; 3]",
+      "envs": {
+        "env0": {
+          "id": {
+            "corec": [],
+            "expr": {
+              "expr":
+                "fun l -> ((fold_right)[@env1 ]) (fun acc -> fun x -> x :: acc) [] l",
+              "envs": {
+                "env1": {
+                  "fold_right": {
+                    "corec": [ "fold_right" ],
+                    "expr": {
+                      "expr":
+                        "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+                      "envs": {}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun l -> ((fold_right)[@env0 ]) (fun acc -> fun x -> x :: acc) [] l)\n  [1; 2; 3]",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((((fold_right)[@env0 ]) (fun acc -> fun x -> x :: acc) [] l)[@env1 ])",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "l": { "corec": [], "expr": { "expr": "[1; 2; 3]", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((fold_right)[@env1 ]) (fun acc -> fun x -> x :: acc) [] ((l)[@env0 ])",
+      "envs": {
+        "env0": {
+          "l": { "corec": [], "expr": { "expr": "[1; 2; 3]", "envs": {} } }
+        },
+        "env1": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((fold_right)[@env0 ]) (fun acc -> fun x -> x :: acc) [] [1; 2; 3]",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((fun f ->\n    fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a)\n  [@env0 ]) (fun acc -> fun x -> x :: acc) [] [1; 2; 3]",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun f ->\n   ((fun a ->\n       fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a)\n   [@env0 ])) (fun acc -> fun x -> x :: acc) [] [1; 2; 3]",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun f ->\n   fun a ->\n     ((fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a)\n     [@env0 ])) (fun acc -> fun x -> x :: acc) [] [1; 2; 3]",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun f ->\n   fun a ->\n     fun l -> ((match l with | p::q -> f (fold_right f a q) p | [] -> a)\n       [@env0 ])) (fun acc -> fun x -> x :: acc) [] [1; 2; 3]",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun f ->\n   fun a ->\n     fun l ->\n       match l with | p::q -> ((f (fold_right f a q) p)[@env0 ]) | [] -> a)\n  (fun acc -> fun x -> x :: acc) [] [1; 2; 3]",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((match l with | p::q -> ((f (fold_right f a q) p)[@env0 ]) | [] -> a)\n[@env1 ])",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "l": { "corec": [], "expr": { "expr": "[1; 2; 3]", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun acc -> fun x -> x :: acc", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "match ((l)[@env3 ]) with\n| p::q -> ((f (fold_right f a q) p)[@env1 ][@env0 ])\n| [] -> ((a)[@env2 ])",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun acc -> fun x -> x :: acc", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        },
+        "env2": {
+          "a": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        },
+        "env3": {
+          "l": { "corec": [], "expr": { "expr": "[1; 2; 3]", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "match [1; 2; 3] with\n| p::q -> ((f (fold_right f a q) p)[@env1 ][@env0 ])\n| [] -> ((a)[@env2 ])",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun acc -> fun x -> x :: acc", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        },
+        "env2": {
+          "a": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "Match" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((f (fold_right f a q) p)[@env2 ][@env1 ][@env0 ])",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun acc -> fun x -> x :: acc", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        },
+        "env2": {
+          "q": { "corec": [], "expr": { "expr": "[2; 3]", "envs": {} } },
+          "p": { "corec": [], "expr": { "expr": "1", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "SubstCombine" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((f (fold_right f a q) p)[@env1 ][@env0 ])",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "q": { "corec": [], "expr": { "expr": "[2; 3]", "envs": {} } },
+          "p": { "corec": [], "expr": { "expr": "1", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun acc -> fun x -> x :: acc", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "SubstCombine" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((f (fold_right f a q) p)[@env0 ])",
+      "envs": {
+        "env0": {
+          "q": { "corec": [], "expr": { "expr": "[2; 3]", "envs": {} } },
+          "p": { "corec": [], "expr": { "expr": "1", "envs": {} } },
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun acc -> fun x -> x :: acc", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((f)[@env2 ]) ((fold_right f a q)[@env0 ]) ((p)[@env1 ])",
+      "envs": {
+        "env0": {
+          "q": { "corec": [], "expr": { "expr": "[2; 3]", "envs": {} } },
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun acc -> fun x -> x :: acc", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        },
+        "env1": { "p": { "corec": [], "expr": { "expr": "1", "envs": {} } } },
+        "env2": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun acc -> fun x -> x :: acc", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((f)[@env5 ])\n  (((fold_right)[@env3 ]) ((f)[@env0 ]) ((a)[@env1 ]) ((q)[@env2 ])) ((p)\n  [@env4 ])",
+      "envs": {
+        "env0": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun acc -> fun x -> x :: acc", "envs": {} }
+          }
+        },
+        "env1": {
+          "a": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        },
+        "env2": {
+          "q": { "corec": [], "expr": { "expr": "[2; 3]", "envs": {} } }
+        },
+        "env3": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        },
+        "env4": { "p": { "corec": [], "expr": { "expr": "1", "envs": {} } } },
+        "env5": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun acc -> fun x -> x :: acc", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  (((fold_right)[@env3 ]) ((f)[@env0 ]) ((a)[@env1 ]) ((q)[@env2 ])) ((p)\n  [@env4 ])",
+      "envs": {
+        "env0": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun acc -> fun x -> x :: acc", "envs": {} }
+          }
+        },
+        "env1": {
+          "a": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        },
+        "env2": {
+          "q": { "corec": [], "expr": { "expr": "[2; 3]", "envs": {} } }
+        },
+        "env3": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        },
+        "env4": { "p": { "corec": [], "expr": { "expr": "1", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  (((fold_right)[@env2 ]) (fun acc -> fun x -> x :: acc) ((a)[@env0 ]) ((q)\n     [@env1 ])) ((p)[@env3 ])",
+      "envs": {
+        "env0": {
+          "a": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        },
+        "env1": {
+          "q": { "corec": [], "expr": { "expr": "[2; 3]", "envs": {} } }
+        },
+        "env2": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        },
+        "env3": { "p": { "corec": [], "expr": { "expr": "1", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  (((fold_right)[@env1 ]) (fun acc -> fun x -> x :: acc) [] ((q)[@env0 ]))\n  ((p)[@env2 ])",
+      "envs": {
+        "env0": {
+          "q": { "corec": [], "expr": { "expr": "[2; 3]", "envs": {} } }
+        },
+        "env1": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        },
+        "env2": { "p": { "corec": [], "expr": { "expr": "1", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  (((fold_right)[@env0 ]) (fun acc -> fun x -> x :: acc) [] [2; 3]) ((p)\n  [@env1 ])",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        },
+        "env1": { "p": { "corec": [], "expr": { "expr": "1", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  (((fold_right)[@env0 ]) (fun acc -> fun x -> x :: acc) [] [2; 3]) 1",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  (((fun f ->\n       fun a ->\n         fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a)\n     [@env0 ]) (fun acc -> fun x -> x :: acc) [] [2; 3]) 1",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  ((fun f ->\n      ((fun a ->\n          fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a)\n      [@env0 ])) (fun acc -> fun x -> x :: acc) [] [2; 3]) 1",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  ((fun f ->\n      fun a ->\n        ((fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a)\n        [@env0 ])) (fun acc -> fun x -> x :: acc) [] [2; 3]) 1",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  ((fun f ->\n      fun a ->\n        fun l -> ((match l with | p::q -> f (fold_right f a q) p | [] -> a)\n          [@env0 ])) (fun acc -> fun x -> x :: acc) [] [2; 3]) 1",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  ((fun f ->\n      fun a ->\n        fun l ->\n          match l with | p::q -> ((f (fold_right f a q) p)[@env0 ]) | [] -> a)\n     (fun acc -> fun x -> x :: acc) [] [2; 3]) 1",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  ((match l with | p::q -> ((f (fold_right f a q) p)[@env0 ]) | [] -> a)\n  [@env1 ]) 1",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "l": { "corec": [], "expr": { "expr": "[2; 3]", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun acc -> fun x -> x :: acc", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  (match ((l)[@env3 ]) with\n   | p::q -> ((f (fold_right f a q) p)[@env1 ][@env0 ])\n   | [] -> ((a)[@env2 ])) 1",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun acc -> fun x -> x :: acc", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        },
+        "env2": {
+          "a": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        },
+        "env3": {
+          "l": { "corec": [], "expr": { "expr": "[2; 3]", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  (match [2; 3] with\n   | p::q -> ((f (fold_right f a q) p)[@env1 ][@env0 ])\n   | [] -> ((a)[@env2 ])) 1",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun acc -> fun x -> x :: acc", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        },
+        "env2": {
+          "a": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "Match" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc) ((f (fold_right f a q) p)\n  [@env2 ][@env1 ][@env0 ]) 1",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun acc -> fun x -> x :: acc", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        },
+        "env2": {
+          "q": { "corec": [], "expr": { "expr": "[3]", "envs": {} } },
+          "p": { "corec": [], "expr": { "expr": "2", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "SubstCombine" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc) ((f (fold_right f a q) p)[@env1 ][@env0 ]) 1",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "q": { "corec": [], "expr": { "expr": "[3]", "envs": {} } },
+          "p": { "corec": [], "expr": { "expr": "2", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun acc -> fun x -> x :: acc", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "SubstCombine" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc) ((f (fold_right f a q) p)[@env0 ]) 1",
+      "envs": {
+        "env0": {
+          "q": { "corec": [], "expr": { "expr": "[3]", "envs": {} } },
+          "p": { "corec": [], "expr": { "expr": "2", "envs": {} } },
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun acc -> fun x -> x :: acc", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  (((f)[@env2 ]) ((fold_right f a q)[@env0 ]) ((p)[@env1 ])) 1",
+      "envs": {
+        "env0": {
+          "q": { "corec": [], "expr": { "expr": "[3]", "envs": {} } },
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun acc -> fun x -> x :: acc", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        },
+        "env1": { "p": { "corec": [], "expr": { "expr": "2", "envs": {} } } },
+        "env2": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun acc -> fun x -> x :: acc", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  (((f)[@env5 ])\n     (((fold_right)[@env3 ]) ((f)[@env0 ]) ((a)[@env1 ]) ((q)[@env2 ])) ((p)\n     [@env4 ])) 1",
+      "envs": {
+        "env0": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun acc -> fun x -> x :: acc", "envs": {} }
+          }
+        },
+        "env1": {
+          "a": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        },
+        "env2": {
+          "q": { "corec": [], "expr": { "expr": "[3]", "envs": {} } }
+        },
+        "env3": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        },
+        "env4": { "p": { "corec": [], "expr": { "expr": "2", "envs": {} } } },
+        "env5": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun acc -> fun x -> x :: acc", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  ((fun acc -> fun x -> x :: acc)\n     (((fold_right)[@env3 ]) ((f)[@env0 ]) ((a)[@env1 ]) ((q)[@env2 ])) ((p)\n     [@env4 ])) 1",
+      "envs": {
+        "env0": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun acc -> fun x -> x :: acc", "envs": {} }
+          }
+        },
+        "env1": {
+          "a": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        },
+        "env2": {
+          "q": { "corec": [], "expr": { "expr": "[3]", "envs": {} } }
+        },
+        "env3": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        },
+        "env4": { "p": { "corec": [], "expr": { "expr": "2", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  ((fun acc -> fun x -> x :: acc)\n     (((fold_right)[@env2 ]) (fun acc -> fun x -> x :: acc) ((a)[@env0 ])\n        ((q)[@env1 ])) ((p)[@env3 ])) 1",
+      "envs": {
+        "env0": {
+          "a": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        },
+        "env1": {
+          "q": { "corec": [], "expr": { "expr": "[3]", "envs": {} } }
+        },
+        "env2": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        },
+        "env3": { "p": { "corec": [], "expr": { "expr": "2", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  ((fun acc -> fun x -> x :: acc)\n     (((fold_right)[@env1 ]) (fun acc -> fun x -> x :: acc) [] ((q)[@env0 ]))\n     ((p)[@env2 ])) 1",
+      "envs": {
+        "env0": {
+          "q": { "corec": [], "expr": { "expr": "[3]", "envs": {} } }
+        },
+        "env1": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        },
+        "env2": { "p": { "corec": [], "expr": { "expr": "2", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  ((fun acc -> fun x -> x :: acc)\n     (((fold_right)[@env0 ]) (fun acc -> fun x -> x :: acc) [] [3]) ((p)\n     [@env1 ])) 1",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        },
+        "env1": { "p": { "corec": [], "expr": { "expr": "2", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  ((fun acc -> fun x -> x :: acc)\n     (((fold_right)[@env0 ]) (fun acc -> fun x -> x :: acc) [] [3]) 2) 1",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  ((fun acc -> fun x -> x :: acc)\n     (((fun f ->\n          fun a ->\n            fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a)\n        [@env0 ]) (fun acc -> fun x -> x :: acc) [] [3]) 2) 1",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  ((fun acc -> fun x -> x :: acc)\n     ((fun f ->\n         ((fun a ->\n             fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a)\n         [@env0 ])) (fun acc -> fun x -> x :: acc) [] [3]) 2) 1",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  ((fun acc -> fun x -> x :: acc)\n     ((fun f ->\n         fun a ->\n           ((fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a)\n           [@env0 ])) (fun acc -> fun x -> x :: acc) [] [3]) 2) 1",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  ((fun acc -> fun x -> x :: acc)\n     ((fun f ->\n         fun a ->\n           fun l ->\n             ((match l with | p::q -> f (fold_right f a q) p | [] -> a)\n             [@env0 ])) (fun acc -> fun x -> x :: acc) [] [3]) 2) 1",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  ((fun acc -> fun x -> x :: acc)\n     ((fun f ->\n         fun a ->\n           fun l ->\n             match l with\n             | p::q -> ((f (fold_right f a q) p)[@env0 ])\n             | [] -> a) (fun acc -> fun x -> x :: acc) [] [3]) 2) 1",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  ((fun acc -> fun x -> x :: acc)\n     ((match l with | p::q -> ((f (fold_right f a q) p)[@env0 ]) | [] -> a)\n     [@env1 ]) 2) 1",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "l": { "corec": [], "expr": { "expr": "[3]", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun acc -> fun x -> x :: acc", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  ((fun acc -> fun x -> x :: acc)\n     (match ((l)[@env3 ]) with\n      | p::q -> ((f (fold_right f a q) p)[@env1 ][@env0 ])\n      | [] -> ((a)[@env2 ])) 2) 1",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun acc -> fun x -> x :: acc", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        },
+        "env2": {
+          "a": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        },
+        "env3": {
+          "l": { "corec": [], "expr": { "expr": "[3]", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  ((fun acc -> fun x -> x :: acc)\n     (match [3] with\n      | p::q -> ((f (fold_right f a q) p)[@env1 ][@env0 ])\n      | [] -> ((a)[@env2 ])) 2) 1",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun acc -> fun x -> x :: acc", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        },
+        "env2": {
+          "a": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "Match" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  ((fun acc -> fun x -> x :: acc) ((f (fold_right f a q) p)\n     [@env2 ][@env1 ][@env0 ]) 2) 1",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun acc -> fun x -> x :: acc", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        },
+        "env2": {
+          "q": { "corec": [], "expr": { "expr": "[]", "envs": {} } },
+          "p": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "SubstCombine" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  ((fun acc -> fun x -> x :: acc) ((f (fold_right f a q) p)[@env1 ][@env0 ])\n     2) 1",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "q": { "corec": [], "expr": { "expr": "[]", "envs": {} } },
+          "p": { "corec": [], "expr": { "expr": "3", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun acc -> fun x -> x :: acc", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "SubstCombine" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  ((fun acc -> fun x -> x :: acc) ((f (fold_right f a q) p)[@env0 ]) 2) 1",
+      "envs": {
+        "env0": {
+          "q": { "corec": [], "expr": { "expr": "[]", "envs": {} } },
+          "p": { "corec": [], "expr": { "expr": "3", "envs": {} } },
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun acc -> fun x -> x :: acc", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  ((fun acc -> fun x -> x :: acc)\n     (((f)[@env2 ]) ((fold_right f a q)[@env0 ]) ((p)[@env1 ])) 2) 1",
+      "envs": {
+        "env0": {
+          "q": { "corec": [], "expr": { "expr": "[]", "envs": {} } },
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun acc -> fun x -> x :: acc", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        },
+        "env1": { "p": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env2": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun acc -> fun x -> x :: acc", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  ((fun acc -> fun x -> x :: acc)\n     (((f)[@env5 ])\n        (((fold_right)[@env3 ]) ((f)[@env0 ]) ((a)[@env1 ]) ((q)[@env2 ]))\n        ((p)[@env4 ])) 2) 1",
+      "envs": {
+        "env0": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun acc -> fun x -> x :: acc", "envs": {} }
+          }
+        },
+        "env1": {
+          "a": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        },
+        "env2": {
+          "q": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        },
+        "env3": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        },
+        "env4": { "p": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env5": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun acc -> fun x -> x :: acc", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  ((fun acc -> fun x -> x :: acc)\n     ((fun acc -> fun x -> x :: acc)\n        (((fold_right)[@env3 ]) ((f)[@env0 ]) ((a)[@env1 ]) ((q)[@env2 ]))\n        ((p)[@env4 ])) 2) 1",
+      "envs": {
+        "env0": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun acc -> fun x -> x :: acc", "envs": {} }
+          }
+        },
+        "env1": {
+          "a": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        },
+        "env2": {
+          "q": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        },
+        "env3": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        },
+        "env4": { "p": { "corec": [], "expr": { "expr": "3", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  ((fun acc -> fun x -> x :: acc)\n     ((fun acc -> fun x -> x :: acc)\n        (((fold_right)[@env2 ]) (fun acc -> fun x -> x :: acc) ((a)[@env0 ])\n           ((q)[@env1 ])) ((p)[@env3 ])) 2) 1",
+      "envs": {
+        "env0": {
+          "a": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        },
+        "env1": {
+          "q": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        },
+        "env2": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        },
+        "env3": { "p": { "corec": [], "expr": { "expr": "3", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  ((fun acc -> fun x -> x :: acc)\n     ((fun acc -> fun x -> x :: acc)\n        (((fold_right)[@env1 ]) (fun acc -> fun x -> x :: acc) [] ((q)\n           [@env0 ])) ((p)[@env2 ])) 2) 1",
+      "envs": {
+        "env0": {
+          "q": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        },
+        "env1": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        },
+        "env2": { "p": { "corec": [], "expr": { "expr": "3", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  ((fun acc -> fun x -> x :: acc)\n     ((fun acc -> fun x -> x :: acc)\n        (((fold_right)[@env0 ]) (fun acc -> fun x -> x :: acc) [] []) ((p)\n        [@env1 ])) 2) 1",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        },
+        "env1": { "p": { "corec": [], "expr": { "expr": "3", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  ((fun acc -> fun x -> x :: acc)\n     ((fun acc -> fun x -> x :: acc)\n        (((fold_right)[@env0 ]) (fun acc -> fun x -> x :: acc) [] []) 3) 2) 1",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  ((fun acc -> fun x -> x :: acc)\n     ((fun acc -> fun x -> x :: acc)\n        (((fun f ->\n             fun a ->\n               fun l ->\n                 match l with | p::q -> f (fold_right f a q) p | [] -> a)\n           [@env0 ]) (fun acc -> fun x -> x :: acc) [] []) 3) 2) 1",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  ((fun acc -> fun x -> x :: acc)\n     ((fun acc -> fun x -> x :: acc)\n        ((fun f ->\n            ((fun a ->\n                fun l ->\n                  match l with | p::q -> f (fold_right f a q) p | [] -> a)\n            [@env0 ])) (fun acc -> fun x -> x :: acc) [] []) 3) 2) 1",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  ((fun acc -> fun x -> x :: acc)\n     ((fun acc -> fun x -> x :: acc)\n        ((fun f ->\n            fun a ->\n              ((fun l ->\n                  match l with | p::q -> f (fold_right f a q) p | [] -> a)\n              [@env0 ])) (fun acc -> fun x -> x :: acc) [] []) 3) 2) 1",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  ((fun acc -> fun x -> x :: acc)\n     ((fun acc -> fun x -> x :: acc)\n        ((fun f ->\n            fun a ->\n              fun l ->\n                ((match l with | p::q -> f (fold_right f a q) p | [] -> a)\n                [@env0 ])) (fun acc -> fun x -> x :: acc) [] []) 3) 2) 1",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  ((fun acc -> fun x -> x :: acc)\n     ((fun acc -> fun x -> x :: acc)\n        ((fun f ->\n            fun a ->\n              fun l ->\n                match l with\n                | p::q -> ((f (fold_right f a q) p)[@env0 ])\n                | [] -> a) (fun acc -> fun x -> x :: acc) [] []) 3) 2) 1",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  ((fun acc -> fun x -> x :: acc)\n     ((fun acc -> fun x -> x :: acc)\n        ((match l with | p::q -> ((f (fold_right f a q) p)[@env0 ]) | [] -> a)\n        [@env1 ]) 3) 2) 1",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "l": { "corec": [], "expr": { "expr": "[]", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun acc -> fun x -> x :: acc", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  ((fun acc -> fun x -> x :: acc)\n     ((fun acc -> fun x -> x :: acc)\n        (match ((l)[@env3 ]) with\n         | p::q -> ((f (fold_right f a q) p)[@env1 ][@env0 ])\n         | [] -> ((a)[@env2 ])) 3) 2) 1",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun acc -> fun x -> x :: acc", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        },
+        "env2": {
+          "a": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        },
+        "env3": {
+          "l": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  ((fun acc -> fun x -> x :: acc)\n     ((fun acc -> fun x -> x :: acc)\n        (match [] with\n         | p::q -> ((f (fold_right f a q) p)[@env1 ][@env0 ])\n         | [] -> ((a)[@env2 ])) 3) 2) 1",
+      "envs": {
+        "env0": {
+          "fold_right": {
+            "corec": [ "fold_right" ],
+            "expr": {
+              "expr":
+                "fun f ->\n  fun a -> fun l -> match l with | p::q -> f (fold_right f a q) p | [] -> a",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun acc -> fun x -> x :: acc", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        },
+        "env2": {
+          "a": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "Match" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  ((fun acc -> fun x -> x :: acc)\n     ((fun acc -> fun x -> x :: acc) ((a)[@env0 ]) 3) 2) 1",
+      "envs": {
+        "env0": {
+          "a": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  ((fun acc -> fun x -> x :: acc) ((fun acc -> fun x -> x :: acc) [] 3) 2) 1",
+      "envs": {}
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  ((fun acc -> fun x -> x :: acc) ((x :: acc)[@env0 ]) 2) 1",
+      "envs": {
+        "env0": {
+          "x": { "corec": [], "expr": { "expr": "3", "envs": {} } },
+          "acc": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  ((fun acc -> fun x -> x :: acc) ((x :: acc)[@env0 ]) 2) 1",
+      "envs": {
+        "env0": {
+          "x": { "corec": [], "expr": { "expr": "3", "envs": {} } },
+          "acc": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  ((fun acc -> fun x -> x :: acc) (((x)[@env0 ]) :: ((acc)[@env1 ])) 2) 1",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "acc": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc)\n  ((fun acc -> fun x -> x :: acc) (3 :: ((acc)[@env0 ])) 2) 1",
+      "envs": {
+        "env0": {
+          "acc": { "corec": [], "expr": { "expr": "[]", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc) ((fun acc -> fun x -> x :: acc) [3] 2) 1",
+      "envs": {}
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr": "(fun acc -> fun x -> x :: acc) ((x :: acc)[@env0 ]) 1",
+      "envs": {
+        "env0": {
+          "x": { "corec": [], "expr": { "expr": "2", "envs": {} } },
+          "acc": { "corec": [], "expr": { "expr": "[3]", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "(fun acc -> fun x -> x :: acc) ((x :: acc)[@env0 ]) 1",
+      "envs": {
+        "env0": {
+          "x": { "corec": [], "expr": { "expr": "2", "envs": {} } },
+          "acc": { "corec": [], "expr": { "expr": "[3]", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun acc -> fun x -> x :: acc) (((x)[@env0 ]) :: ((acc)[@env1 ])) 1",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "2", "envs": {} } } },
+        "env1": {
+          "acc": { "corec": [], "expr": { "expr": "[3]", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr": "(fun acc -> fun x -> x :: acc) (2 :: ((acc)[@env0 ])) 1",
+      "envs": {
+        "env0": {
+          "acc": { "corec": [], "expr": { "expr": "[3]", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr": "(fun acc -> fun x -> x :: acc) [2; 3] 1",
+      "envs": {}
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((x :: acc)[@env0 ])",
+      "envs": {
+        "env0": {
+          "x": { "corec": [], "expr": { "expr": "1", "envs": {} } },
+          "acc": { "corec": [], "expr": { "expr": "[2; 3]", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((x :: acc)[@env0 ])",
+      "envs": {
+        "env0": {
+          "x": { "corec": [], "expr": { "expr": "1", "envs": {} } },
+          "acc": { "corec": [], "expr": { "expr": "[2; 3]", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((x)[@env0 ]) :: ((acc)[@env1 ])",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "1", "envs": {} } } },
+        "env1": {
+          "acc": { "corec": [], "expr": { "expr": "[2; 3]", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr": "1 :: ((acc)[@env0 ])",
+      "envs": {
+        "env0": {
+          "acc": { "corec": [], "expr": { "expr": "[2; 3]", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  { "current_expression": { "expr": "[1; 2; 3]", "envs": {} }, "step": [] }
+]

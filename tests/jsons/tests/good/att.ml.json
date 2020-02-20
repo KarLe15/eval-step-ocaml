@@ -1,0 +1,7 @@
+[
+  {
+    "current_expression": { "expr": "2 + 3", "envs": {} },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  { "current_expression": { "expr": "5", "envs": {} }, "step": [] }
+]

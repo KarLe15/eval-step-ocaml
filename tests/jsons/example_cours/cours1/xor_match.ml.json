@@ -1,0 +1,108 @@
+[
+  {
+    "current_expression": {
+      "expr": "((xor true false)[@env0 ])",
+      "envs": {
+        "env0": {
+          "xor": {
+            "corec": [],
+            "expr": {
+              "expr":
+                "fun b1 ->\n  fun b2 ->\n    match (b1, b2) with\n    | (true, true) -> false\n    | (true, false) -> true\n    | (false, true) -> true\n    | (false, false) -> false",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((xor)[@env0 ]) true false",
+      "envs": {
+        "env0": {
+          "xor": {
+            "corec": [],
+            "expr": {
+              "expr":
+                "fun b1 ->\n  fun b2 ->\n    match (b1, b2) with\n    | (true, true) -> false\n    | (true, false) -> true\n    | (false, true) -> true\n    | (false, false) -> false",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun b1 ->\n   fun b2 ->\n     match (b1, b2) with\n     | (true, true) -> false\n     | (true, false) -> true\n     | (false, true) -> true\n     | (false, false) -> false) true false",
+      "envs": {}
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((match (b1, b2) with\n  | (true, true) -> false\n  | (true, false) -> true\n  | (false, true) -> true\n  | (false, false) -> false)\n[@env0 ])",
+      "envs": {
+        "env0": {
+          "b2": { "corec": [], "expr": { "expr": "false", "envs": {} } },
+          "b1": { "corec": [], "expr": { "expr": "true", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "match (((b1, b2))[@env0 ]) with\n| (true, true) -> false\n| (true, false) -> true\n| (false, true) -> true\n| (false, false) -> false",
+      "envs": {
+        "env0": {
+          "b2": { "corec": [], "expr": { "expr": "false", "envs": {} } },
+          "b1": { "corec": [], "expr": { "expr": "true", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "match (((b1)[@env0 ]), ((b2)[@env1 ])) with\n| (true, true) -> false\n| (true, false) -> true\n| (false, true) -> true\n| (false, false) -> false",
+      "envs": {
+        "env0": {
+          "b1": { "corec": [], "expr": { "expr": "true", "envs": {} } }
+        },
+        "env1": {
+          "b2": { "corec": [], "expr": { "expr": "false", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "match (true, ((b2)[@env0 ])) with\n| (true, true) -> false\n| (true, false) -> true\n| (false, true) -> true\n| (false, false) -> false",
+      "envs": {
+        "env0": {
+          "b2": { "corec": [], "expr": { "expr": "false", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "match (true, false) with\n| (true, true) -> false\n| (true, false) -> true\n| (false, true) -> true\n| (false, false) -> false",
+      "envs": {}
+    },
+    "step": [ "Match" ]
+  },
+  { "current_expression": { "expr": "true", "envs": {} }, "step": [] }
+]

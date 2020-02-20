@@ -1,0 +1,67 @@
+[
+  {
+    "current_expression": {
+      "expr": "let a = 1 in let f = (+) in f a 1",
+      "envs": {}
+    },
+    "step": [ "Let" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((let f = (+) in f a 1)[@env0 ])",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "1", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "let f = (+) in ((f a 1)[@env0 ])",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "1", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "let f = (+) in f ((a)[@env0 ]) 1",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "1", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": { "expr": "let f = (+) in f 1 1", "envs": {} },
+    "step": [ "Let" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((f 1 1)[@env0 ])",
+      "envs": {
+        "env0": {
+          "f": { "corec": [], "expr": { "expr": "(+)", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((f)[@env0 ]) 1 1",
+      "envs": {
+        "env0": {
+          "f": { "corec": [], "expr": { "expr": "(+)", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": { "expr": "1 + 1", "envs": {} },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  { "current_expression": { "expr": "2", "envs": {} }, "step": [] }
+]

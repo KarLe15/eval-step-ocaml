@@ -1,0 +1,10 @@
+[
+  {
+    "current_expression": {
+      "expr": "if true then true else false",
+      "envs": {}
+    },
+    "step": [ "If" ]
+  },
+  { "current_expression": { "expr": "true", "envs": {} }, "step": [] }
+]

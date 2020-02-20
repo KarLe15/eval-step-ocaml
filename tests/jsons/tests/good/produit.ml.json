@@ -1,0 +1,98 @@
+[
+  {
+    "current_expression": {
+      "expr": "let a = { x = 0; y = 1 } in let b = { a with y = 2 } in b.y",
+      "envs": {}
+    },
+    "step": [ "Let" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((let b = { a with y = 2 } in b.y)[@env0 ])",
+      "envs": {
+        "env0": {
+          "a": {
+            "corec": [],
+            "expr": { "expr": "{ x = 0; y = 1 }", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "let b = (({ a with y = 2 })[@env0 ]) in b.y",
+      "envs": {
+        "env0": {
+          "a": {
+            "corec": [],
+            "expr": { "expr": "{ x = 0; y = 1 }", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "let b = { ((a)[@env0 ]) with y = 2 } in b.y",
+      "envs": {
+        "env0": {
+          "a": {
+            "corec": [],
+            "expr": { "expr": "{ x = 0; y = 1 }", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr": "let b = { { x = 0; y = 1 } with y = 2 } in b.y",
+      "envs": {}
+    },
+    "step": [ "Record" ]
+  },
+  {
+    "current_expression": {
+      "expr": "let b = { x = 0; y = 2 } in b.y",
+      "envs": {}
+    },
+    "step": [ "Let" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((b.y)[@env0 ])",
+      "envs": {
+        "env0": {
+          "b": {
+            "corec": [],
+            "expr": { "expr": "{ x = 0; y = 2 }", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((b)[@env0 ]).y",
+      "envs": {
+        "env0": {
+          "b": {
+            "corec": [],
+            "expr": { "expr": "{ x = 0; y = 2 }", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": { "expr": "{ x = 0; y = 2 }.y", "envs": {} },
+    "step": [ "Record" ]
+  },
+  { "current_expression": { "expr": "2", "envs": {} }, "step": [] }
+]

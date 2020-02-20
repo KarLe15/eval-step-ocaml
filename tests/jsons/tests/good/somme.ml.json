@@ -1,0 +1,94 @@
+[
+  {
+    "current_expression": {
+      "expr":
+        "let a = A in\nlet b = B in\nmatch a with\n| B -> 0\n| A -> (match b with | C|B -> 1 | A -> 0)\n| C -> assert false",
+      "envs": {}
+    },
+    "step": [ "Let" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((let b = B in\n  match a with\n  | B -> 0\n  | A -> (match b with | C|B -> 1 | A -> 0)\n  | C -> assert false)\n[@env0 ])",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "A", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "let b = B in\n((match a with\n  | B -> 0\n  | A -> (match b with | C|B -> 1 | A -> 0)\n  | C -> assert false)[@env0 ])",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "A", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "let b = B in\nmatch ((a)[@env0 ]) with\n| B -> 0\n| A -> (match b with | C|B -> 1 | A -> 0)\n| C -> assert false",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "A", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "let b = B in\nmatch A with\n| B -> 0\n| A -> (match b with | C|B -> 1 | A -> 0)\n| C -> assert false",
+      "envs": {}
+    },
+    "step": [ "Let" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((match A with\n  | B -> 0\n  | A -> (match b with | C|B -> 1 | A -> 0)\n  | C -> assert false)\n[@env0 ])",
+      "envs": {
+        "env0": { "b": { "corec": [], "expr": { "expr": "B", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "match A with\n| B -> 0\n| A -> (((match b with | C|B -> 1 | A -> 0))[@env0 ])\n| C -> assert false",
+      "envs": {
+        "env0": { "b": { "corec": [], "expr": { "expr": "B", "envs": {} } } }
+      }
+    },
+    "step": [ "Match" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((match b with | C|B -> 1 | A -> 0)[@env0 ])",
+      "envs": {
+        "env0": { "b": { "corec": [], "expr": { "expr": "B", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "match ((b)[@env0 ]) with | C|B -> 1 | A -> 0",
+      "envs": {
+        "env0": { "b": { "corec": [], "expr": { "expr": "B", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr": "match B with | C|B -> 1 | A -> 0",
+      "envs": {}
+    },
+    "step": [ "Match" ]
+  },
+  { "current_expression": { "expr": "1", "envs": {} }, "step": [] }
+]

@@ -1,0 +1,82 @@
+[
+  {
+    "current_expression": {
+      "expr": "((is_empty [1; 2; 3; 4])[@env0 ])",
+      "envs": {
+        "env0": {
+          "is_empty": {
+            "corec": [],
+            "expr": {
+              "expr":
+                "fun xs -> match xs with | [] -> true | x::xs' -> false",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((is_empty)[@env0 ]) [1; 2; 3; 4]",
+      "envs": {
+        "env0": {
+          "is_empty": {
+            "corec": [],
+            "expr": {
+              "expr":
+                "fun xs -> match xs with | [] -> true | x::xs' -> false",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun xs -> match xs with | [] -> true | x::xs' -> false) [1; 2; 3; 4]",
+      "envs": {}
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((match xs with | [] -> true | x::xs' -> false)[@env0 ])",
+      "envs": {
+        "env0": {
+          "xs": {
+            "corec": [],
+            "expr": { "expr": "[1; 2; 3; 4]", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "match ((xs)[@env0 ]) with | [] -> true | x::xs' -> false",
+      "envs": {
+        "env0": {
+          "xs": {
+            "corec": [],
+            "expr": { "expr": "[1; 2; 3; 4]", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr": "match [1; 2; 3; 4] with | [] -> true | x::xs' -> false",
+      "envs": {}
+    },
+    "step": [ "Match" ]
+  },
+  { "current_expression": { "expr": "false", "envs": {} }, "step": [] }
+]
