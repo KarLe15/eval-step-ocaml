@@ -10,7 +10,11 @@
             </h5>
             <i class="fi flaticon-test symbol"></i>
           </div>
-          <p class="card-text result" >{{currentStep.currentExpression.toString | replaceN }}</p>
+          <div class="card-text result" >
+            <pre>
+                <code [highlight]="currentStep.currentExpression.toString" (highlighted)="onHighlight($event)" [lineNumbers]="true"></code>
+            </pre>
+          </div>
         </div>
       </div>
 

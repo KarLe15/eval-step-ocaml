@@ -13,6 +13,7 @@ import {ScrollToModule} from '@nicky-lenaers/ngx-scroll-to';
 import { UiSwitchModule } from 'ngx-ui-switch';
 import {AppModule} from '../app.module';
 import {ReplaceNPipe} from '../pipes/replace-n.pipe';
+import {HIGHLIGHT_OPTIONS, HighlightModule, HighlightOptions} from 'ngx-highlightjs';
 
 
 // @ts-ignore
@@ -37,10 +38,17 @@ import {ReplaceNPipe} from '../pipes/replace-n.pipe';
     MonacoEditorModule,
     ScrollToModule.forRoot(),
     UiSwitchModule,
+    HighlightModule
   ],
   providers: [
     EvalService,
-    ReplaceNPipe
+    ReplaceNPipe,
+    {
+      provide: HIGHLIGHT_OPTIONS,
+      useValue: <HighlightOptions>{
+        lineNumbers: true
+      }
+    }
   ]
 })
 export class CoreModule { }
