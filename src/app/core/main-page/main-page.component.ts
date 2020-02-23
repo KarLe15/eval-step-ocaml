@@ -6,6 +6,7 @@ import IOption from '../../structures/IOption';
 import {OptionsService} from '../../services/options.service';
 
 
+
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
@@ -20,6 +21,8 @@ export class MainPageComponent implements OnInit {
   private expressions: IEvaluation;
 
   private options: Map<string, IOption>;
+  private listeOptionsAffichage = ["Liste", "Arbre"];
+  optionChoisi = this.listeOptionsAffichage[0];
 
   constructor(private evaluator: EvalService, private OptService: OptionsService) { }
   ngOnInit() {
@@ -46,5 +49,10 @@ export class MainPageComponent implements OnInit {
 
   emitEventToChild() {
     this.eventSubject.next();
+  }
+
+  /* ---------- Changment de l'option d'affichage ------------------*/
+  onChoisi(item) {
+    this.optionChoisi = item;
   }
 }

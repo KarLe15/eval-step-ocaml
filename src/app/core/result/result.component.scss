@@ -14,12 +14,29 @@
   margin-top: -25px;
 }
 .result{
-  font-size: 22px !important;
+  font-size: 25px !important;
   color: black ;
 }
 
 /* Env */
 .text-env{
-  font-size: 20px !important;
+  font-size: 18px !important;
   color: black ;
+}
+
+.hljs{
+  background: white;
+}
+
+
+/* Numéro de l'étape */
+.step{
+  font-size: 30px;
+  font-family: 'Nunito';
+  margin-top: -10px;
+}
+
+.stepText{
+  font-size: 30px;
+  font-family: 'Nunito';
 }

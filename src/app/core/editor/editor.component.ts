@@ -12,7 +12,7 @@ export class EditorComponent implements OnInit {
 
   editorOptions = {theme: 'vs-dark', fontSize: '18px', autoIndent: 'full', language: 'fsharp'};
   codeFun = ' let f a = a + 1;';
-  codeMain = 'let _ = f 5';
+  codeMain = 'f 5';
   constructor() { }
 
   ngOnInit() {

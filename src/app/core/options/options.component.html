@@ -1,26 +1,50 @@
 <div class="card card-cascade wider">
+  <ul class="card-header nav nav-pills mb-3 d-flex justify-content-between" id="pills-tab" role="tablist">
+    <li class="ml-5 nav-item ">
+      <a class="nav-link " id="pills-option-tab" data-toggle="pill" href="#pills-option" role="tab"
+         aria-controls="pills-option" aria-selected="true">
+        <div class="">
+          <div class="ml-0 textHeader">Options</div>
+        </div>
+      </a>
+    </li>
 
-  <div class="card-header">
-    <div class="d-flex justify-content-between ">
-      <div class="ml-0 textHeader">Options</div>
-      <div class="mr-0" > <i class="fi flaticon-checklist"></i> </div>
+    <li class="mr-5 nav-item">
+      <a class="nav-link active" id="pills-mode-tab" data-toggle="pill" href="#pills-mode" role="tab"
+         aria-controls="pills-mode" aria-selected="true">
+        <div class="">
+          <div class="ml-0 textHeader">Mode</div>
+        </div>
+      </a>
+    </li>
+  </ul>
+
+  <div class="card-body card-body-cascade pb-0 ml-4 mr-5 tab-content pt-2 pl-1" id="pills-tabContent">
+    <div class="tab-pane fade" id="pills-option" role="tabpanel" aria-labelledby="pills-option-tab">
+      <div *ngFor="let item of options | keyvalue" class="d-flex justify-content-between align-self-center">
+        <p class="labelOption">{{item.key}}</p>
+        <ui-switch
+          color="#0099CC" size="small"
+          checkedLabel="On" uncheckedLabel="Off"
+          (change)="onChangeOption()"
+          [(ngModel)]="item.value.valueDefault"
+          (valueChange)="onValueChange($event, item.value.name)"
+        ></ui-switch>
+      </div>
     </div>
 
-  </div>
 
-  <div class="card-body card-body-cascade pb-0 ml-4 mr-5">
 
-    <div *ngFor="let item of options | keyvalue" class="d-flex justify-content-between align-self-center">
-      <p class="labelOption">{{item.key}}</p>
-      <ui-switch
-        color="#0099CC" size="small"
-        checkedLabel="On" uncheckedLabel="Off"
-        (change)="onChangeOption()"
-        [(ngModel)]="item.value.valueDefault"
-        (valueChange)="onValueChange($event, item.value.name)"
-      ></ui-switch>
+    <div class="tab-pane fade  show active" id="pills-mode" role="tabpanel" aria-labelledby="pills-mode-tab">
+      <div class="d-flex justify-content-between align-self-center">
+        <p class="labelOption">Mode basique</p>
+        <ui-switch
+          color="#0099CC" size="small"
+          checkedLabel="On" uncheckedLabel="Off"
+          [(ngModel)]="mode_basique"
+        ></ui-switch>
+      </div>
     </div>
-
 
   </div>
 

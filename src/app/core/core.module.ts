@@ -11,9 +11,9 @@ import {EvalService} from '../services/eval.service';
 import { ResultComponent } from './result/result.component';
 import {ScrollToModule} from '@nicky-lenaers/ngx-scroll-to';
 import { UiSwitchModule } from 'ngx-ui-switch';
-import {AppModule} from '../app.module';
 import {ReplaceNPipe} from '../pipes/replace-n.pipe';
 import {HIGHLIGHT_OPTIONS, HighlightModule, HighlightOptions} from 'ngx-highlightjs';
+
 
 
 // @ts-ignore
@@ -38,7 +38,7 @@ import {HIGHLIGHT_OPTIONS, HighlightModule, HighlightOptions} from 'ngx-highligh
     MonacoEditorModule,
     ScrollToModule.forRoot(),
     UiSwitchModule,
-    HighlightModule
+    HighlightModule,
   ],
   providers: [
     EvalService,

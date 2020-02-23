@@ -5,6 +5,7 @@ import IStep from '../../structures/IStep';
 import {EvalService} from '../../services/eval.service';
 import IOption from '../../structures/IOption';
 import {HighlightResult} from 'ngx-highlightjs';
+import {log} from 'util';
 
 @Component({
   selector: 'app-result',
@@ -19,6 +20,9 @@ export class ResultComponent implements OnInit {
   response: HighlightResult;
   private eventsSubscription: Subscription;
   private currentStep: IStep;
+  etape = 0;
+
+
   constructor(private evalService: EvalService) { }
 
 
@@ -34,10 +38,10 @@ export class ResultComponent implements OnInit {
 
   onPrevious() {
     this.currentStep = this.evalService.getPreviousStep(this.currentStep);
+    this.etape--;
   }
 
   onNext() {
-    let index = 0;
     let expr = this.currentStep;
     while(this.options.get(expr.nexts[0].name).valueDefault != true){
       if (expr.nexts !== null) {
@@ -45,6 +49,7 @@ export class ResultComponent implements OnInit {
       }
     }
     this.currentStep = this.evalService.getNextStep(expr);
+    this.etape++;
   }
 
   onHighlight(e) {
@@ -56,4 +61,5 @@ export class ResultComponent implements OnInit {
       value: '{...}'
     }
   }
+
 }
