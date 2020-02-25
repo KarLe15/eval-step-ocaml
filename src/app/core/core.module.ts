@@ -13,6 +13,9 @@ import {ScrollToModule} from '@nicky-lenaers/ngx-scroll-to';
 import { UiSwitchModule } from 'ngx-ui-switch';
 import {ReplaceNPipe} from '../pipes/replace-n.pipe';
 import {HIGHLIGHT_OPTIONS, HighlightModule, HighlightOptions} from 'ngx-highlightjs';
+import { ResultTreeComponent } from './result-tree/result-tree.component';
+import {SharedModule} from '../shared/shared.module';
+import { ResultListeComponent } from './result-liste/result-liste.component';
 
 
 
@@ -24,7 +27,9 @@ import {HIGHLIGHT_OPTIONS, HighlightModule, HighlightOptions} from 'ngx-highligh
     OptionsComponent,
     MainPageComponent,
     ResultComponent,
-    ReplaceNPipe
+    ReplaceNPipe,
+    ResultTreeComponent,
+    ResultListeComponent
   ],
   exports: [
     EditorComponent,
@@ -39,6 +44,7 @@ import {HIGHLIGHT_OPTIONS, HighlightModule, HighlightOptions} from 'ngx-highligh
     ScrollToModule.forRoot(),
     UiSwitchModule,
     HighlightModule,
+    SharedModule,
   ],
   providers: [
     EvalService,

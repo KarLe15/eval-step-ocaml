@@ -4,8 +4,6 @@ import {Observable, Subscription} from 'rxjs';
 import IStep from '../../structures/IStep';
 import {EvalService} from '../../services/eval.service';
 import IOption from '../../structures/IOption';
-import {HighlightResult} from 'ngx-highlightjs';
-import {log} from 'util';
 
 @Component({
   selector: 'app-result',
@@ -16,11 +14,12 @@ export class ResultComponent implements OnInit {
   @Input('expressions') expressions: IEvaluation;
   @Input('events') events: Observable<void>;
   @Input('options') options: Map<string, IOption>;
+  @Input('typeAffichage') type: string;
 
-  response: HighlightResult;
   private eventsSubscription: Subscription;
   private currentStep: IStep;
   etape = 0;
+  listeEtape = [];
 
 
   constructor(private evalService: EvalService) { }
@@ -33,6 +32,7 @@ export class ResultComponent implements OnInit {
 
   private initStep() {
     this.currentStep = this.evalService.getFirstStep(this.expressions);
+    this.listeEtape.push(this.currentStep);
     console.log('init', this.currentStep );
   }
 
@@ -49,17 +49,9 @@ export class ResultComponent implements OnInit {
       }
     }
     this.currentStep = this.evalService.getNextStep(expr);
+    this.listeEtape.push(this.currentStep);
     this.etape++;
   }
 
-  onHighlight(e) {
-    this.response = {
-      language: e.language,
-      relevance: e.relevance,
-      second_best: '{...}',
-      top: '{...}',
-      value: '{...}'
-    }
-  }
 
 }

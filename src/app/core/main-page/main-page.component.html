@@ -39,7 +39,9 @@
 
   <div *ngIf="evaluate"  class="row mt-2 mr-4 ml-4 border-top">
     <div class="col-12" id="destination" #destinationRef>
-      <app-result [options]="options"  [expressions]="expressions" [events]="eventSubject.asObservable()" ></app-result>
+      <app-result [events]="eventSubject.asObservable()" [expressions]="expressions" [options]="options" [typeAffichage]="optionChoisi"></app-result>
     </div>
   </div>
+
 </div>
+

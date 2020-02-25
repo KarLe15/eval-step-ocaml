@@ -1,0 +1,19 @@
+<div class="container-fluid mt-5">
+  <div class="row d-flex justify-content-center">
+    <!-- Expression -->
+    <div class="col-sm-9 mb-3 mb-md-0">
+      <div>
+        <app-node>
+          <div exp class="result" >
+            <pre>
+                <code  [highlight]="currentStep.currentExpression.toString | replaceN" (highlighted)="onHighlight($event)" [lineNumbers]="false "></code>
+            </pre>
+          </div>
+          <div env >{{currentStep.currentExpression.environements.toString() | json }}</div>
+        </app-node>
+      </div>
+
+    </div>
+  </div>
+
+</div>
