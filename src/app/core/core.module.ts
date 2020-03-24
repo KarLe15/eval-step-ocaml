@@ -8,14 +8,17 @@ import {MonacoEditorModule} from 'ngx-monaco-editor';
 
 import {EvalService} from '../services/eval.service';
 
+
+
 import { ResultComponent } from './result/result.component';
-import {ScrollToModule} from '@nicky-lenaers/ngx-scroll-to';
+import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 import { UiSwitchModule } from 'ngx-ui-switch';
 import {ReplaceNPipe} from '../pipes/replace-n.pipe';
 import {HIGHLIGHT_OPTIONS, HighlightModule, HighlightOptions} from 'ngx-highlightjs';
 import { ResultTreeComponent } from './result-tree/result-tree.component';
-import {SharedModule} from '../shared/shared.module';
+import { SharedModule } from '../shared/shared.module';
 import { ResultListeComponent } from './result-liste/result-liste.component';
+
 
 
 

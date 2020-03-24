@@ -5,6 +5,9 @@ import {IEnvironment} from '../structures/IEnvironement';
 import IExpression from '../structures/IExpression';
 import * as jsonSteps from './fact.json';
 
+
+declare var get_evaluation_steps: any;
+
 @Injectable({
   providedIn: 'root'
 })
@@ -138,7 +141,10 @@ export class EvalService {
     // const stringOfJson = JSON.stringify(jsonSteps);
     // console.log(JSON.parse(stringOfJson).default);
     // return this.parseJSONToIEvaluation(stringOfJson, '@mock : first expression');
-     return this.jsonToIEvaluation(jsonSteps, '@mock : first expression');
+    const res = get_evaluation_steps('let _ = 5 + 1');
+    console.log(res);
+    // return this.jsonToIEvaluation(jsonSteps, '@mock : first expression');
+    return null;
   }
   public getFirstStep(evaluations: IEvaluation): IStep {
     return evaluations.firstStep;

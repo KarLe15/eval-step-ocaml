@@ -23,6 +23,7 @@
     "angular-custom-dropdown": "^1.1.1",
     "angular-particle": "^1.0.4",
     "bootstrap": "^4.4.1",
+    "express": "^4.17.1",
     "jquery": "^3.4.1",
     "mdbootstrap": "^4.12.0",
     "ngx-highlightjs": "^4.0.2",
