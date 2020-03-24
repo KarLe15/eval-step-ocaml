@@ -30,7 +30,8 @@ export class MainPageComponent implements OnInit {
   }
 
   onClick() {
-    this.expressions = this.evaluator.getDataStructure();
+    const expression = this.defFun + '\n\nlet _ = ' + this.defMain;
+    this.expressions = this.evaluator.getDataStructure(expression, this.defMain);
     this.emitEventToChild();
     this.evaluate = true;
   }

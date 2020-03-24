@@ -4,6 +4,7 @@ import IStep from '../structures/IStep';
 import {IEnvironment} from '../structures/IEnvironement';
 import IExpression from '../structures/IExpression';
 import * as jsonSteps from './fact.json';
+import {first} from 'rxjs/operators';
 
 
 declare var get_evaluation_steps: any;
@@ -14,6 +15,9 @@ declare var get_evaluation_steps: any;
 export class EvalService {
 
   constructor() { }
+  // =======================================================================
+  //
+  // =======================================================================
   private getSubEnvironementsfromJson(expr: any): IExpression {
     const toString: string = expr.expr.expr;
     let environements = null;
@@ -51,6 +55,9 @@ export class EvalService {
       environements
     };
   }
+  // =======================================================================
+  //
+  // =======================================================================
   private getEnvironementsFromJSONStep(step: any): Array<IEnvironment> | null {
     if (step.current_expression.envs) {
       const context = step.current_expression.envs;
@@ -68,7 +75,6 @@ export class EvalService {
           if (varEnv.corec.length !== 0) {
             corec = varEnv.corec;
           }
-          // console.log('getEnvironementsFromJSON', varEnv);
           const expr = this.getSubEnvironementsfromJson(varEnv);
           itemsEnv.push({
             corec,
@@ -85,19 +91,21 @@ export class EvalService {
     }
     return null;
   }
-
+  // =======================================================================
+  //
+  // =======================================================================
   private getExpressionFromJSONstep(step: any): IExpression {
-    // console.log('getExpressionFromJSON', step);
     const environements = this.getEnvironementsFromJSONStep(step);
     return {
       toString: step.current_expression.expr,
       environements
     };
   }
-
+  // =======================================================================
+  //
+  // =======================================================================
   private getStepFromJSONStep(steps: any, index: number, previous: IStep): IStep {
     const step: any = steps[index];
-    // console.log('getStepFromJSON', step);
     const currentExpression = this.getExpressionFromJSONstep(step);
     let next = null;
     if (index !== steps.length - 1) {
@@ -116,6 +124,9 @@ export class EvalService {
     }
     return res;
   }
+  // =======================================================================
+  //
+  // =======================================================================
   private parseJSONToIEvaluation(content: string, firstExpression: string): IEvaluation {
     const json: Array<any> = JSON.parse(content);
     const firstStep = this.getStepFromJSONStep(json, 0, null);
@@ -126,7 +137,6 @@ export class EvalService {
   }
   // temporary function
   private jsonToIEvaluation(content, firstExpression: string): IEvaluation {
-    // console.log('jsonToIevaluation', content.default);
     const firstStep = this.getStepFromJSONStep(content.default, 0, null);
     return {
       firstExpression,
@@ -137,18 +147,19 @@ export class EvalService {
   /**
    * Public function available for this service
    */
-  public getDataStructure(): IEvaluation {
-    // const stringOfJson = JSON.stringify(jsonSteps);
-    // console.log(JSON.parse(stringOfJson).default);
-    // return this.parseJSONToIEvaluation(stringOfJson, '@mock : first expression');
-    const res = get_evaluation_steps('let _ = 5 + 1');
-    console.log(res);
-    // return this.jsonToIEvaluation(jsonSteps, '@mock : first expression');
-    return null;
+  public getDataStructure(expression: string, firstExpression: string): IEvaluation {
+      const evals = get_evaluation_steps(expression);
+      return this.parseJSONToIEvaluation(evals, firstExpression);
   }
+  // =======================================================================
+  //
+  // =======================================================================
   public getFirstStep(evaluations: IEvaluation): IStep {
     return evaluations.firstStep;
   }
+  // =======================================================================
+  //
+  // =======================================================================
   public getNextStep(current: IStep): IStep | null {
     let next: IStep | null = null;
     if (current.nexts !== null) {
@@ -156,6 +167,9 @@ export class EvalService {
     }
     return next;
   }
+  // =======================================================================
+  //
+  // =======================================================================
   public getPreviousStep(current: IStep): IStep | null {
     return current.previous;
   }
