@@ -1,0 +1,28 @@
+{
+  "steps": [
+    "descente_rec",
+    "remonte_rec",
+    "resolution"
+  ],
+  "descente_rec": {
+    "skip": null,
+    "wait": [
+      {"name": "SubstFun"}
+    ],
+    "naming_wait": true
+  },
+  "remonte_rec": {
+    "skip": null,
+    "wait": [
+      {"name": "ApplyFunRuntime"}
+    ],
+    "naming_wait": false
+  },
+  "resolution": {
+    "skip": [
+      "MoveDownSubst"
+    ],
+    "wait": null,
+    "naming_wait": false
+  }
+}

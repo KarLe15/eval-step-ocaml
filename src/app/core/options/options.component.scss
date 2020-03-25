@@ -1,0 +1,29 @@
+.card{
+  height: 88%;
+}
+.card-header{
+  height: 10%;
+}
+
+.textHeader{
+  font-family: "Nunito";
+  margin-top: 4px;
+  font-size: 20px;
+}
+.nav-link{
+  color: black;
+}
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link{
+  background-color: #66615B;
+  border-radius: 43%;
+}
+
+.fi{
+  margin-bottom: 2px;
+  font-size: 40px;
+}
+
+.labelOption{
+  font-family: "Nunito";
+  font-size: 20px;
+}

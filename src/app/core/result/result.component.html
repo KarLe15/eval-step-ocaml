@@ -1,0 +1,24 @@
+<div class="container-fluid mt-5">
+  <div *ngIf="type == 'liste'">
+    <app-result-liste [currentStep]="currentStep"></app-result-liste>
+  </div>
+
+  <div *ngIf="type == 'arbre'">
+    <div *ngFor="let item of listeEtape">
+      <app-result-tree [currentStep]='item'></app-result-tree>
+      <div class="d-flex justify-content-center"  >
+        <i class="fi flaticon-down-arrow"  [ngx-scroll-to]="'#destinationStep'" (click)="onNext()" > </i>
+      </div>
+    </div>
+  </div>
+  <div class="mt-5" id="destinationStep" #destinationRef >
+  </div>
+
+  <!-- Buttons Next and Previous -->
+  <div *ngIf="type == 'liste'" class="d-flex justify-content-between mt-4 ">
+    <i class="fi flaticon-back ml-4"  (click)="onPrevious()" > </i>
+    <i class="fi flaticon-next mr-4" (click)="onNext()" > </i>
+  </div>
+
+
+</div>
