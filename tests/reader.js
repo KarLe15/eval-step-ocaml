@@ -2,7 +2,7 @@ const fs = require("fs");
 const readline = require('readline');
 
 
-const text = fs.readFileSync("./jsons/example_cours/cours3/length_tr.ml.json");
+const text = fs.readFileSync("./jsons/example_cours/cours2/fact.ml.json");
 const json = JSON.parse(text);
 
 
@@ -60,13 +60,13 @@ process.stdin.on('keypress', (str, key) => {
       while (step !== "SubstFun" ) {
         i++;
         step = json[i].step[0];
-      }  
+      }
     }
     else if(! onlyRuntimeLeft(json, i, "fact")){
       while ((!onlyRuntimeLeft(json, i, "fact")) ) {
         i++;
         step = json[i].step[0];
-      }  
+      }
     }
 
     // console.log(step);
@@ -86,7 +86,7 @@ function isSubstFunOf(jsons, index, func){
   for (let i = index; i < jsons.length; i++) {
     if(jsons[i].step[0] === "SubstFun"){
       return true;
-    } 
+    }
   }
   return false;
 }
@@ -169,7 +169,7 @@ function mapStepToEnum (step)  {
 
 
 
-// modes : 
+// modes :
 // retirer les moveDownSubst
-// Aller de subtFun en SubtFun et ApplyFunRuntime 
+// Aller de subtFun en SubtFun et ApplyFunRuntime
 
