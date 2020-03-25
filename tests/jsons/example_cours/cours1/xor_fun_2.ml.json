@@ -1,0 +1,402 @@
+[
+  {
+    "current_expression": {
+      "expr": "((xor true false)[@env0 ])",
+      "envs": {
+        "env0": {
+          "xor": {
+            "corec": [],
+            "expr": {
+              "expr":
+                "fun x -> ((fun y -> (x || y) && (not (x && y)))[@env1 ])",
+              "envs": {
+                "env1": {
+                  "not": {
+                    "corec": [],
+                    "expr": {
+                      "expr":
+                        "fun b -> match b with | true -> false | false -> true",
+                      "envs": {}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((xor)[@env0 ]) true false",
+      "envs": {
+        "env0": {
+          "xor": {
+            "corec": [],
+            "expr": {
+              "expr":
+                "fun x -> ((fun y -> (x || y) && (not (x && y)))[@env1 ])",
+              "envs": {
+                "env1": {
+                  "not": {
+                    "corec": [],
+                    "expr": {
+                      "expr":
+                        "fun b -> match b with | true -> false | false -> true",
+                      "envs": {}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> ((fun y -> (x || y) && (not (x && y)))[@env0 ])) true false",
+      "envs": {
+        "env0": {
+          "not": {
+            "corec": [],
+            "expr": {
+              "expr": "fun b -> match b with | true -> false | false -> true",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> fun y -> (((x || y) && (not (x && y)))[@env0 ])) true false",
+      "envs": {
+        "env0": {
+          "not": {
+            "corec": [],
+            "expr": {
+              "expr": "fun b -> match b with | true -> false | false -> true",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> fun y -> (x || y) && ((not (x && y))[@env0 ])) true false",
+      "envs": {
+        "env0": {
+          "not": {
+            "corec": [],
+            "expr": {
+              "expr": "fun b -> match b with | true -> false | false -> true",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> fun y -> (x || y) && (((not)[@env0 ]) (x && y))) true false",
+      "envs": {
+        "env0": {
+          "not": {
+            "corec": [],
+            "expr": {
+              "expr": "fun b -> match b with | true -> false | false -> true",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr": "(((x || y) && (((not)[@env0 ]) (x && y)))[@env1 ])",
+      "envs": {
+        "env0": {
+          "not": {
+            "corec": [],
+            "expr": {
+              "expr": "fun b -> match b with | true -> false | false -> true",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "y": { "corec": [], "expr": { "expr": "false", "envs": {} } },
+          "x": { "corec": [], "expr": { "expr": "true", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((x || y)[@env0 ]) && ((((not)[@env1 ]) (x && y))[@env2 ])",
+      "envs": {
+        "env0": {
+          "y": { "corec": [], "expr": { "expr": "false", "envs": {} } },
+          "x": { "corec": [], "expr": { "expr": "true", "envs": {} } }
+        },
+        "env1": {
+          "not": {
+            "corec": [],
+            "expr": {
+              "expr": "fun b -> match b with | true -> false | false -> true",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "y": { "corec": [], "expr": { "expr": "false", "envs": {} } },
+          "x": { "corec": [], "expr": { "expr": "true", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(((x)[@env0 ]) || ((y)[@env1 ])) && ((((not)[@env2 ]) (x && y))[@env3 ])",
+      "envs": {
+        "env0": {
+          "x": { "corec": [], "expr": { "expr": "true", "envs": {} } }
+        },
+        "env1": {
+          "y": { "corec": [], "expr": { "expr": "false", "envs": {} } }
+        },
+        "env2": {
+          "not": {
+            "corec": [],
+            "expr": {
+              "expr": "fun b -> match b with | true -> false | false -> true",
+              "envs": {}
+            }
+          }
+        },
+        "env3": {
+          "y": { "corec": [], "expr": { "expr": "false", "envs": {} } },
+          "x": { "corec": [], "expr": { "expr": "true", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(((x)[@env0 ]) || ((y)[@env1 ])) && (((not)[@env3 ]) ((x && y)[@env2 ]))",
+      "envs": {
+        "env0": {
+          "x": { "corec": [], "expr": { "expr": "true", "envs": {} } }
+        },
+        "env1": {
+          "y": { "corec": [], "expr": { "expr": "false", "envs": {} } }
+        },
+        "env2": {
+          "y": { "corec": [], "expr": { "expr": "false", "envs": {} } },
+          "x": { "corec": [], "expr": { "expr": "true", "envs": {} } }
+        },
+        "env3": {
+          "not": {
+            "corec": [],
+            "expr": {
+              "expr": "fun b -> match b with | true -> false | false -> true",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(((x)[@env0 ]) || ((y)[@env1 ])) &&\n  (((not)[@env4 ]) (((x)[@env2 ]) && ((y)[@env3 ])))",
+      "envs": {
+        "env0": {
+          "x": { "corec": [], "expr": { "expr": "true", "envs": {} } }
+        },
+        "env1": {
+          "y": { "corec": [], "expr": { "expr": "false", "envs": {} } }
+        },
+        "env2": {
+          "x": { "corec": [], "expr": { "expr": "true", "envs": {} } }
+        },
+        "env3": {
+          "y": { "corec": [], "expr": { "expr": "false", "envs": {} } }
+        },
+        "env4": {
+          "not": {
+            "corec": [],
+            "expr": {
+              "expr": "fun b -> match b with | true -> false | false -> true",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(true || ((y)[@env0 ])) && (((not)[@env3 ]) (((x)[@env1 ]) && ((y)[@env2 ])))",
+      "envs": {
+        "env0": {
+          "y": { "corec": [], "expr": { "expr": "false", "envs": {} } }
+        },
+        "env1": {
+          "x": { "corec": [], "expr": { "expr": "true", "envs": {} } }
+        },
+        "env2": {
+          "y": { "corec": [], "expr": { "expr": "false", "envs": {} } }
+        },
+        "env3": {
+          "not": {
+            "corec": [],
+            "expr": {
+              "expr": "fun b -> match b with | true -> false | false -> true",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(true || false) && (((not)[@env2 ]) (((x)[@env0 ]) && ((y)[@env1 ])))",
+      "envs": {
+        "env0": {
+          "x": { "corec": [], "expr": { "expr": "true", "envs": {} } }
+        },
+        "env1": {
+          "y": { "corec": [], "expr": { "expr": "false", "envs": {} } }
+        },
+        "env2": {
+          "not": {
+            "corec": [],
+            "expr": {
+              "expr": "fun b -> match b with | true -> false | false -> true",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(true || false) &&\n  ((fun b -> match b with | true -> false | false -> true)\n     (((x)[@env0 ]) && ((y)[@env1 ])))",
+      "envs": {
+        "env0": {
+          "x": { "corec": [], "expr": { "expr": "true", "envs": {} } }
+        },
+        "env1": {
+          "y": { "corec": [], "expr": { "expr": "false", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(true || false) &&\n  ((fun b -> match b with | true -> false | false -> true)\n     (true && ((y)[@env0 ])))",
+      "envs": {
+        "env0": {
+          "y": { "corec": [], "expr": { "expr": "false", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(true || false) &&\n  ((fun b -> match b with | true -> false | false -> true) (true && false))",
+      "envs": {}
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "true &&\n  ((fun b -> match b with | true -> false | false -> true) (true && false))",
+      "envs": {}
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "true && ((fun b -> match b with | true -> false | false -> true) false)",
+      "envs": {}
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "true && ((match b with | true -> false | false -> true)[@env0 ])",
+      "envs": {
+        "env0": {
+          "b": { "corec": [], "expr": { "expr": "false", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "true && (match ((b)[@env0 ]) with | true -> false | false -> true)",
+      "envs": {
+        "env0": {
+          "b": { "corec": [], "expr": { "expr": "false", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr": "true && (match false with | true -> false | false -> true)",
+      "envs": {}
+    },
+    "step": [ "Match" ]
+  },
+  {
+    "current_expression": { "expr": "true && true", "envs": {} },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  { "current_expression": { "expr": "true", "envs": {} }, "step": [] }
+]

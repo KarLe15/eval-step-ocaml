@@ -1,0 +1,32 @@
+[
+  {
+    "current_expression": {
+      "expr": "let a = 3 in let a = 4 in a",
+      "envs": {}
+    },
+    "step": [ "Let" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((let a = 4 in a)[@env0 ])",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "3", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": { "expr": "let a = 4 in a", "envs": {} },
+    "step": [ "Let" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((a)[@env0 ])",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "4", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  { "current_expression": { "expr": "4", "envs": {} }, "step": [] }
+]

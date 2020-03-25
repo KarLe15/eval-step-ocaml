@@ -1,0 +1,5587 @@
+[
+  {
+    "current_expression": {
+      "expr": "((iter 10 (fun x -> x + 1) 0)[@env0 ])",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((iter)[@env0 ]) 10 (fun x -> x + 1) 0",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a)\n  [@env0 ]) 10 (fun x -> x + 1) 0",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun n -> ((fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a)\n   [@env0 ])) 10 (fun x -> x + 1) 0",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun n ->\n   fun f -> ((fun a -> if n > 0 then f (iter (n - 1) f a) else a)[@env0 ]))\n  10 (fun x -> x + 1) 0",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun n ->\n   fun f -> fun a -> ((if n > 0 then f (iter (n - 1) f a) else a)[@env0 ]))\n  10 (fun x -> x + 1) 0",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun n ->\n   fun f -> fun a -> if n > 0 then ((f (iter (n - 1) f a))[@env0 ]) else a)\n  10 (fun x -> x + 1) 0",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((if n > 0 then ((f (iter (n - 1) f a))[@env0 ]) else a)[@env1 ])",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "n": { "corec": [], "expr": { "expr": "10", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "if ((n > 0)[@env3 ])\nthen ((f (iter (n - 1) f a))[@env2 ][@env1 ])\nelse ((a)[@env0 ])",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "n": { "corec": [], "expr": { "expr": "10", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        },
+        "env3": {
+          "n": { "corec": [], "expr": { "expr": "10", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "if ((n)[@env3 ]) > 0\nthen ((f (iter (n - 1) f a))[@env2 ][@env1 ])\nelse ((a)[@env0 ])",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "n": { "corec": [], "expr": { "expr": "10", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        },
+        "env3": {
+          "n": { "corec": [], "expr": { "expr": "10", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "if 10 > 0 then ((f (iter (n - 1) f a))[@env2 ][@env1 ]) else ((a)[@env0 ])",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "n": { "corec": [], "expr": { "expr": "10", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "if true then ((f (iter (n - 1) f a))[@env2 ][@env1 ]) else ((a)[@env0 ])",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "n": { "corec": [], "expr": { "expr": "10", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "If" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((f (iter (n - 1) f a))[@env1 ][@env0 ])",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "n": { "corec": [], "expr": { "expr": "10", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "SubstCombine" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((f (iter (n - 1) f a))[@env0 ])",
+      "envs": {
+        "env0": {
+          "n": { "corec": [], "expr": { "expr": "10", "envs": {} } },
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((f)[@env1 ]) ((iter (n - 1) f a)[@env0 ])",
+      "envs": {
+        "env0": {
+          "n": { "corec": [], "expr": { "expr": "10", "envs": {} } },
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((f)[@env4 ])\n  (((iter)[@env3 ]) ((n - 1)[@env0 ]) ((f)[@env1 ]) ((a)[@env2 ]))",
+      "envs": {
+        "env0": {
+          "n": { "corec": [], "expr": { "expr": "10", "envs": {} } }
+        },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        },
+        "env2": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env3": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env4": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((f)[@env4 ])\n  (((iter)[@env3 ]) (((n)[@env0 ]) - 1) ((f)[@env1 ]) ((a)[@env2 ]))",
+      "envs": {
+        "env0": {
+          "n": { "corec": [], "expr": { "expr": "10", "envs": {} } }
+        },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        },
+        "env2": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env3": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env4": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  (((iter)[@env3 ]) (((n)[@env0 ]) - 1) ((f)[@env1 ]) ((a)[@env2 ]))",
+      "envs": {
+        "env0": {
+          "n": { "corec": [], "expr": { "expr": "10", "envs": {} } }
+        },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        },
+        "env2": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env3": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1) (((iter)[@env2 ]) (10 - 1) ((f)[@env0 ]) ((a)[@env1 ]))",
+      "envs": {
+        "env0": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        },
+        "env1": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env2": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1) (((iter)[@env1 ]) (10 - 1) (fun x -> x + 1) ((a)[@env0 ]))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1) (((iter)[@env0 ]) (10 - 1) (fun x -> x + 1) 0)",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr": "(fun x -> x + 1) (((iter)[@env0 ]) 9 (fun x -> x + 1) 0)",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  (((fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a)\n     [@env0 ]) 9 (fun x -> x + 1) 0)",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun n -> ((fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a)\n      [@env0 ])) 9 (fun x -> x + 1) 0)",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun n ->\n      fun f -> ((fun a -> if n > 0 then f (iter (n - 1) f a) else a)[@env0 ]))\n     9 (fun x -> x + 1) 0)",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun n ->\n      fun f -> fun a -> ((if n > 0 then f (iter (n - 1) f a) else a)[@env0 ]))\n     9 (fun x -> x + 1) 0)",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun n ->\n      fun f -> fun a -> if n > 0 then ((f (iter (n - 1) f a))[@env0 ]) else a)\n     9 (fun x -> x + 1) 0)",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1) ((if n > 0 then ((f (iter (n - 1) f a))[@env0 ]) else a)\n  [@env1 ])",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "n": { "corec": [], "expr": { "expr": "9", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  (if ((n > 0)[@env3 ])\n   then ((f (iter (n - 1) f a))[@env2 ][@env1 ])\n   else ((a)[@env0 ]))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "n": { "corec": [], "expr": { "expr": "9", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        },
+        "env3": { "n": { "corec": [], "expr": { "expr": "9", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  (if ((n)[@env3 ]) > 0\n   then ((f (iter (n - 1) f a))[@env2 ][@env1 ])\n   else ((a)[@env0 ]))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "n": { "corec": [], "expr": { "expr": "9", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        },
+        "env3": { "n": { "corec": [], "expr": { "expr": "9", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  (if 9 > 0 then ((f (iter (n - 1) f a))[@env2 ][@env1 ]) else ((a)[@env0 ]))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "n": { "corec": [], "expr": { "expr": "9", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  (if true then ((f (iter (n - 1) f a))[@env2 ][@env1 ]) else ((a)[@env0 ]))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "n": { "corec": [], "expr": { "expr": "9", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "If" ]
+  },
+  {
+    "current_expression": {
+      "expr": "(fun x -> x + 1) ((f (iter (n - 1) f a))[@env1 ][@env0 ])",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "n": { "corec": [], "expr": { "expr": "9", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "SubstCombine" ]
+  },
+  {
+    "current_expression": {
+      "expr": "(fun x -> x + 1) ((f (iter (n - 1) f a))[@env0 ])",
+      "envs": {
+        "env0": {
+          "n": { "corec": [], "expr": { "expr": "9", "envs": {} } },
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "(fun x -> x + 1) (((f)[@env1 ]) ((iter (n - 1) f a)[@env0 ]))",
+      "envs": {
+        "env0": {
+          "n": { "corec": [], "expr": { "expr": "9", "envs": {} } },
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  (((f)[@env4 ])\n     (((iter)[@env3 ]) ((n - 1)[@env0 ]) ((f)[@env1 ]) ((a)[@env2 ])))",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "9", "envs": {} } } },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        },
+        "env2": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env3": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env4": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  (((f)[@env4 ])\n     (((iter)[@env3 ]) (((n)[@env0 ]) - 1) ((f)[@env1 ]) ((a)[@env2 ])))",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "9", "envs": {} } } },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        },
+        "env2": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env3": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env4": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     (((iter)[@env3 ]) (((n)[@env0 ]) - 1) ((f)[@env1 ]) ((a)[@env2 ])))",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "9", "envs": {} } } },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        },
+        "env2": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env3": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1) (((iter)[@env2 ]) (9 - 1) ((f)[@env0 ]) ((a)[@env1 ])))",
+      "envs": {
+        "env0": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        },
+        "env1": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env2": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1) (((iter)[@env1 ]) (9 - 1) (fun x -> x + 1) ((a)[@env0 ])))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1) (((iter)[@env0 ]) (9 - 1) (fun x -> x + 1) 0))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1) ((fun x -> x + 1) (((iter)[@env0 ]) 8 (fun x -> x + 1) 0))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     (((fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a)\n        [@env0 ]) 8 (fun x -> x + 1) 0))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun n ->\n         ((fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a)\n         [@env0 ])) 8 (fun x -> x + 1) 0))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun n ->\n         fun f -> ((fun a -> if n > 0 then f (iter (n - 1) f a) else a)\n           [@env0 ])) 8 (fun x -> x + 1) 0))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun n ->\n         fun f ->\n           fun a -> ((if n > 0 then f (iter (n - 1) f a) else a)[@env0 ])) 8\n        (fun x -> x + 1) 0))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun n ->\n         fun f ->\n           fun a -> if n > 0 then ((f (iter (n - 1) f a))[@env0 ]) else a) 8\n        (fun x -> x + 1) 0))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1) ((if n > 0 then ((f (iter (n - 1) f a))[@env0 ]) else a)\n     [@env1 ]))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "n": { "corec": [], "expr": { "expr": "8", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     (if ((n > 0)[@env3 ])\n      then ((f (iter (n - 1) f a))[@env2 ][@env1 ])\n      else ((a)[@env0 ])))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "n": { "corec": [], "expr": { "expr": "8", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        },
+        "env3": { "n": { "corec": [], "expr": { "expr": "8", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     (if ((n)[@env3 ]) > 0\n      then ((f (iter (n - 1) f a))[@env2 ][@env1 ])\n      else ((a)[@env0 ])))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "n": { "corec": [], "expr": { "expr": "8", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        },
+        "env3": { "n": { "corec": [], "expr": { "expr": "8", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     (if 8 > 0\n      then ((f (iter (n - 1) f a))[@env2 ][@env1 ])\n      else ((a)[@env0 ])))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "n": { "corec": [], "expr": { "expr": "8", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     (if true\n      then ((f (iter (n - 1) f a))[@env2 ][@env1 ])\n      else ((a)[@env0 ])))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "n": { "corec": [], "expr": { "expr": "8", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "If" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1) ((fun x -> x + 1) ((f (iter (n - 1) f a))[@env1 ][@env0 ]))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "n": { "corec": [], "expr": { "expr": "8", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "SubstCombine" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1) ((fun x -> x + 1) ((f (iter (n - 1) f a))[@env0 ]))",
+      "envs": {
+        "env0": {
+          "n": { "corec": [], "expr": { "expr": "8", "envs": {} } },
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1) (((f)[@env1 ]) ((iter (n - 1) f a)[@env0 ])))",
+      "envs": {
+        "env0": {
+          "n": { "corec": [], "expr": { "expr": "8", "envs": {} } },
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     (((f)[@env4 ])\n        (((iter)[@env3 ]) ((n - 1)[@env0 ]) ((f)[@env1 ]) ((a)[@env2 ]))))",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "8", "envs": {} } } },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        },
+        "env2": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env3": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env4": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     (((f)[@env4 ])\n        (((iter)[@env3 ]) (((n)[@env0 ]) - 1) ((f)[@env1 ]) ((a)[@env2 ]))))",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "8", "envs": {} } } },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        },
+        "env2": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env3": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env4": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        (((iter)[@env3 ]) (((n)[@env0 ]) - 1) ((f)[@env1 ]) ((a)[@env2 ]))))",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "8", "envs": {} } } },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        },
+        "env2": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env3": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1) (((iter)[@env2 ]) (8 - 1) ((f)[@env0 ]) ((a)[@env1 ]))))",
+      "envs": {
+        "env0": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        },
+        "env1": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env2": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        (((iter)[@env1 ]) (8 - 1) (fun x -> x + 1) ((a)[@env0 ]))))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1) (((iter)[@env0 ]) (8 - 1) (fun x -> x + 1) 0)))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1) (((iter)[@env0 ]) 7 (fun x -> x + 1) 0)))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        (((fun n ->\n             fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a)\n           [@env0 ]) 7 (fun x -> x + 1) 0)))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun n ->\n            ((fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a)\n            [@env0 ])) 7 (fun x -> x + 1) 0)))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun n ->\n            fun f -> ((fun a -> if n > 0 then f (iter (n - 1) f a) else a)\n              [@env0 ])) 7 (fun x -> x + 1) 0)))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun n ->\n            fun f ->\n              fun a -> ((if n > 0 then f (iter (n - 1) f a) else a)[@env0 ]))\n           7 (fun x -> x + 1) 0)))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun n ->\n            fun f ->\n              fun a -> if n > 0 then ((f (iter (n - 1) f a))[@env0 ]) else a)\n           7 (fun x -> x + 1) 0)))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((if n > 0 then ((f (iter (n - 1) f a))[@env0 ]) else a)[@env1 ])))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "n": { "corec": [], "expr": { "expr": "7", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        (if ((n > 0)[@env3 ])\n         then ((f (iter (n - 1) f a))[@env2 ][@env1 ])\n         else ((a)[@env0 ]))))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "n": { "corec": [], "expr": { "expr": "7", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        },
+        "env3": { "n": { "corec": [], "expr": { "expr": "7", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        (if ((n)[@env3 ]) > 0\n         then ((f (iter (n - 1) f a))[@env2 ][@env1 ])\n         else ((a)[@env0 ]))))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "n": { "corec": [], "expr": { "expr": "7", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        },
+        "env3": { "n": { "corec": [], "expr": { "expr": "7", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        (if 7 > 0\n         then ((f (iter (n - 1) f a))[@env2 ][@env1 ])\n         else ((a)[@env0 ]))))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "n": { "corec": [], "expr": { "expr": "7", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        (if true\n         then ((f (iter (n - 1) f a))[@env2 ][@env1 ])\n         else ((a)[@env0 ]))))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "n": { "corec": [], "expr": { "expr": "7", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "If" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1) ((f (iter (n - 1) f a))[@env1 ][@env0 ])))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "n": { "corec": [], "expr": { "expr": "7", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "SubstCombine" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1) ((fun x -> x + 1) ((f (iter (n - 1) f a))[@env0 ])))",
+      "envs": {
+        "env0": {
+          "n": { "corec": [], "expr": { "expr": "7", "envs": {} } },
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1) (((f)[@env1 ]) ((iter (n - 1) f a)[@env0 ]))))",
+      "envs": {
+        "env0": {
+          "n": { "corec": [], "expr": { "expr": "7", "envs": {} } },
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        (((f)[@env4 ])\n           (((iter)[@env3 ]) ((n - 1)[@env0 ]) ((f)[@env1 ]) ((a)[@env2 ])))))",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "7", "envs": {} } } },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        },
+        "env2": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env3": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env4": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        (((f)[@env4 ])\n           (((iter)[@env3 ]) (((n)[@env0 ]) - 1) ((f)[@env1 ]) ((a)[@env2 ])))))",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "7", "envs": {} } } },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        },
+        "env2": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env3": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env4": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           (((iter)[@env3 ]) (((n)[@env0 ]) - 1) ((f)[@env1 ]) ((a)[@env2 ])))))",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "7", "envs": {} } } },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        },
+        "env2": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env3": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           (((iter)[@env2 ]) (7 - 1) ((f)[@env0 ]) ((a)[@env1 ])))))",
+      "envs": {
+        "env0": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        },
+        "env1": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env2": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           (((iter)[@env1 ]) (7 - 1) (fun x -> x + 1) ((a)[@env0 ])))))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1) (((iter)[@env0 ]) (7 - 1) (fun x -> x + 1) 0))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1) (((iter)[@env0 ]) 6 (fun x -> x + 1) 0))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           (((fun n ->\n                fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a)\n              [@env0 ]) 6 (fun x -> x + 1) 0))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun n ->\n               ((fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a)\n               [@env0 ])) 6 (fun x -> x + 1) 0))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun n ->\n               fun f -> ((fun a -> if n > 0 then f (iter (n - 1) f a) else a)\n                 [@env0 ])) 6 (fun x -> x + 1) 0))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun n ->\n               fun f ->\n                 fun a -> ((if n > 0 then f (iter (n - 1) f a) else a)\n                   [@env0 ])) 6 (fun x -> x + 1) 0))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun n ->\n               fun f ->\n                 fun a ->\n                   if n > 0 then ((f (iter (n - 1) f a))[@env0 ]) else a) 6\n              (fun x -> x + 1) 0))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((if n > 0 then ((f (iter (n - 1) f a))[@env0 ]) else a)[@env1 ]))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "n": { "corec": [], "expr": { "expr": "6", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           (if ((n > 0)[@env3 ])\n            then ((f (iter (n - 1) f a))[@env2 ][@env1 ])\n            else ((a)[@env0 ])))))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "n": { "corec": [], "expr": { "expr": "6", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        },
+        "env3": { "n": { "corec": [], "expr": { "expr": "6", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           (if ((n)[@env3 ]) > 0\n            then ((f (iter (n - 1) f a))[@env2 ][@env1 ])\n            else ((a)[@env0 ])))))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "n": { "corec": [], "expr": { "expr": "6", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        },
+        "env3": { "n": { "corec": [], "expr": { "expr": "6", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           (if 6 > 0\n            then ((f (iter (n - 1) f a))[@env2 ][@env1 ])\n            else ((a)[@env0 ])))))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "n": { "corec": [], "expr": { "expr": "6", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           (if true\n            then ((f (iter (n - 1) f a))[@env2 ][@env1 ])\n            else ((a)[@env0 ])))))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "n": { "corec": [], "expr": { "expr": "6", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "If" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1) ((f (iter (n - 1) f a))[@env1 ][@env0 ]))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "n": { "corec": [], "expr": { "expr": "6", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "SubstCombine" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1) ((fun x -> x + 1) ((f (iter (n - 1) f a))[@env0 ]))))",
+      "envs": {
+        "env0": {
+          "n": { "corec": [], "expr": { "expr": "6", "envs": {} } },
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1) (((f)[@env1 ]) ((iter (n - 1) f a)[@env0 ])))))",
+      "envs": {
+        "env0": {
+          "n": { "corec": [], "expr": { "expr": "6", "envs": {} } },
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           (((f)[@env4 ])\n              (((iter)[@env3 ]) ((n - 1)[@env0 ]) ((f)[@env1 ]) ((a)[@env2 ]))))))",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "6", "envs": {} } } },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        },
+        "env2": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env3": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env4": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           (((f)[@env4 ])\n              (((iter)[@env3 ]) (((n)[@env0 ]) - 1) ((f)[@env1 ]) ((a)\n                 [@env2 ]))))))",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "6", "envs": {} } } },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        },
+        "env2": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env3": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env4": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              (((iter)[@env3 ]) (((n)[@env0 ]) - 1) ((f)[@env1 ]) ((a)\n                 [@env2 ]))))))",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "6", "envs": {} } } },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        },
+        "env2": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env3": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              (((iter)[@env2 ]) (6 - 1) ((f)[@env0 ]) ((a)[@env1 ]))))))",
+      "envs": {
+        "env0": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        },
+        "env1": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env2": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              (((iter)[@env1 ]) (6 - 1) (fun x -> x + 1) ((a)[@env0 ]))))))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1) (((iter)[@env0 ]) (6 - 1) (fun x -> x + 1) 0)))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1) (((iter)[@env0 ]) 5 (fun x -> x + 1) 0)))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              (((fun n ->\n                   fun f ->\n                     fun a -> if n > 0 then f (iter (n - 1) f a) else a)\n                 [@env0 ]) 5 (fun x -> x + 1) 0)))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun n ->\n                  ((fun f ->\n                      fun a -> if n > 0 then f (iter (n - 1) f a) else a)\n                  [@env0 ])) 5 (fun x -> x + 1) 0)))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun n ->\n                  fun f ->\n                    ((fun a -> if n > 0 then f (iter (n - 1) f a) else a)\n                    [@env0 ])) 5 (fun x -> x + 1) 0)))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun n ->\n                  fun f ->\n                    fun a -> ((if n > 0 then f (iter (n - 1) f a) else a)\n                      [@env0 ])) 5 (fun x -> x + 1) 0)))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun n ->\n                  fun f ->\n                    fun a ->\n                      if n > 0 then ((f (iter (n - 1) f a))[@env0 ]) else a)\n                 5 (fun x -> x + 1) 0)))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((if n > 0 then ((f (iter (n - 1) f a))[@env0 ]) else a)\n              [@env1 ])))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "n": { "corec": [], "expr": { "expr": "5", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              (if ((n > 0)[@env3 ])\n               then ((f (iter (n - 1) f a))[@env2 ][@env1 ])\n               else ((a)[@env0 ]))))))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "n": { "corec": [], "expr": { "expr": "5", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        },
+        "env3": { "n": { "corec": [], "expr": { "expr": "5", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              (if ((n)[@env3 ]) > 0\n               then ((f (iter (n - 1) f a))[@env2 ][@env1 ])\n               else ((a)[@env0 ]))))))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "n": { "corec": [], "expr": { "expr": "5", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        },
+        "env3": { "n": { "corec": [], "expr": { "expr": "5", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              (if 5 > 0\n               then ((f (iter (n - 1) f a))[@env2 ][@env1 ])\n               else ((a)[@env0 ]))))))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "n": { "corec": [], "expr": { "expr": "5", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              (if true\n               then ((f (iter (n - 1) f a))[@env2 ][@env1 ])\n               else ((a)[@env0 ]))))))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "n": { "corec": [], "expr": { "expr": "5", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "If" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1) ((f (iter (n - 1) f a))[@env1 ][@env0 ])))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "n": { "corec": [], "expr": { "expr": "5", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "SubstCombine" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1) ((fun x -> x + 1) ((f (iter (n - 1) f a))[@env0 ])))))",
+      "envs": {
+        "env0": {
+          "n": { "corec": [], "expr": { "expr": "5", "envs": {} } },
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1) (((f)[@env1 ]) ((iter (n - 1) f a)[@env0 ]))))))",
+      "envs": {
+        "env0": {
+          "n": { "corec": [], "expr": { "expr": "5", "envs": {} } },
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              (((f)[@env4 ])\n                 (((iter)[@env3 ]) ((n - 1)[@env0 ]) ((f)[@env1 ]) ((a)\n                    [@env2 ])))))))",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "5", "envs": {} } } },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        },
+        "env2": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env3": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env4": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              (((f)[@env4 ])\n                 (((iter)[@env3 ]) (((n)[@env0 ]) - 1) ((f)[@env1 ]) ((a)\n                    [@env2 ])))))))",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "5", "envs": {} } } },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        },
+        "env2": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env3": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env4": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 (((iter)[@env3 ]) (((n)[@env0 ]) - 1) ((f)[@env1 ]) ((a)\n                    [@env2 ])))))))",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "5", "envs": {} } } },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        },
+        "env2": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env3": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 (((iter)[@env2 ]) (5 - 1) ((f)[@env0 ]) ((a)[@env1 ])))))))",
+      "envs": {
+        "env0": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        },
+        "env1": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env2": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 (((iter)[@env1 ]) (5 - 1) (fun x -> x + 1) ((a)[@env0 ])))))))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1) (((iter)[@env0 ]) (5 - 1) (fun x -> x + 1) 0))))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1) (((iter)[@env0 ]) 4 (fun x -> x + 1) 0))))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 (((fun n ->\n                      fun f ->\n                        fun a -> if n > 0 then f (iter (n - 1) f a) else a)\n                    [@env0 ]) 4 (fun x -> x + 1) 0))))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun n ->\n                     ((fun f ->\n                         fun a -> if n > 0 then f (iter (n - 1) f a) else a)\n                     [@env0 ])) 4 (fun x -> x + 1) 0))))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun n ->\n                     fun f ->\n                       ((fun a -> if n > 0 then f (iter (n - 1) f a) else a)\n                       [@env0 ])) 4 (fun x -> x + 1) 0))))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun n ->\n                     fun f ->\n                       fun a -> ((if n > 0 then f (iter (n - 1) f a) else a)\n                         [@env0 ])) 4 (fun x -> x + 1) 0))))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun n ->\n                     fun f ->\n                       fun a ->\n                         if n > 0\n                         then ((f (iter (n - 1) f a))[@env0 ])\n                         else a) 4 (fun x -> x + 1) 0))))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((if n > 0 then ((f (iter (n - 1) f a))[@env0 ]) else a)\n                 [@env1 ]))))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "n": { "corec": [], "expr": { "expr": "4", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 (if ((n > 0)[@env3 ])\n                  then ((f (iter (n - 1) f a))[@env2 ][@env1 ])\n                  else ((a)[@env0 ])))))))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "n": { "corec": [], "expr": { "expr": "4", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        },
+        "env3": { "n": { "corec": [], "expr": { "expr": "4", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 (if ((n)[@env3 ]) > 0\n                  then ((f (iter (n - 1) f a))[@env2 ][@env1 ])\n                  else ((a)[@env0 ])))))))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "n": { "corec": [], "expr": { "expr": "4", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        },
+        "env3": { "n": { "corec": [], "expr": { "expr": "4", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 (if 4 > 0\n                  then ((f (iter (n - 1) f a))[@env2 ][@env1 ])\n                  else ((a)[@env0 ])))))))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "n": { "corec": [], "expr": { "expr": "4", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 (if true\n                  then ((f (iter (n - 1) f a))[@env2 ][@env1 ])\n                  else ((a)[@env0 ])))))))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "n": { "corec": [], "expr": { "expr": "4", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "If" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1) ((f (iter (n - 1) f a))[@env1 ][@env0 ]))))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "n": { "corec": [], "expr": { "expr": "4", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "SubstCombine" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1) ((f (iter (n - 1) f a))[@env0 ]))))))",
+      "envs": {
+        "env0": {
+          "n": { "corec": [], "expr": { "expr": "4", "envs": {} } },
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1) (((f)[@env1 ]) ((iter (n - 1) f a)[@env0 ])))))))",
+      "envs": {
+        "env0": {
+          "n": { "corec": [], "expr": { "expr": "4", "envs": {} } },
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 (((f)[@env4 ])\n                    (((iter)[@env3 ]) ((n - 1)[@env0 ]) ((f)[@env1 ]) ((a)\n                       [@env2 ]))))))))",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "4", "envs": {} } } },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        },
+        "env2": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env3": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env4": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 (((f)[@env4 ])\n                    (((iter)[@env3 ]) (((n)[@env0 ]) - 1) ((f)[@env1 ]) ((a)\n                       [@env2 ]))))))))",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "4", "envs": {} } } },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        },
+        "env2": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env3": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env4": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    (((iter)[@env3 ]) (((n)[@env0 ]) - 1) ((f)[@env1 ]) ((a)\n                       [@env2 ]))))))))",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "4", "envs": {} } } },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        },
+        "env2": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env3": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    (((iter)[@env2 ]) (4 - 1) ((f)[@env0 ]) ((a)[@env1 ]))))))))",
+      "envs": {
+        "env0": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        },
+        "env1": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env2": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    (((iter)[@env1 ]) (4 - 1) (fun x -> x + 1) ((a)[@env0 ]))))))))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    (((iter)[@env0 ]) (4 - 1) (fun x -> x + 1) 0)))))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1) (((iter)[@env0 ]) 3 (fun x -> x + 1) 0)))))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    (((fun n ->\n                         fun f ->\n                           fun a -> if n > 0 then f (iter (n - 1) f a) else a)\n                       [@env0 ]) 3 (fun x -> x + 1) 0)))))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun n ->\n                        ((fun f ->\n                            fun a ->\n                              if n > 0 then f (iter (n - 1) f a) else a)\n                        [@env0 ])) 3 (fun x -> x + 1) 0)))))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun n ->\n                        fun f ->\n                          ((fun a ->\n                              if n > 0 then f (iter (n - 1) f a) else a)\n                          [@env0 ])) 3 (fun x -> x + 1) 0)))))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun n ->\n                        fun f ->\n                          fun a ->\n                            ((if n > 0 then f (iter (n - 1) f a) else a)\n                            [@env0 ])) 3 (fun x -> x + 1) 0)))))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun n ->\n                        fun f ->\n                          fun a ->\n                            if n > 0\n                            then ((f (iter (n - 1) f a))[@env0 ])\n                            else a) 3 (fun x -> x + 1) 0)))))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((if n > 0 then ((f (iter (n - 1) f a))[@env0 ]) else a)\n                    [@env1 ])))))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "n": { "corec": [], "expr": { "expr": "3", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    (if ((n > 0)[@env3 ])\n                     then ((f (iter (n - 1) f a))[@env2 ][@env1 ])\n                     else ((a)[@env0 ]))))))))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "n": { "corec": [], "expr": { "expr": "3", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        },
+        "env3": { "n": { "corec": [], "expr": { "expr": "3", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    (if ((n)[@env3 ]) > 0\n                     then ((f (iter (n - 1) f a))[@env2 ][@env1 ])\n                     else ((a)[@env0 ]))))))))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "n": { "corec": [], "expr": { "expr": "3", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        },
+        "env3": { "n": { "corec": [], "expr": { "expr": "3", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    (if 3 > 0\n                     then ((f (iter (n - 1) f a))[@env2 ][@env1 ])\n                     else ((a)[@env0 ]))))))))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "n": { "corec": [], "expr": { "expr": "3", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    (if true\n                     then ((f (iter (n - 1) f a))[@env2 ][@env1 ])\n                     else ((a)[@env0 ]))))))))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "n": { "corec": [], "expr": { "expr": "3", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "If" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1) ((f (iter (n - 1) f a))[@env1 ][@env0 ])))))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "n": { "corec": [], "expr": { "expr": "3", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "SubstCombine" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1) ((f (iter (n - 1) f a))[@env0 ])))))))",
+      "envs": {
+        "env0": {
+          "n": { "corec": [], "expr": { "expr": "3", "envs": {} } },
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    (((f)[@env1 ]) ((iter (n - 1) f a)[@env0 ]))))))))",
+      "envs": {
+        "env0": {
+          "n": { "corec": [], "expr": { "expr": "3", "envs": {} } },
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    (((f)[@env4 ])\n                       (((iter)[@env3 ]) ((n - 1)[@env0 ]) ((f)[@env1 ]) ((a)\n                          [@env2 ])))))))))",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        },
+        "env2": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env3": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env4": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    (((f)[@env4 ])\n                       (((iter)[@env3 ]) (((n)[@env0 ]) - 1) ((f)[@env1 ])\n                          ((a)[@env2 ])))))))))",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        },
+        "env2": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env3": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env4": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       (((iter)[@env3 ]) (((n)[@env0 ]) - 1) ((f)[@env1 ])\n                          ((a)[@env2 ])))))))))",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        },
+        "env2": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env3": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       (((iter)[@env2 ]) (3 - 1) ((f)[@env0 ]) ((a)[@env1 ])))))))))",
+      "envs": {
+        "env0": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        },
+        "env1": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env2": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       (((iter)[@env1 ]) (3 - 1) (fun x -> x + 1) ((a)\n                          [@env0 ])))))))))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       (((iter)[@env0 ]) (3 - 1) (fun x -> x + 1) 0))))))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1) (((iter)[@env0 ]) 2 (fun x -> x + 1) 0))))))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       (((fun n ->\n                            fun f ->\n                              fun a ->\n                                if n > 0 then f (iter (n - 1) f a) else a)\n                          [@env0 ]) 2 (fun x -> x + 1) 0))))))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       ((fun n ->\n                           ((fun f ->\n                               fun a ->\n                                 if n > 0 then f (iter (n - 1) f a) else a)\n                           [@env0 ])) 2 (fun x -> x + 1) 0))))))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       ((fun n ->\n                           fun f ->\n                             ((fun a ->\n                                 if n > 0 then f (iter (n - 1) f a) else a)\n                             [@env0 ])) 2 (fun x -> x + 1) 0))))))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       ((fun n ->\n                           fun f ->\n                             fun a ->\n                               ((if n > 0 then f (iter (n - 1) f a) else a)\n                               [@env0 ])) 2 (fun x -> x + 1) 0))))))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       ((fun n ->\n                           fun f ->\n                             fun a ->\n                               if n > 0\n                               then ((f (iter (n - 1) f a))[@env0 ])\n                               else a) 2 (fun x -> x + 1) 0))))))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       ((if n > 0\n                         then ((f (iter (n - 1) f a))[@env0 ])\n                         else a)[@env1 ]))))))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "n": { "corec": [], "expr": { "expr": "2", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       (if ((n > 0)[@env3 ])\n                        then ((f (iter (n - 1) f a))[@env2 ][@env1 ])\n                        else ((a)[@env0 ])))))))))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "n": { "corec": [], "expr": { "expr": "2", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        },
+        "env3": { "n": { "corec": [], "expr": { "expr": "2", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       (if ((n)[@env3 ]) > 0\n                        then ((f (iter (n - 1) f a))[@env2 ][@env1 ])\n                        else ((a)[@env0 ])))))))))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "n": { "corec": [], "expr": { "expr": "2", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        },
+        "env3": { "n": { "corec": [], "expr": { "expr": "2", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       (if 2 > 0\n                        then ((f (iter (n - 1) f a))[@env2 ][@env1 ])\n                        else ((a)[@env0 ])))))))))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "n": { "corec": [], "expr": { "expr": "2", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       (if true\n                        then ((f (iter (n - 1) f a))[@env2 ][@env1 ])\n                        else ((a)[@env0 ])))))))))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "n": { "corec": [], "expr": { "expr": "2", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "If" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1) ((f (iter (n - 1) f a))\n                       [@env1 ][@env0 ]))))))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "n": { "corec": [], "expr": { "expr": "2", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "SubstCombine" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1) ((f (iter (n - 1) f a))[@env0 ]))))))))",
+      "envs": {
+        "env0": {
+          "n": { "corec": [], "expr": { "expr": "2", "envs": {} } },
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       (((f)[@env1 ]) ((iter (n - 1) f a)[@env0 ])))))))))",
+      "envs": {
+        "env0": {
+          "n": { "corec": [], "expr": { "expr": "2", "envs": {} } },
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       (((f)[@env4 ])\n                          (((iter)[@env3 ]) ((n - 1)[@env0 ]) ((f)[@env1 ])\n                             ((a)[@env2 ]))))))))))",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "2", "envs": {} } } },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        },
+        "env2": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env3": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env4": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       (((f)[@env4 ])\n                          (((iter)[@env3 ]) (((n)[@env0 ]) - 1) ((f)[@env1 ])\n                             ((a)[@env2 ]))))))))))",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "2", "envs": {} } } },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        },
+        "env2": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env3": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env4": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       ((fun x -> x + 1)\n                          (((iter)[@env3 ]) (((n)[@env0 ]) - 1) ((f)[@env1 ])\n                             ((a)[@env2 ]))))))))))",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "2", "envs": {} } } },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        },
+        "env2": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env3": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       ((fun x -> x + 1)\n                          (((iter)[@env2 ]) (2 - 1) ((f)[@env0 ]) ((a)\n                             [@env1 ]))))))))))",
+      "envs": {
+        "env0": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        },
+        "env1": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env2": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       ((fun x -> x + 1)\n                          (((iter)[@env1 ]) (2 - 1) (fun x -> x + 1) ((a)\n                             [@env0 ]))))))))))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       ((fun x -> x + 1)\n                          (((iter)[@env0 ]) (2 - 1) (fun x -> x + 1) 0)))))))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       ((fun x -> x + 1)\n                          (((iter)[@env0 ]) 1 (fun x -> x + 1) 0)))))))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       ((fun x -> x + 1)\n                          (((fun n ->\n                               fun f ->\n                                 fun a ->\n                                   if n > 0 then f (iter (n - 1) f a) else a)\n                             [@env0 ]) 1 (fun x -> x + 1) 0)))))))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       ((fun x -> x + 1)\n                          ((fun n ->\n                              ((fun f ->\n                                  fun a ->\n                                    if n > 0 then f (iter (n - 1) f a) else a)\n                              [@env0 ])) 1 (fun x -> x + 1) 0)))))))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       ((fun x -> x + 1)\n                          ((fun n ->\n                              fun f ->\n                                ((fun a ->\n                                    if n > 0 then f (iter (n - 1) f a) else a)\n                                [@env0 ])) 1 (fun x -> x + 1) 0)))))))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       ((fun x -> x + 1)\n                          ((fun n ->\n                              fun f ->\n                                fun a ->\n                                  ((if n > 0 then f (iter (n - 1) f a) else a)\n                                  [@env0 ])) 1 (fun x -> x + 1) 0)))))))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       ((fun x -> x + 1)\n                          ((fun n ->\n                              fun f ->\n                                fun a ->\n                                  if n > 0\n                                  then ((f (iter (n - 1) f a))[@env0 ])\n                                  else a) 1 (fun x -> x + 1) 0)))))))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       ((fun x -> x + 1)\n                          ((if n > 0\n                            then ((f (iter (n - 1) f a))[@env0 ])\n                            else a)[@env1 ])))))))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "n": { "corec": [], "expr": { "expr": "1", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       ((fun x -> x + 1)\n                          (if ((n > 0)[@env3 ])\n                           then ((f (iter (n - 1) f a))[@env2 ][@env1 ])\n                           else ((a)[@env0 ]))))))))))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "n": { "corec": [], "expr": { "expr": "1", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        },
+        "env3": { "n": { "corec": [], "expr": { "expr": "1", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       ((fun x -> x + 1)\n                          (if ((n)[@env3 ]) > 0\n                           then ((f (iter (n - 1) f a))[@env2 ][@env1 ])\n                           else ((a)[@env0 ]))))))))))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "n": { "corec": [], "expr": { "expr": "1", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        },
+        "env3": { "n": { "corec": [], "expr": { "expr": "1", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       ((fun x -> x + 1)\n                          (if 1 > 0\n                           then ((f (iter (n - 1) f a))[@env2 ][@env1 ])\n                           else ((a)[@env0 ]))))))))))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "n": { "corec": [], "expr": { "expr": "1", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       ((fun x -> x + 1)\n                          (if true\n                           then ((f (iter (n - 1) f a))[@env2 ][@env1 ])\n                           else ((a)[@env0 ]))))))))))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "n": { "corec": [], "expr": { "expr": "1", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "If" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       ((fun x -> x + 1) ((f (iter (n - 1) f a))\n                          [@env1 ][@env0 ])))))))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "n": { "corec": [], "expr": { "expr": "1", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "SubstCombine" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       ((fun x -> x + 1) ((f (iter (n - 1) f a))[@env0 ])))))))))",
+      "envs": {
+        "env0": {
+          "n": { "corec": [], "expr": { "expr": "1", "envs": {} } },
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       ((fun x -> x + 1)\n                          (((f)[@env1 ]) ((iter (n - 1) f a)[@env0 ]))))))))))",
+      "envs": {
+        "env0": {
+          "n": { "corec": [], "expr": { "expr": "1", "envs": {} } },
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       ((fun x -> x + 1)\n                          (((f)[@env4 ])\n                             (((iter)[@env3 ]) ((n - 1)[@env0 ]) ((f)\n                                [@env1 ]) ((a)[@env2 ])))))))))))",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "1", "envs": {} } } },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        },
+        "env2": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env3": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env4": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       ((fun x -> x + 1)\n                          (((f)[@env4 ])\n                             (((iter)[@env3 ]) (((n)[@env0 ]) - 1) ((f)\n                                [@env1 ]) ((a)[@env2 ])))))))))))",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "1", "envs": {} } } },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        },
+        "env2": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env3": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env4": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       ((fun x -> x + 1)\n                          ((fun x -> x + 1)\n                             (((iter)[@env3 ]) (((n)[@env0 ]) - 1) ((f)\n                                [@env1 ]) ((a)[@env2 ])))))))))))",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "1", "envs": {} } } },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        },
+        "env2": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env3": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       ((fun x -> x + 1)\n                          ((fun x -> x + 1)\n                             (((iter)[@env2 ]) (1 - 1) ((f)[@env0 ]) ((a)\n                                [@env1 ])))))))))))",
+      "envs": {
+        "env0": {
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          }
+        },
+        "env1": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env2": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       ((fun x -> x + 1)\n                          ((fun x -> x + 1)\n                             (((iter)[@env1 ]) (1 - 1) (fun x -> x + 1) ((a)\n                                [@env0 ])))))))))))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       ((fun x -> x + 1)\n                          ((fun x -> x + 1)\n                             (((iter)[@env0 ]) (1 - 1) (fun x -> x + 1) 0))))))))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       ((fun x -> x + 1)\n                          ((fun x -> x + 1)\n                             (((iter)[@env0 ]) 0 (fun x -> x + 1) 0))))))))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       ((fun x -> x + 1)\n                          ((fun x -> x + 1)\n                             (((fun n ->\n                                  fun f ->\n                                    fun a ->\n                                      if n > 0\n                                      then f (iter (n - 1) f a)\n                                      else a)[@env0 ]) 0 (fun x -> x + 1) 0))))))))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       ((fun x -> x + 1)\n                          ((fun x -> x + 1)\n                             ((fun n ->\n                                 ((fun f ->\n                                     fun a ->\n                                       if n > 0\n                                       then f (iter (n - 1) f a)\n                                       else a)\n                                 [@env0 ])) 0 (fun x -> x + 1) 0))))))))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       ((fun x -> x + 1)\n                          ((fun x -> x + 1)\n                             ((fun n ->\n                                 fun f ->\n                                   ((fun a ->\n                                       if n > 0\n                                       then f (iter (n - 1) f a)\n                                       else a)\n                                   [@env0 ])) 0 (fun x -> x + 1) 0))))))))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       ((fun x -> x + 1)\n                          ((fun x -> x + 1)\n                             ((fun n ->\n                                 fun f ->\n                                   fun a ->\n                                     ((if n > 0\n                                       then f (iter (n - 1) f a)\n                                       else a)\n                                     [@env0 ])) 0 (fun x -> x + 1) 0))))))))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       ((fun x -> x + 1)\n                          ((fun x -> x + 1)\n                             ((fun n ->\n                                 fun f ->\n                                   fun a ->\n                                     if n > 0\n                                     then ((f (iter (n - 1) f a))[@env0 ])\n                                     else a) 0 (fun x -> x + 1) 0))))))))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       ((fun x -> x + 1)\n                          ((fun x -> x + 1)\n                             ((if n > 0\n                               then ((f (iter (n - 1) f a))[@env0 ])\n                               else a)[@env1 ]))))))))))",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "n": { "corec": [], "expr": { "expr": "0", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       ((fun x -> x + 1)\n                          ((fun x -> x + 1)\n                             (if ((n > 0)[@env3 ])\n                              then ((f (iter (n - 1) f a))[@env2 ][@env1 ])\n                              else ((a)[@env0 ])))))))))))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "n": { "corec": [], "expr": { "expr": "0", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        },
+        "env3": { "n": { "corec": [], "expr": { "expr": "0", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       ((fun x -> x + 1)\n                          ((fun x -> x + 1)\n                             (if ((n)[@env3 ]) > 0\n                              then ((f (iter (n - 1) f a))[@env2 ][@env1 ])\n                              else ((a)[@env0 ])))))))))))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "n": { "corec": [], "expr": { "expr": "0", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        },
+        "env3": { "n": { "corec": [], "expr": { "expr": "0", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       ((fun x -> x + 1)\n                          ((fun x -> x + 1)\n                             (if 0 > 0\n                              then ((f (iter (n - 1) f a))[@env2 ][@env1 ])\n                              else ((a)[@env0 ])))))))))))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "n": { "corec": [], "expr": { "expr": "0", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       ((fun x -> x + 1)\n                          ((fun x -> x + 1)\n                             (if false\n                              then ((f (iter (n - 1) f a))[@env2 ][@env1 ])\n                              else ((a)[@env0 ])))))))))))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun n -> fun f -> fun a -> if n > 0 then f (iter (n - 1) f a) else a",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "n": { "corec": [], "expr": { "expr": "0", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": { "expr": "fun x -> x + 1", "envs": {} }
+          },
+          "a": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "If" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1)\n                       ((fun x -> x + 1) ((fun x -> x + 1) ((a)[@env0 ]))))))))))",
+      "envs": {
+        "env0": { "a": { "corec": [], "expr": { "expr": "0", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1) 0)))))))))",
+      "envs": {}
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1) ((fun x -> x + 1) ((x + 1)[@env0 ])))))))))",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "0", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1) ((fun x -> x + 1) (((x)[@env0 ]) + 1)))))))))",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "0", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1)\n                    ((fun x -> x + 1) ((fun x -> x + 1) (0 + 1)))))))))",
+      "envs": {}
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1) 1))))))))",
+      "envs": {}
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1) ((fun x -> x + 1) ((x + 1)[@env0 ]))))))))",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "1", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1)\n                 ((fun x -> x + 1) ((fun x -> x + 1) (((x)[@env0 ]) + 1))))))))",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "1", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1) (1 + 1))))))))",
+      "envs": {}
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1) 2)))))))",
+      "envs": {}
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1) ((fun x -> x + 1) ((x + 1)[@env0 ])))))))",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "2", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1)\n              ((fun x -> x + 1) ((fun x -> x + 1) (((x)[@env0 ]) + 1)))))))",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "2", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1) (2 + 1)))))))",
+      "envs": {}
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1) 3))))))",
+      "envs": {}
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1) ((fun x -> x + 1) ((x + 1)[@env0 ]))))))",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1)\n           ((fun x -> x + 1) ((fun x -> x + 1) (((x)[@env0 ]) + 1))))))",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1) (3 + 1))))))",
+      "envs": {}
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1) 4)))))",
+      "envs": {}
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1) ((fun x -> x + 1) ((x + 1)[@env0 ])))))",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "4", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1)\n        ((fun x -> x + 1) ((fun x -> x + 1) (((x)[@env0 ]) + 1)))))",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "4", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1) (4 + 1)))))",
+      "envs": {}
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1)\n     ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1) 5))))",
+      "envs": {}
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1) ((x + 1)[@env0 ]))))",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "5", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1) (((x)[@env0 ]) + 1))))",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "5", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1)\n  ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1) (5 + 1))))",
+      "envs": {}
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1) 6)))",
+      "envs": {}
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1) ((x + 1)[@env0 ])))",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "6", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1) (((x)[@env0 ]) + 1)))",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "6", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1) (6 + 1)))",
+      "envs": {}
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr": "(fun x -> x + 1) ((fun x -> x + 1) ((fun x -> x + 1) 7))",
+      "envs": {}
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr": "(fun x -> x + 1) ((fun x -> x + 1) ((x + 1)[@env0 ]))",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "7", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "(fun x -> x + 1) ((fun x -> x + 1) (((x)[@env0 ]) + 1))",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "7", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr": "(fun x -> x + 1) ((fun x -> x + 1) (7 + 1))",
+      "envs": {}
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr": "(fun x -> x + 1) ((fun x -> x + 1) 8)",
+      "envs": {}
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr": "(fun x -> x + 1) ((x + 1)[@env0 ])",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "8", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "(fun x -> x + 1) (((x)[@env0 ]) + 1)",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "8", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": { "expr": "(fun x -> x + 1) (8 + 1)", "envs": {} },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": { "expr": "(fun x -> x + 1) 9", "envs": {} },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((x + 1)[@env0 ])",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "9", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((x)[@env0 ]) + 1",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "9", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": { "expr": "9 + 1", "envs": {} },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  { "current_expression": { "expr": "10", "envs": {} }, "step": [] }
+]

@@ -1,0 +1,2101 @@
+[
+  {
+    "current_expression": {
+      "expr": "((fact 5)[@env0 ])",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [],
+            "expr": {
+              "expr":
+                "fun n ->\n  let rec loop n rep = match n with | 0 -> rep | _ -> loop (n - 1) (n * rep) in\n  loop n 1",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((fact)[@env0 ]) 5",
+      "envs": {
+        "env0": {
+          "fact": {
+            "corec": [],
+            "expr": {
+              "expr":
+                "fun n ->\n  let rec loop n rep = match n with | 0 -> rep | _ -> loop (n - 1) (n * rep) in\n  loop n 1",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun n ->\n   let rec loop n rep = match n with | 0 -> rep | _ -> loop (n - 1) (n * rep) in\n   loop n 1) 5",
+      "envs": {}
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((let rec loop n rep = match n with | 0 -> rep | _ -> loop (n - 1) (n * rep) in\n  loop n 1)\n[@env0 ])",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "5", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "let rec loop =\n  ((fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep))\n  [@env1 ]) in\n((loop n 1)[@env0 ])",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "5", "envs": {} } } },
+        "env1": { "n": { "corec": [], "expr": { "expr": "5", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "let rec loop =\n  ((fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep))\n  [@env1 ]) in\nloop ((n)[@env0 ]) 1",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "5", "envs": {} } } },
+        "env1": { "n": { "corec": [], "expr": { "expr": "5", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "let rec loop n rep = match n with | 0 -> rep | _ -> loop (n - 1) (n * rep) in\nloop ((n)[@env0 ]) 1",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "5", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "let rec loop n rep = match n with | 0 -> rep | _ -> loop (n - 1) (n * rep) in\nloop 5 1",
+      "envs": {}
+    },
+    "step": [ "Let" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop 5 1)[@env0 ])",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env0 ]) 5 1",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep))\n  [@env0 ]) 5 1",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun n -> ((fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep))\n   [@env0 ])) 5 1",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun n ->\n   fun rep -> ((match n with | 0 -> rep | _ -> loop (n - 1) (n * rep))\n     [@env0 ])) 5 1",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun n ->\n   fun rep ->\n     match n with | 0 -> rep | _ -> ((loop (n - 1) (n * rep))[@env0 ])) 5 1",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((match n with | 0 -> rep | _ -> ((loop (n - 1) (n * rep))[@env0 ]))[@env1 ])",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "rep": { "corec": [], "expr": { "expr": "1", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "5", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "match ((n)[@env3 ]) with\n| 0 -> ((rep)[@env0 ])\n| _ -> ((loop (n - 1) (n * rep))[@env2 ][@env1 ])",
+      "envs": {
+        "env0": {
+          "rep": { "corec": [], "expr": { "expr": "1", "envs": {} } }
+        },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "rep": { "corec": [], "expr": { "expr": "1", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "5", "envs": {} } }
+        },
+        "env3": { "n": { "corec": [], "expr": { "expr": "5", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "match 5 with\n| 0 -> ((rep)[@env0 ])\n| _ -> ((loop (n - 1) (n * rep))[@env2 ][@env1 ])",
+      "envs": {
+        "env0": {
+          "rep": { "corec": [], "expr": { "expr": "1", "envs": {} } }
+        },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "rep": { "corec": [], "expr": { "expr": "1", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "5", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "Match" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop (n - 1) (n * rep))[@env1 ][@env0 ])",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "rep": { "corec": [], "expr": { "expr": "1", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "5", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "SubstCombine" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop (n - 1) (n * rep))[@env0 ])",
+      "envs": {
+        "env0": {
+          "rep": { "corec": [], "expr": { "expr": "1", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "5", "envs": {} } },
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env2 ]) ((n - 1)[@env0 ]) ((n * rep)[@env1 ])",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "5", "envs": {} } } },
+        "env1": {
+          "rep": { "corec": [], "expr": { "expr": "1", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "5", "envs": {} } }
+        },
+        "env2": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env2 ]) (((n)[@env0 ]) - 1) ((n * rep)[@env1 ])",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "5", "envs": {} } } },
+        "env1": {
+          "rep": { "corec": [], "expr": { "expr": "1", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "5", "envs": {} } }
+        },
+        "env2": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((loop)[@env3 ]) (((n)[@env0 ]) - 1) (((n)[@env1 ]) * ((rep)[@env2 ]))",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "5", "envs": {} } } },
+        "env1": { "n": { "corec": [], "expr": { "expr": "5", "envs": {} } } },
+        "env2": {
+          "rep": { "corec": [], "expr": { "expr": "1", "envs": {} } }
+        },
+        "env3": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env2 ]) (5 - 1) (((n)[@env0 ]) * ((rep)[@env1 ]))",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "5", "envs": {} } } },
+        "env1": {
+          "rep": { "corec": [], "expr": { "expr": "1", "envs": {} } }
+        },
+        "env2": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env1 ]) (5 - 1) (5 * ((rep)[@env0 ]))",
+      "envs": {
+        "env0": {
+          "rep": { "corec": [], "expr": { "expr": "1", "envs": {} } }
+        },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env0 ]) (5 - 1) (5 * 1)",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env0 ]) (5 - 1) 5",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env0 ]) 4 5",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep))\n  [@env0 ]) 4 5",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun n -> ((fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep))\n   [@env0 ])) 4 5",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun n ->\n   fun rep -> ((match n with | 0 -> rep | _ -> loop (n - 1) (n * rep))\n     [@env0 ])) 4 5",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun n ->\n   fun rep ->\n     match n with | 0 -> rep | _ -> ((loop (n - 1) (n * rep))[@env0 ])) 4 5",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((match n with | 0 -> rep | _ -> ((loop (n - 1) (n * rep))[@env0 ]))[@env1 ])",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "rep": { "corec": [], "expr": { "expr": "5", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "4", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "match ((n)[@env3 ]) with\n| 0 -> ((rep)[@env0 ])\n| _ -> ((loop (n - 1) (n * rep))[@env2 ][@env1 ])",
+      "envs": {
+        "env0": {
+          "rep": { "corec": [], "expr": { "expr": "5", "envs": {} } }
+        },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "rep": { "corec": [], "expr": { "expr": "5", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "4", "envs": {} } }
+        },
+        "env3": { "n": { "corec": [], "expr": { "expr": "4", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "match 4 with\n| 0 -> ((rep)[@env0 ])\n| _ -> ((loop (n - 1) (n * rep))[@env2 ][@env1 ])",
+      "envs": {
+        "env0": {
+          "rep": { "corec": [], "expr": { "expr": "5", "envs": {} } }
+        },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "rep": { "corec": [], "expr": { "expr": "5", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "4", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "Match" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop (n - 1) (n * rep))[@env1 ][@env0 ])",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "rep": { "corec": [], "expr": { "expr": "5", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "4", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "SubstCombine" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop (n - 1) (n * rep))[@env0 ])",
+      "envs": {
+        "env0": {
+          "rep": { "corec": [], "expr": { "expr": "5", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "4", "envs": {} } },
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env2 ]) ((n - 1)[@env0 ]) ((n * rep)[@env1 ])",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "4", "envs": {} } } },
+        "env1": {
+          "rep": { "corec": [], "expr": { "expr": "5", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "4", "envs": {} } }
+        },
+        "env2": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env2 ]) (((n)[@env0 ]) - 1) ((n * rep)[@env1 ])",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "4", "envs": {} } } },
+        "env1": {
+          "rep": { "corec": [], "expr": { "expr": "5", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "4", "envs": {} } }
+        },
+        "env2": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((loop)[@env3 ]) (((n)[@env0 ]) - 1) (((n)[@env1 ]) * ((rep)[@env2 ]))",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "4", "envs": {} } } },
+        "env1": { "n": { "corec": [], "expr": { "expr": "4", "envs": {} } } },
+        "env2": {
+          "rep": { "corec": [], "expr": { "expr": "5", "envs": {} } }
+        },
+        "env3": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env2 ]) (4 - 1) (((n)[@env0 ]) * ((rep)[@env1 ]))",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "4", "envs": {} } } },
+        "env1": {
+          "rep": { "corec": [], "expr": { "expr": "5", "envs": {} } }
+        },
+        "env2": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env1 ]) (4 - 1) (4 * ((rep)[@env0 ]))",
+      "envs": {
+        "env0": {
+          "rep": { "corec": [], "expr": { "expr": "5", "envs": {} } }
+        },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env0 ]) (4 - 1) (4 * 5)",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env0 ]) (4 - 1) 20",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env0 ]) 3 20",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep))\n  [@env0 ]) 3 20",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun n -> ((fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep))\n   [@env0 ])) 3 20",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun n ->\n   fun rep -> ((match n with | 0 -> rep | _ -> loop (n - 1) (n * rep))\n     [@env0 ])) 3 20",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun n ->\n   fun rep ->\n     match n with | 0 -> rep | _ -> ((loop (n - 1) (n * rep))[@env0 ])) 3 20",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((match n with | 0 -> rep | _ -> ((loop (n - 1) (n * rep))[@env0 ]))[@env1 ])",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "rep": { "corec": [], "expr": { "expr": "20", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "match ((n)[@env3 ]) with\n| 0 -> ((rep)[@env0 ])\n| _ -> ((loop (n - 1) (n * rep))[@env2 ][@env1 ])",
+      "envs": {
+        "env0": {
+          "rep": { "corec": [], "expr": { "expr": "20", "envs": {} } }
+        },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "rep": { "corec": [], "expr": { "expr": "20", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+        },
+        "env3": { "n": { "corec": [], "expr": { "expr": "3", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "match 3 with\n| 0 -> ((rep)[@env0 ])\n| _ -> ((loop (n - 1) (n * rep))[@env2 ][@env1 ])",
+      "envs": {
+        "env0": {
+          "rep": { "corec": [], "expr": { "expr": "20", "envs": {} } }
+        },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "rep": { "corec": [], "expr": { "expr": "20", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "Match" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop (n - 1) (n * rep))[@env1 ][@env0 ])",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "rep": { "corec": [], "expr": { "expr": "20", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "SubstCombine" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop (n - 1) (n * rep))[@env0 ])",
+      "envs": {
+        "env0": {
+          "rep": { "corec": [], "expr": { "expr": "20", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "3", "envs": {} } },
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env2 ]) ((n - 1)[@env0 ]) ((n * rep)[@env1 ])",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "rep": { "corec": [], "expr": { "expr": "20", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+        },
+        "env2": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env2 ]) (((n)[@env0 ]) - 1) ((n * rep)[@env1 ])",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "rep": { "corec": [], "expr": { "expr": "20", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+        },
+        "env2": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((loop)[@env3 ]) (((n)[@env0 ]) - 1) (((n)[@env1 ]) * ((rep)[@env2 ]))",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": { "n": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env2": {
+          "rep": { "corec": [], "expr": { "expr": "20", "envs": {} } }
+        },
+        "env3": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env2 ]) (3 - 1) (((n)[@env0 ]) * ((rep)[@env1 ]))",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "rep": { "corec": [], "expr": { "expr": "20", "envs": {} } }
+        },
+        "env2": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env1 ]) (3 - 1) (3 * ((rep)[@env0 ]))",
+      "envs": {
+        "env0": {
+          "rep": { "corec": [], "expr": { "expr": "20", "envs": {} } }
+        },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env0 ]) (3 - 1) (3 * 20)",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env0 ]) (3 - 1) 60",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env0 ]) 2 60",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep))\n  [@env0 ]) 2 60",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun n -> ((fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep))\n   [@env0 ])) 2 60",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun n ->\n   fun rep -> ((match n with | 0 -> rep | _ -> loop (n - 1) (n * rep))\n     [@env0 ])) 2 60",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun n ->\n   fun rep ->\n     match n with | 0 -> rep | _ -> ((loop (n - 1) (n * rep))[@env0 ])) 2 60",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((match n with | 0 -> rep | _ -> ((loop (n - 1) (n * rep))[@env0 ]))[@env1 ])",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "rep": { "corec": [], "expr": { "expr": "60", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "2", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "match ((n)[@env3 ]) with\n| 0 -> ((rep)[@env0 ])\n| _ -> ((loop (n - 1) (n * rep))[@env2 ][@env1 ])",
+      "envs": {
+        "env0": {
+          "rep": { "corec": [], "expr": { "expr": "60", "envs": {} } }
+        },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "rep": { "corec": [], "expr": { "expr": "60", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "2", "envs": {} } }
+        },
+        "env3": { "n": { "corec": [], "expr": { "expr": "2", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "match 2 with\n| 0 -> ((rep)[@env0 ])\n| _ -> ((loop (n - 1) (n * rep))[@env2 ][@env1 ])",
+      "envs": {
+        "env0": {
+          "rep": { "corec": [], "expr": { "expr": "60", "envs": {} } }
+        },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "rep": { "corec": [], "expr": { "expr": "60", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "2", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "Match" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop (n - 1) (n * rep))[@env1 ][@env0 ])",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "rep": { "corec": [], "expr": { "expr": "60", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "2", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "SubstCombine" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop (n - 1) (n * rep))[@env0 ])",
+      "envs": {
+        "env0": {
+          "rep": { "corec": [], "expr": { "expr": "60", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "2", "envs": {} } },
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env2 ]) ((n - 1)[@env0 ]) ((n * rep)[@env1 ])",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "2", "envs": {} } } },
+        "env1": {
+          "rep": { "corec": [], "expr": { "expr": "60", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "2", "envs": {} } }
+        },
+        "env2": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env2 ]) (((n)[@env0 ]) - 1) ((n * rep)[@env1 ])",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "2", "envs": {} } } },
+        "env1": {
+          "rep": { "corec": [], "expr": { "expr": "60", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "2", "envs": {} } }
+        },
+        "env2": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((loop)[@env3 ]) (((n)[@env0 ]) - 1) (((n)[@env1 ]) * ((rep)[@env2 ]))",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "2", "envs": {} } } },
+        "env1": { "n": { "corec": [], "expr": { "expr": "2", "envs": {} } } },
+        "env2": {
+          "rep": { "corec": [], "expr": { "expr": "60", "envs": {} } }
+        },
+        "env3": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env2 ]) (2 - 1) (((n)[@env0 ]) * ((rep)[@env1 ]))",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "2", "envs": {} } } },
+        "env1": {
+          "rep": { "corec": [], "expr": { "expr": "60", "envs": {} } }
+        },
+        "env2": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env1 ]) (2 - 1) (2 * ((rep)[@env0 ]))",
+      "envs": {
+        "env0": {
+          "rep": { "corec": [], "expr": { "expr": "60", "envs": {} } }
+        },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env0 ]) (2 - 1) (2 * 60)",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env0 ]) (2 - 1) 120",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env0 ]) 1 120",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep))\n  [@env0 ]) 1 120",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun n -> ((fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep))\n   [@env0 ])) 1 120",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun n ->\n   fun rep -> ((match n with | 0 -> rep | _ -> loop (n - 1) (n * rep))\n     [@env0 ])) 1 120",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun n ->\n   fun rep ->\n     match n with | 0 -> rep | _ -> ((loop (n - 1) (n * rep))[@env0 ])) 1 120",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((match n with | 0 -> rep | _ -> ((loop (n - 1) (n * rep))[@env0 ]))[@env1 ])",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "rep": { "corec": [], "expr": { "expr": "120", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "1", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "match ((n)[@env3 ]) with\n| 0 -> ((rep)[@env0 ])\n| _ -> ((loop (n - 1) (n * rep))[@env2 ][@env1 ])",
+      "envs": {
+        "env0": {
+          "rep": { "corec": [], "expr": { "expr": "120", "envs": {} } }
+        },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "rep": { "corec": [], "expr": { "expr": "120", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "1", "envs": {} } }
+        },
+        "env3": { "n": { "corec": [], "expr": { "expr": "1", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "match 1 with\n| 0 -> ((rep)[@env0 ])\n| _ -> ((loop (n - 1) (n * rep))[@env2 ][@env1 ])",
+      "envs": {
+        "env0": {
+          "rep": { "corec": [], "expr": { "expr": "120", "envs": {} } }
+        },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "rep": { "corec": [], "expr": { "expr": "120", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "1", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "Match" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop (n - 1) (n * rep))[@env1 ][@env0 ])",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "rep": { "corec": [], "expr": { "expr": "120", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "1", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "SubstCombine" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop (n - 1) (n * rep))[@env0 ])",
+      "envs": {
+        "env0": {
+          "rep": { "corec": [], "expr": { "expr": "120", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "1", "envs": {} } },
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env2 ]) ((n - 1)[@env0 ]) ((n * rep)[@env1 ])",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "1", "envs": {} } } },
+        "env1": {
+          "rep": { "corec": [], "expr": { "expr": "120", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "1", "envs": {} } }
+        },
+        "env2": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env2 ]) (((n)[@env0 ]) - 1) ((n * rep)[@env1 ])",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "1", "envs": {} } } },
+        "env1": {
+          "rep": { "corec": [], "expr": { "expr": "120", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "1", "envs": {} } }
+        },
+        "env2": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((loop)[@env3 ]) (((n)[@env0 ]) - 1) (((n)[@env1 ]) * ((rep)[@env2 ]))",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "1", "envs": {} } } },
+        "env1": { "n": { "corec": [], "expr": { "expr": "1", "envs": {} } } },
+        "env2": {
+          "rep": { "corec": [], "expr": { "expr": "120", "envs": {} } }
+        },
+        "env3": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env2 ]) (1 - 1) (((n)[@env0 ]) * ((rep)[@env1 ]))",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "1", "envs": {} } } },
+        "env1": {
+          "rep": { "corec": [], "expr": { "expr": "120", "envs": {} } }
+        },
+        "env2": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env1 ]) (1 - 1) (1 * ((rep)[@env0 ]))",
+      "envs": {
+        "env0": {
+          "rep": { "corec": [], "expr": { "expr": "120", "envs": {} } }
+        },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env0 ]) (1 - 1) (1 * 120)",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env0 ]) (1 - 1) 120",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env0 ]) 0 120",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep))\n  [@env0 ]) 0 120",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun n -> ((fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep))\n   [@env0 ])) 0 120",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun n ->\n   fun rep -> ((match n with | 0 -> rep | _ -> loop (n - 1) (n * rep))\n     [@env0 ])) 0 120",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun n ->\n   fun rep ->\n     match n with | 0 -> rep | _ -> ((loop (n - 1) (n * rep))[@env0 ])) 0 120",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((match n with | 0 -> rep | _ -> ((loop (n - 1) (n * rep))[@env0 ]))[@env1 ])",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "rep": { "corec": [], "expr": { "expr": "120", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "match ((n)[@env3 ]) with\n| 0 -> ((rep)[@env0 ])\n| _ -> ((loop (n - 1) (n * rep))[@env2 ][@env1 ])",
+      "envs": {
+        "env0": {
+          "rep": { "corec": [], "expr": { "expr": "120", "envs": {} } }
+        },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "rep": { "corec": [], "expr": { "expr": "120", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        },
+        "env3": { "n": { "corec": [], "expr": { "expr": "0", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "match 0 with\n| 0 -> ((rep)[@env0 ])\n| _ -> ((loop (n - 1) (n * rep))[@env2 ][@env1 ])",
+      "envs": {
+        "env0": {
+          "rep": { "corec": [], "expr": { "expr": "120", "envs": {} } }
+        },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun rep -> match n with | 0 -> rep | _ -> loop (n - 1) (n * rep)",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "rep": { "corec": [], "expr": { "expr": "120", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "Match" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((rep)[@env0 ])",
+      "envs": {
+        "env0": {
+          "rep": { "corec": [], "expr": { "expr": "120", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  { "current_expression": { "expr": "120", "envs": {} }, "step": [] }
+]

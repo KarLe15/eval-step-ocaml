@@ -1,0 +1,2506 @@
+[
+  {
+    "current_expression": {
+      "expr":
+        "let rec iter f l = match l with | [] -> () | p::q -> (f p; iter f q) in\nlet forall p l =\n  try iter (fun x -> if p x then () else raise (Not x)) l; (-1)\n  with | Not x -> x in\nforall (fun x -> (x mod 2) = 0) [0; 1; 4]",
+      "envs": {}
+    },
+    "step": [ "Let" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((let forall p l =\n    try iter (fun x -> if p x then () else raise (Not x)) l; (-1)\n    with | Not x -> x in\n  forall (fun x -> (x mod 2) = 0) [0; 1; 4])\n[@env0 ])",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "let forall =\n  ((fun p ->\n      fun l ->\n        try iter (fun x -> if p x then () else raise (Not x)) l; (-1)\n        with | Not x -> x)\n  [@env0 ]) in\nforall (fun x -> (x mod 2) = 0) [0; 1; 4]",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "let forall p =\n  ((fun l ->\n      try iter (fun x -> if p x then () else raise (Not x)) l; (-1)\n      with | Not x -> x)\n  [@env0 ]) in\nforall (fun x -> (x mod 2) = 0) [0; 1; 4]",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "let forall p l =\n  ((try iter (fun x -> if p x then () else raise (Not x)) l; (-1)\n    with | Not x -> x)\n  [@env0 ]) in\nforall (fun x -> (x mod 2) = 0) [0; 1; 4]",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "let forall p l =\n  try ((iter (fun x -> if p x then () else raise (Not x)) l; (-1))[@env0 ])\n  with | Not x -> x in\nforall (fun x -> (x mod 2) = 0) [0; 1; 4]",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "let forall p l =\n  try ((iter (fun x -> if p x then () else raise (Not x)) l)[@env0 ]); (-1)\n  with | Not x -> x in\nforall (fun x -> (x mod 2) = 0) [0; 1; 4]",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "let forall p l =\n  try ((iter)[@env0 ]) (fun x -> if p x then () else raise (Not x)) l; (-1)\n  with | Not x -> x in\nforall (fun x -> (x mod 2) = 0) [0; 1; 4]",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "Let" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((forall (fun x -> (x mod 2) = 0) [0; 1; 4])[@env0 ])",
+      "envs": {
+        "env0": {
+          "forall": {
+            "corec": [],
+            "expr": {
+              "expr":
+                "fun p ->\n  fun l ->\n    try ((iter)[@env1 ]) (fun x -> if p x then () else raise (Not x)) l; (-1)\n    with | Not x -> x",
+              "envs": {
+                "env1": {
+                  "iter": {
+                    "corec": [ "iter" ],
+                    "expr": {
+                      "expr":
+                        "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+                      "envs": {}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((forall)[@env0 ]) (fun x -> (x mod 2) = 0) [0; 1; 4]",
+      "envs": {
+        "env0": {
+          "forall": {
+            "corec": [],
+            "expr": {
+              "expr":
+                "fun p ->\n  fun l ->\n    try ((iter)[@env1 ]) (fun x -> if p x then () else raise (Not x)) l; (-1)\n    with | Not x -> x",
+              "envs": {
+                "env1": {
+                  "iter": {
+                    "corec": [ "iter" ],
+                    "expr": {
+                      "expr":
+                        "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+                      "envs": {}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun p ->\n   fun l ->\n     try\n       ((iter)[@env0 ]) (fun x -> if p x then () else raise (Not x)) l; (-1)\n     with | Not x -> x) (fun x -> (x mod 2) = 0) [0; 1; 4]",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((try ((iter)[@env0 ]) (fun x -> if p x then () else raise (Not x)) l; (-1)\n  with | Not x -> x)\n[@env1 ])",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          },
+          "l": { "corec": [], "expr": { "expr": "[0; 1; 4]", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  ((((iter)[@env0 ]) (fun x -> if p x then () else raise (Not x)) l; (-1))\n  [@env1 ])\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          },
+          "l": { "corec": [], "expr": { "expr": "[0; 1; 4]", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  ((((iter)[@env0 ]) (fun x -> if p x then () else raise (Not x)) l)\n  [@env1 ]);\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          },
+          "l": { "corec": [], "expr": { "expr": "[0; 1; 4]", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  ((iter)[@env2 ]) ((fun x -> if p x then () else raise (Not x))[@env0 ])\n    ((l)[@env1 ]);\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        },
+        "env1": {
+          "l": { "corec": [], "expr": { "expr": "[0; 1; 4]", "envs": {} } }
+        },
+        "env2": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  ((iter)[@env2 ]) (fun x -> ((if p x then () else raise (Not x))[@env0 ]))\n    ((l)[@env1 ]);\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        },
+        "env1": {
+          "l": { "corec": [], "expr": { "expr": "[0; 1; 4]", "envs": {} } }
+        },
+        "env2": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  ((iter)[@env2 ]) (fun x -> if ((p x)[@env0 ]) then () else raise (Not x))\n    ((l)[@env1 ]);\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        },
+        "env1": {
+          "l": { "corec": [], "expr": { "expr": "[0; 1; 4]", "envs": {} } }
+        },
+        "env2": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  ((iter)[@env2 ]) (fun x -> if ((p)[@env0 ]) x then () else raise (Not x))\n    ((l)[@env1 ]);\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        },
+        "env1": {
+          "l": { "corec": [], "expr": { "expr": "[0; 1; 4]", "envs": {} } }
+        },
+        "env2": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  ((iter)[@env1 ]) (fun x -> if ((p)[@env0 ]) x then () else raise (Not x))\n    [0; 1; 4];\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  (((fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)))\n    [@env1 ]) (fun x -> if ((p)[@env0 ]) x then () else raise (Not x))\n    [0; 1; 4];\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  ((fun f -> ((fun l -> match l with | [] -> () | p::q -> (f p; iter f q))\n      [@env1 ]))) (fun x -> if ((p)[@env0 ]) x then () else raise (Not x))\n    [0; 1; 4];\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  ((fun f ->\n      fun l -> ((match l with | [] -> () | p::q -> (f p; iter f q))[@env1 ])))\n    (fun x -> if ((p)[@env0 ]) x then () else raise (Not x)) [0; 1; 4];\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  ((fun f ->\n      fun l -> match l with | [] -> () | p::q -> (((f p; iter f q))[@env1 ])))\n    (fun x -> if ((p)[@env0 ]) x then () else raise (Not x)) [0; 1; 4];\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  (((match l with | [] -> () | p::q -> (((f p; iter f q))[@env0 ])))\n  [@env1 ]);\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "l": { "corec": [], "expr": { "expr": "[0; 1; 4]", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": {
+              "expr":
+                "fun x -> if ((p)[@env2 ]) x then () else raise (Not x)",
+              "envs": {
+                "env2": {
+                  "p": {
+                    "corec": [],
+                    "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  (match ((l)[@env2 ]) with\n   | [] -> ()\n   | p::q -> (((f p; iter f q))[@env1 ][@env0 ]));\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": {
+              "expr":
+                "fun x -> if ((p)[@env3 ]) x then () else raise (Not x)",
+              "envs": {
+                "env3": {
+                  "p": {
+                    "corec": [],
+                    "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "env2": {
+          "l": { "corec": [], "expr": { "expr": "[0; 1; 4]", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  (match [0; 1; 4] with\n   | [] -> ()\n   | p::q -> (((f p; iter f q))[@env1 ][@env0 ]));\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": {
+              "expr":
+                "fun x -> if ((p)[@env2 ]) x then () else raise (Not x)",
+              "envs": {
+                "env2": {
+                  "p": {
+                    "corec": [],
+                    "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "Match" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try (((f p; iter f q))[@env2 ][@env1 ][@env0 ]); (-1) with | Not x -> x",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": {
+              "expr":
+                "fun x -> if ((p)[@env3 ]) x then () else raise (Not x)",
+              "envs": {
+                "env3": {
+                  "p": {
+                    "corec": [],
+                    "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "env2": {
+          "q": { "corec": [], "expr": { "expr": "[1; 4]", "envs": {} } },
+          "p": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "SubstCombine" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try (((f p; iter f q))[@env1 ][@env0 ]); (-1) with | Not x -> x",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "q": { "corec": [], "expr": { "expr": "[1; 4]", "envs": {} } },
+          "p": { "corec": [], "expr": { "expr": "0", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": {
+              "expr":
+                "fun x -> if ((p)[@env2 ]) x then () else raise (Not x)",
+              "envs": {
+                "env2": {
+                  "p": {
+                    "corec": [],
+                    "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstCombine" ]
+  },
+  {
+    "current_expression": {
+      "expr": "try (((f p; iter f q))[@env0 ]); (-1) with | Not x -> x",
+      "envs": {
+        "env0": {
+          "q": { "corec": [], "expr": { "expr": "[1; 4]", "envs": {} } },
+          "p": { "corec": [], "expr": { "expr": "0", "envs": {} } },
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          },
+          "f": {
+            "corec": [],
+            "expr": {
+              "expr":
+                "fun x -> if ((p)[@env1 ]) x then () else raise (Not x)",
+              "envs": {
+                "env1": {
+                  "p": {
+                    "corec": [],
+                    "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try (((f p)[@env1 ]); ((iter f q)[@env0 ])); (-1) with | Not x -> x",
+      "envs": {
+        "env0": {
+          "q": { "corec": [], "expr": { "expr": "[1; 4]", "envs": {} } },
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          },
+          "f": {
+            "corec": [],
+            "expr": {
+              "expr":
+                "fun x -> if ((p)[@env2 ]) x then () else raise (Not x)",
+              "envs": {
+                "env2": {
+                  "p": {
+                    "corec": [],
+                    "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "env1": {
+          "p": { "corec": [], "expr": { "expr": "0", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": {
+              "expr":
+                "fun x -> if ((p)[@env3 ]) x then () else raise (Not x)",
+              "envs": {
+                "env3": {
+                  "p": {
+                    "corec": [],
+                    "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try (((f)[@env2 ]) ((p)[@env1 ]); ((iter f q)[@env0 ])); (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "q": { "corec": [], "expr": { "expr": "[1; 4]", "envs": {} } },
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          },
+          "f": {
+            "corec": [],
+            "expr": {
+              "expr":
+                "fun x -> if ((p)[@env3 ]) x then () else raise (Not x)",
+              "envs": {
+                "env3": {
+                  "p": {
+                    "corec": [],
+                    "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "env1": { "p": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env2": {
+          "f": {
+            "corec": [],
+            "expr": {
+              "expr":
+                "fun x -> if ((p)[@env4 ]) x then () else raise (Not x)",
+              "envs": {
+                "env4": {
+                  "p": {
+                    "corec": [],
+                    "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  (((f)[@env4 ]) ((p)[@env3 ]); ((iter)[@env2 ]) ((f)[@env0 ]) ((q)[@env1 ]));\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "f": {
+            "corec": [],
+            "expr": {
+              "expr":
+                "fun x -> if ((p)[@env5 ]) x then () else raise (Not x)",
+              "envs": {
+                "env5": {
+                  "p": {
+                    "corec": [],
+                    "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "env1": {
+          "q": { "corec": [], "expr": { "expr": "[1; 4]", "envs": {} } }
+        },
+        "env2": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        },
+        "env3": { "p": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env4": {
+          "f": {
+            "corec": [],
+            "expr": {
+              "expr":
+                "fun x -> if ((p)[@env6 ]) x then () else raise (Not x)",
+              "envs": {
+                "env6": {
+                  "p": {
+                    "corec": [],
+                    "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  (((fun x -> if ((p)[@env4 ]) x then () else raise (Not x))) ((p)[@env3 ]);\n   ((iter)[@env2 ]) ((f)[@env0 ]) ((q)[@env1 ]));\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "f": {
+            "corec": [],
+            "expr": {
+              "expr":
+                "fun x -> if ((p)[@env5 ]) x then () else raise (Not x)",
+              "envs": {
+                "env5": {
+                  "p": {
+                    "corec": [],
+                    "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "env1": {
+          "q": { "corec": [], "expr": { "expr": "[1; 4]", "envs": {} } }
+        },
+        "env2": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        },
+        "env3": { "p": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env4": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  (((fun x -> if ((p)[@env3 ]) x then () else raise (Not x))) 0;\n   ((iter)[@env2 ]) ((f)[@env0 ]) ((q)[@env1 ]));\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "f": {
+            "corec": [],
+            "expr": {
+              "expr":
+                "fun x -> if ((p)[@env4 ]) x then () else raise (Not x)",
+              "envs": {
+                "env4": {
+                  "p": {
+                    "corec": [],
+                    "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "env1": {
+          "q": { "corec": [], "expr": { "expr": "[1; 4]", "envs": {} } }
+        },
+        "env2": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        },
+        "env3": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  (((fun x -> if ((p)[@env3 ]) x then () else raise (Not x))) 0;\n   ((iter)[@env2 ]) (fun x -> if ((p)[@env0 ]) x then () else raise (Not x))\n     ((q)[@env1 ]));\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        },
+        "env1": {
+          "q": { "corec": [], "expr": { "expr": "[1; 4]", "envs": {} } }
+        },
+        "env2": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        },
+        "env3": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  (((fun x -> if ((p)[@env2 ]) x then () else raise (Not x))) 0;\n   ((iter)[@env1 ]) (fun x -> if ((p)[@env0 ]) x then () else raise (Not x))\n     [1; 4]);\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  (((if ((p)[@env2 ]) x then () else raise (Not x))\n   [@env3 ]);\n   ((iter)[@env1 ]) (fun x -> if ((p)[@env0 ]) x then () else raise (Not x))\n     [1; 4]);\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        },
+        "env3": { "x": { "corec": [], "expr": { "expr": "0", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  (if ((((p)[@env3 ]) x)[@env4 ]) then () else ((raise (Not x))[@env2 ]);\n   ((iter)[@env1 ]) (fun x -> if ((p)[@env0 ]) x then () else raise (Not x))\n     [1; 4]);\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        },
+        "env2": { "x": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env3": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        },
+        "env4": { "x": { "corec": [], "expr": { "expr": "0", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  (if ((p)[@env4 ]) ((x)[@env3 ]) then () else ((raise (Not x))[@env2 ]);\n   ((iter)[@env1 ]) (fun x -> if ((p)[@env0 ]) x then () else raise (Not x))\n     [1; 4]);\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        },
+        "env2": { "x": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env3": { "x": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env4": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  (if ((fun x -> (x mod 2) = 0)) ((x)[@env3 ])\n   then ()\n   else ((raise (Not x))[@env2 ]);\n   ((iter)[@env1 ]) (fun x -> if ((p)[@env0 ]) x then () else raise (Not x))\n     [1; 4]);\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        },
+        "env2": { "x": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env3": { "x": { "corec": [], "expr": { "expr": "0", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  (if ((fun x -> (x mod 2) = 0)) 0 then () else ((raise (Not x))[@env2 ]);\n   ((iter)[@env1 ]) (fun x -> if ((p)[@env0 ]) x then () else raise (Not x))\n     [1; 4]);\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        },
+        "env2": { "x": { "corec": [], "expr": { "expr": "0", "envs": {} } } }
+      }
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  (if (((x mod 2) = 0)[@env3 ]) then () else ((raise (Not x))[@env2 ]);\n   ((iter)[@env1 ]) (fun x -> if ((p)[@env0 ]) x then () else raise (Not x))\n     [1; 4]);\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        },
+        "env2": { "x": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env3": { "x": { "corec": [], "expr": { "expr": "0", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  (if ((x mod 2)[@env3 ]) = 0 then () else ((raise (Not x))[@env2 ]);\n   ((iter)[@env1 ]) (fun x -> if ((p)[@env0 ]) x then () else raise (Not x))\n     [1; 4]);\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        },
+        "env2": { "x": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env3": { "x": { "corec": [], "expr": { "expr": "0", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  (if (((x)[@env3 ]) mod 2) = 0 then () else ((raise (Not x))[@env2 ]);\n   ((iter)[@env1 ]) (fun x -> if ((p)[@env0 ]) x then () else raise (Not x))\n     [1; 4]);\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        },
+        "env2": { "x": { "corec": [], "expr": { "expr": "0", "envs": {} } } },
+        "env3": { "x": { "corec": [], "expr": { "expr": "0", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  (if (0 mod 2) = 0 then () else ((raise (Not x))[@env2 ]);\n   ((iter)[@env1 ]) (fun x -> if ((p)[@env0 ]) x then () else raise (Not x))\n     [1; 4]);\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        },
+        "env2": { "x": { "corec": [], "expr": { "expr": "0", "envs": {} } } }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  (if 0 = 0 then () else ((raise (Not x))[@env2 ]);\n   ((iter)[@env1 ]) (fun x -> if ((p)[@env0 ]) x then () else raise (Not x))\n     [1; 4]);\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        },
+        "env2": { "x": { "corec": [], "expr": { "expr": "0", "envs": {} } } }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  (if true then () else ((raise (Not x))[@env2 ]);\n   ((iter)[@env1 ]) (fun x -> if ((p)[@env0 ]) x then () else raise (Not x))\n     [1; 4]);\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        },
+        "env2": { "x": { "corec": [], "expr": { "expr": "0", "envs": {} } } }
+      }
+    },
+    "step": [ "If" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  (();\n   ((iter)[@env1 ]) (fun x -> if ((p)[@env0 ]) x then () else raise (Not x))\n     [1; 4]);\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "Seq" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  ((iter)[@env1 ]) (fun x -> if ((p)[@env0 ]) x then () else raise (Not x))\n    [1; 4];\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  (((fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)))\n    [@env1 ]) (fun x -> if ((p)[@env0 ]) x then () else raise (Not x)) \n    [1; 4];\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  ((fun f -> ((fun l -> match l with | [] -> () | p::q -> (f p; iter f q))\n      [@env1 ]))) (fun x -> if ((p)[@env0 ]) x then () else raise (Not x))\n    [1; 4];\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  ((fun f ->\n      fun l -> ((match l with | [] -> () | p::q -> (f p; iter f q))[@env1 ])))\n    (fun x -> if ((p)[@env0 ]) x then () else raise (Not x)) [1; 4];\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  ((fun f ->\n      fun l -> match l with | [] -> () | p::q -> (((f p; iter f q))[@env1 ])))\n    (fun x -> if ((p)[@env0 ]) x then () else raise (Not x)) [1; 4];\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  (((match l with | [] -> () | p::q -> (((f p; iter f q))[@env0 ])))\n  [@env1 ]);\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "l": { "corec": [], "expr": { "expr": "[1; 4]", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": {
+              "expr":
+                "fun x -> if ((p)[@env2 ]) x then () else raise (Not x)",
+              "envs": {
+                "env2": {
+                  "p": {
+                    "corec": [],
+                    "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  (match ((l)[@env2 ]) with\n   | [] -> ()\n   | p::q -> (((f p; iter f q))[@env1 ][@env0 ]));\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": {
+              "expr":
+                "fun x -> if ((p)[@env3 ]) x then () else raise (Not x)",
+              "envs": {
+                "env3": {
+                  "p": {
+                    "corec": [],
+                    "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "env2": {
+          "l": { "corec": [], "expr": { "expr": "[1; 4]", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  (match [1; 4] with | [] -> () | p::q -> (((f p; iter f q))[@env1 ][@env0 ]));\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": {
+              "expr":
+                "fun x -> if ((p)[@env2 ]) x then () else raise (Not x)",
+              "envs": {
+                "env2": {
+                  "p": {
+                    "corec": [],
+                    "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "Match" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try (((f p; iter f q))[@env2 ][@env1 ][@env0 ]); (-1) with | Not x -> x",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "f": {
+            "corec": [],
+            "expr": {
+              "expr":
+                "fun x -> if ((p)[@env3 ]) x then () else raise (Not x)",
+              "envs": {
+                "env3": {
+                  "p": {
+                    "corec": [],
+                    "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "env2": {
+          "q": { "corec": [], "expr": { "expr": "[4]", "envs": {} } },
+          "p": { "corec": [], "expr": { "expr": "1", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "SubstCombine" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try (((f p; iter f q))[@env1 ][@env0 ]); (-1) with | Not x -> x",
+      "envs": {
+        "env0": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        },
+        "env1": {
+          "q": { "corec": [], "expr": { "expr": "[4]", "envs": {} } },
+          "p": { "corec": [], "expr": { "expr": "1", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": {
+              "expr":
+                "fun x -> if ((p)[@env2 ]) x then () else raise (Not x)",
+              "envs": {
+                "env2": {
+                  "p": {
+                    "corec": [],
+                    "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstCombine" ]
+  },
+  {
+    "current_expression": {
+      "expr": "try (((f p; iter f q))[@env0 ]); (-1) with | Not x -> x",
+      "envs": {
+        "env0": {
+          "q": { "corec": [], "expr": { "expr": "[4]", "envs": {} } },
+          "p": { "corec": [], "expr": { "expr": "1", "envs": {} } },
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          },
+          "f": {
+            "corec": [],
+            "expr": {
+              "expr":
+                "fun x -> if ((p)[@env1 ]) x then () else raise (Not x)",
+              "envs": {
+                "env1": {
+                  "p": {
+                    "corec": [],
+                    "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try (((f p)[@env1 ]); ((iter f q)[@env0 ])); (-1) with | Not x -> x",
+      "envs": {
+        "env0": {
+          "q": { "corec": [], "expr": { "expr": "[4]", "envs": {} } },
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          },
+          "f": {
+            "corec": [],
+            "expr": {
+              "expr":
+                "fun x -> if ((p)[@env2 ]) x then () else raise (Not x)",
+              "envs": {
+                "env2": {
+                  "p": {
+                    "corec": [],
+                    "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "env1": {
+          "p": { "corec": [], "expr": { "expr": "1", "envs": {} } },
+          "f": {
+            "corec": [],
+            "expr": {
+              "expr":
+                "fun x -> if ((p)[@env3 ]) x then () else raise (Not x)",
+              "envs": {
+                "env3": {
+                  "p": {
+                    "corec": [],
+                    "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try (((f)[@env2 ]) ((p)[@env1 ]); ((iter f q)[@env0 ])); (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "q": { "corec": [], "expr": { "expr": "[4]", "envs": {} } },
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          },
+          "f": {
+            "corec": [],
+            "expr": {
+              "expr":
+                "fun x -> if ((p)[@env3 ]) x then () else raise (Not x)",
+              "envs": {
+                "env3": {
+                  "p": {
+                    "corec": [],
+                    "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "env1": { "p": { "corec": [], "expr": { "expr": "1", "envs": {} } } },
+        "env2": {
+          "f": {
+            "corec": [],
+            "expr": {
+              "expr":
+                "fun x -> if ((p)[@env4 ]) x then () else raise (Not x)",
+              "envs": {
+                "env4": {
+                  "p": {
+                    "corec": [],
+                    "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  (((f)[@env4 ]) ((p)[@env3 ]); ((iter)[@env2 ]) ((f)[@env0 ]) ((q)[@env1 ]));\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "f": {
+            "corec": [],
+            "expr": {
+              "expr":
+                "fun x -> if ((p)[@env5 ]) x then () else raise (Not x)",
+              "envs": {
+                "env5": {
+                  "p": {
+                    "corec": [],
+                    "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "env1": {
+          "q": { "corec": [], "expr": { "expr": "[4]", "envs": {} } }
+        },
+        "env2": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        },
+        "env3": { "p": { "corec": [], "expr": { "expr": "1", "envs": {} } } },
+        "env4": {
+          "f": {
+            "corec": [],
+            "expr": {
+              "expr":
+                "fun x -> if ((p)[@env6 ]) x then () else raise (Not x)",
+              "envs": {
+                "env6": {
+                  "p": {
+                    "corec": [],
+                    "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  (((fun x -> if ((p)[@env4 ]) x then () else raise (Not x))) ((p)[@env3 ]);\n   ((iter)[@env2 ]) ((f)[@env0 ]) ((q)[@env1 ]));\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "f": {
+            "corec": [],
+            "expr": {
+              "expr":
+                "fun x -> if ((p)[@env5 ]) x then () else raise (Not x)",
+              "envs": {
+                "env5": {
+                  "p": {
+                    "corec": [],
+                    "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "env1": {
+          "q": { "corec": [], "expr": { "expr": "[4]", "envs": {} } }
+        },
+        "env2": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        },
+        "env3": { "p": { "corec": [], "expr": { "expr": "1", "envs": {} } } },
+        "env4": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  (((fun x -> if ((p)[@env3 ]) x then () else raise (Not x))) 1;\n   ((iter)[@env2 ]) ((f)[@env0 ]) ((q)[@env1 ]));\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "f": {
+            "corec": [],
+            "expr": {
+              "expr":
+                "fun x -> if ((p)[@env4 ]) x then () else raise (Not x)",
+              "envs": {
+                "env4": {
+                  "p": {
+                    "corec": [],
+                    "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "env1": {
+          "q": { "corec": [], "expr": { "expr": "[4]", "envs": {} } }
+        },
+        "env2": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        },
+        "env3": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  (((fun x -> if ((p)[@env3 ]) x then () else raise (Not x))) 1;\n   ((iter)[@env2 ]) (fun x -> if ((p)[@env0 ]) x then () else raise (Not x))\n     ((q)[@env1 ]));\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        },
+        "env1": {
+          "q": { "corec": [], "expr": { "expr": "[4]", "envs": {} } }
+        },
+        "env2": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        },
+        "env3": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  (((fun x -> if ((p)[@env2 ]) x then () else raise (Not x))) 1;\n   ((iter)[@env1 ]) (fun x -> if ((p)[@env0 ]) x then () else raise (Not x))\n     [4]);\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  (((if ((p)[@env2 ]) x then () else raise (Not x))\n   [@env3 ]);\n   ((iter)[@env1 ]) (fun x -> if ((p)[@env0 ]) x then () else raise (Not x))\n     [4]);\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        },
+        "env2": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        },
+        "env3": { "x": { "corec": [], "expr": { "expr": "1", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  (if ((((p)[@env3 ]) x)[@env4 ]) then () else ((raise (Not x))[@env2 ]);\n   ((iter)[@env1 ]) (fun x -> if ((p)[@env0 ]) x then () else raise (Not x))\n     [4]);\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        },
+        "env2": { "x": { "corec": [], "expr": { "expr": "1", "envs": {} } } },
+        "env3": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        },
+        "env4": { "x": { "corec": [], "expr": { "expr": "1", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  (if ((p)[@env4 ]) ((x)[@env3 ]) then () else ((raise (Not x))[@env2 ]);\n   ((iter)[@env1 ]) (fun x -> if ((p)[@env0 ]) x then () else raise (Not x))\n     [4]);\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        },
+        "env2": { "x": { "corec": [], "expr": { "expr": "1", "envs": {} } } },
+        "env3": { "x": { "corec": [], "expr": { "expr": "1", "envs": {} } } },
+        "env4": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  (if ((fun x -> (x mod 2) = 0)) ((x)[@env3 ])\n   then ()\n   else ((raise (Not x))[@env2 ]);\n   ((iter)[@env1 ]) (fun x -> if ((p)[@env0 ]) x then () else raise (Not x))\n     [4]);\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        },
+        "env2": { "x": { "corec": [], "expr": { "expr": "1", "envs": {} } } },
+        "env3": { "x": { "corec": [], "expr": { "expr": "1", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  (if ((fun x -> (x mod 2) = 0)) 1 then () else ((raise (Not x))[@env2 ]);\n   ((iter)[@env1 ]) (fun x -> if ((p)[@env0 ]) x then () else raise (Not x))\n     [4]);\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        },
+        "env2": { "x": { "corec": [], "expr": { "expr": "1", "envs": {} } } }
+      }
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  (if (((x mod 2) = 0)[@env3 ]) then () else ((raise (Not x))[@env2 ]);\n   ((iter)[@env1 ]) (fun x -> if ((p)[@env0 ]) x then () else raise (Not x))\n     [4]);\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        },
+        "env2": { "x": { "corec": [], "expr": { "expr": "1", "envs": {} } } },
+        "env3": { "x": { "corec": [], "expr": { "expr": "1", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  (if ((x mod 2)[@env3 ]) = 0 then () else ((raise (Not x))[@env2 ]);\n   ((iter)[@env1 ]) (fun x -> if ((p)[@env0 ]) x then () else raise (Not x))\n     [4]);\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        },
+        "env2": { "x": { "corec": [], "expr": { "expr": "1", "envs": {} } } },
+        "env3": { "x": { "corec": [], "expr": { "expr": "1", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  (if (((x)[@env3 ]) mod 2) = 0 then () else ((raise (Not x))[@env2 ]);\n   ((iter)[@env1 ]) (fun x -> if ((p)[@env0 ]) x then () else raise (Not x))\n     [4]);\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        },
+        "env2": { "x": { "corec": [], "expr": { "expr": "1", "envs": {} } } },
+        "env3": { "x": { "corec": [], "expr": { "expr": "1", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  (if (1 mod 2) = 0 then () else ((raise (Not x))[@env2 ]);\n   ((iter)[@env1 ]) (fun x -> if ((p)[@env0 ]) x then () else raise (Not x))\n     [4]);\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        },
+        "env2": { "x": { "corec": [], "expr": { "expr": "1", "envs": {} } } }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  (if 1 = 0 then () else ((raise (Not x))[@env2 ]);\n   ((iter)[@env1 ]) (fun x -> if ((p)[@env0 ]) x then () else raise (Not x))\n     [4]);\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        },
+        "env2": { "x": { "corec": [], "expr": { "expr": "1", "envs": {} } } }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  (if false then () else ((raise (Not x))[@env2 ]);\n   ((iter)[@env1 ]) (fun x -> if ((p)[@env0 ]) x then () else raise (Not x))\n     [4]);\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        },
+        "env2": { "x": { "corec": [], "expr": { "expr": "1", "envs": {} } } }
+      }
+    },
+    "step": [ "If" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  (((raise (Not x))\n   [@env2 ]);\n   ((iter)[@env1 ]) (fun x -> if ((p)[@env0 ]) x then () else raise (Not x))\n     [4]);\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        },
+        "env2": { "x": { "corec": [], "expr": { "expr": "1", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  (raise ((Not x)[@env2 ]);\n   ((iter)[@env1 ]) (fun x -> if ((p)[@env0 ]) x then () else raise (Not x))\n     [4]);\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        },
+        "env2": { "x": { "corec": [], "expr": { "expr": "1", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  (raise ((Not x)[@env2 ]);\n   ((iter)[@env1 ]) (fun x -> if ((p)[@env0 ]) x then () else raise (Not x))\n     [4]);\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        },
+        "env2": { "x": { "corec": [], "expr": { "expr": "1", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "try\n  (raise (Not 1);\n   ((iter)[@env1 ]) (fun x -> if ((p)[@env0 ]) x then () else raise (Not x))\n     [4]);\n  (-1)\nwith | Not x -> x",
+      "envs": {
+        "env0": {
+          "p": {
+            "corec": [],
+            "expr": { "expr": "fun x -> (x mod 2) = 0", "envs": {} }
+          }
+        },
+        "env1": {
+          "iter": {
+            "corec": [ "iter" ],
+            "expr": {
+              "expr":
+                "fun f -> fun l -> match l with | [] -> () | p::q -> (f p; iter f q)",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "Exn" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((x)[@env0 ])",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "1", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  { "current_expression": { "expr": "1", "envs": {} }, "step": [] }
+]

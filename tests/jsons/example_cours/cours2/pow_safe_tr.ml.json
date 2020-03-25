@@ -1,0 +1,3159 @@
+[
+  {
+    "current_expression": {
+      "expr": "((pow 3 5)[@env0 ])",
+      "envs": {
+        "env0": {
+          "pow": {
+            "corec": [],
+            "expr": {
+              "expr":
+                "fun x ->\n  fun n ->\n    let rec loop n r = if n = 0 then r else loop (n - 1) (r * x) in\n    if n < 0\n    then raise (Invalid_argument \"pow: negative exponent\")\n    else loop n 1",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((pow)[@env0 ]) 3 5",
+      "envs": {
+        "env0": {
+          "pow": {
+            "corec": [],
+            "expr": {
+              "expr":
+                "fun x ->\n  fun n ->\n    let rec loop n r = if n = 0 then r else loop (n - 1) (r * x) in\n    if n < 0\n    then raise (Invalid_argument \"pow: negative exponent\")\n    else loop n 1",
+              "envs": {}
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun x ->\n   fun n ->\n     let rec loop n r = if n = 0 then r else loop (n - 1) (r * x) in\n     if n < 0\n     then raise (Invalid_argument \"pow: negative exponent\")\n     else loop n 1) 3 5",
+      "envs": {}
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((let rec loop n r = if n = 0 then r else loop (n - 1) (r * x) in\n  if n < 0\n  then raise (Invalid_argument \"pow: negative exponent\")\n  else loop n 1)\n[@env0 ])",
+      "envs": {
+        "env0": {
+          "x": { "corec": [], "expr": { "expr": "3", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "5", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "let rec loop = ((fun n -> fun r -> if n = 0 then r else loop (n - 1) (r * x))\n  [@env1 ]) in\n((if n < 0\n  then raise (Invalid_argument \"pow: negative exponent\")\n  else loop n 1)[@env0 ])",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "5", "envs": {} } } },
+        "env1": {
+          "x": { "corec": [], "expr": { "expr": "3", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "5", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "let rec loop = ((fun n -> fun r -> if n = 0 then r else loop (n - 1) (r * x))\n  [@env2 ]) in\nif ((n < 0)[@env1 ])\nthen raise (Invalid_argument \"pow: negative exponent\")\nelse ((loop n 1)[@env0 ])",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "5", "envs": {} } } },
+        "env1": { "n": { "corec": [], "expr": { "expr": "5", "envs": {} } } },
+        "env2": {
+          "x": { "corec": [], "expr": { "expr": "3", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "5", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "let rec loop = ((fun n -> fun r -> if n = 0 then r else loop (n - 1) (r * x))\n  [@env2 ]) in\nif ((n)[@env1 ]) < 0\nthen raise (Invalid_argument \"pow: negative exponent\")\nelse ((loop n 1)[@env0 ])",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "5", "envs": {} } } },
+        "env1": { "n": { "corec": [], "expr": { "expr": "5", "envs": {} } } },
+        "env2": {
+          "x": { "corec": [], "expr": { "expr": "3", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "5", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "let rec loop n = ((fun r -> if n = 0 then r else loop (n - 1) (r * x))\n  [@env2 ]) in\nif ((n)[@env1 ]) < 0\nthen raise (Invalid_argument \"pow: negative exponent\")\nelse ((loop n 1)[@env0 ])",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "5", "envs": {} } } },
+        "env1": { "n": { "corec": [], "expr": { "expr": "5", "envs": {} } } },
+        "env2": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "let rec loop n r = ((if n = 0 then r else loop (n - 1) (r * x))[@env2 ]) in\nif ((n)[@env1 ]) < 0\nthen raise (Invalid_argument \"pow: negative exponent\")\nelse ((loop n 1)[@env0 ])",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "5", "envs": {} } } },
+        "env1": { "n": { "corec": [], "expr": { "expr": "5", "envs": {} } } },
+        "env2": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "let rec loop n r = if n = 0 then r else ((loop (n - 1) (r * x))[@env2 ]) in\nif ((n)[@env1 ]) < 0\nthen raise (Invalid_argument \"pow: negative exponent\")\nelse ((loop n 1)[@env0 ])",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "5", "envs": {} } } },
+        "env1": { "n": { "corec": [], "expr": { "expr": "5", "envs": {} } } },
+        "env2": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "let rec loop n r = if n = 0 then r else ((loop (n - 1) (r * x))[@env1 ]) in\nif 5 < 0\nthen raise (Invalid_argument \"pow: negative exponent\")\nelse ((loop n 1)[@env0 ])",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "5", "envs": {} } } },
+        "env1": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } }
+      }
+    },
+    "step": [ "Let" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((if 5 < 0\n  then raise (Invalid_argument \"pow: negative exponent\")\n  else ((loop n 1)[@env0 ]))\n[@env1 ])",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "5", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env2 ])",
+              "envs": {
+                "env2": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "if 5 < 0\nthen raise (Invalid_argument \"pow: negative exponent\")\nelse ((loop n 1)[@env1 ][@env0 ])",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "5", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env2 ])",
+              "envs": {
+                "env2": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "if false\nthen raise (Invalid_argument \"pow: negative exponent\")\nelse ((loop n 1)[@env1 ][@env0 ])",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "5", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env2 ])",
+              "envs": {
+                "env2": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "If" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop n 1)[@env1 ][@env0 ])",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "5", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env2 ])",
+              "envs": {
+                "env2": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstCombine" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop n 1)[@env0 ])",
+      "envs": {
+        "env0": {
+          "n": { "corec": [], "expr": { "expr": "5", "envs": {} } },
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env1 ])",
+              "envs": {
+                "env1": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env1 ]) ((n)[@env0 ]) 1",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "5", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env2 ])",
+              "envs": {
+                "env2": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env0 ]) 5 1",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env1 ])",
+              "envs": {
+                "env1": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env0 ]))\n  [@env1 ]) 5 1",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env2 ])",
+              "envs": {
+                "env2": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun n -> ((fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env0 ]))\n   [@env1 ])) 5 1",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env2 ])",
+              "envs": {
+                "env2": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun n ->\n   fun r -> ((if n = 0 then r else ((loop (n - 1) (r * x))[@env0 ]))[@env1 ]))\n  5 1",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env2 ])",
+              "envs": {
+                "env2": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun n ->\n   fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env1 ][@env0 ])) 5\n  1",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env2 ])",
+              "envs": {
+                "env2": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((if n = 0 then r else ((loop (n - 1) (r * x))[@env1 ][@env0 ]))[@env2 ])",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env3 ])",
+              "envs": {
+                "env3": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        },
+        "env2": {
+          "r": { "corec": [], "expr": { "expr": "1", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "5", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "if ((n = 0)[@env4 ])\nthen ((r)[@env3 ])\nelse ((loop (n - 1) (r * x))[@env2 ][@env1 ][@env0 ])",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env5 ])",
+              "envs": {
+                "env5": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        },
+        "env2": {
+          "r": { "corec": [], "expr": { "expr": "1", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "5", "envs": {} } }
+        },
+        "env3": { "r": { "corec": [], "expr": { "expr": "1", "envs": {} } } },
+        "env4": { "n": { "corec": [], "expr": { "expr": "5", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "if ((n)[@env4 ]) = 0\nthen ((r)[@env3 ])\nelse ((loop (n - 1) (r * x))[@env2 ][@env1 ][@env0 ])",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env5 ])",
+              "envs": {
+                "env5": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        },
+        "env2": {
+          "r": { "corec": [], "expr": { "expr": "1", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "5", "envs": {} } }
+        },
+        "env3": { "r": { "corec": [], "expr": { "expr": "1", "envs": {} } } },
+        "env4": { "n": { "corec": [], "expr": { "expr": "5", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "if 5 = 0\nthen ((r)[@env3 ])\nelse ((loop (n - 1) (r * x))[@env2 ][@env1 ][@env0 ])",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env4 ])",
+              "envs": {
+                "env4": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        },
+        "env2": {
+          "r": { "corec": [], "expr": { "expr": "1", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "5", "envs": {} } }
+        },
+        "env3": { "r": { "corec": [], "expr": { "expr": "1", "envs": {} } } }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "if false\nthen ((r)[@env3 ])\nelse ((loop (n - 1) (r * x))[@env2 ][@env1 ][@env0 ])",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env4 ])",
+              "envs": {
+                "env4": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        },
+        "env2": {
+          "r": { "corec": [], "expr": { "expr": "1", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "5", "envs": {} } }
+        },
+        "env3": { "r": { "corec": [], "expr": { "expr": "1", "envs": {} } } }
+      }
+    },
+    "step": [ "If" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop (n - 1) (r * x))[@env2 ][@env1 ][@env0 ])",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env3 ])",
+              "envs": {
+                "env3": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        },
+        "env2": {
+          "r": { "corec": [], "expr": { "expr": "1", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "5", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "SubstCombine" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop (n - 1) (r * x))[@env1 ][@env0 ])",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "r": { "corec": [], "expr": { "expr": "1", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "5", "envs": {} } },
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env2 ])",
+              "envs": {
+                "env2": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstCombine" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop (n - 1) (r * x))[@env0 ])",
+      "envs": {
+        "env0": {
+          "x": { "corec": [], "expr": { "expr": "3", "envs": {} } },
+          "r": { "corec": [], "expr": { "expr": "1", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "5", "envs": {} } },
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env1 ])",
+              "envs": {
+                "env1": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env2 ]) ((n - 1)[@env0 ]) ((r * x)[@env1 ])",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "5", "envs": {} } } },
+        "env1": {
+          "x": { "corec": [], "expr": { "expr": "3", "envs": {} } },
+          "r": { "corec": [], "expr": { "expr": "1", "envs": {} } }
+        },
+        "env2": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env3 ])",
+              "envs": {
+                "env3": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env2 ]) (((n)[@env0 ]) - 1) ((r * x)[@env1 ])",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "5", "envs": {} } } },
+        "env1": {
+          "x": { "corec": [], "expr": { "expr": "3", "envs": {} } },
+          "r": { "corec": [], "expr": { "expr": "1", "envs": {} } }
+        },
+        "env2": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env3 ])",
+              "envs": {
+                "env3": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((loop)[@env3 ]) (((n)[@env0 ]) - 1) (((r)[@env1 ]) * ((x)[@env2 ]))",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "5", "envs": {} } } },
+        "env1": { "r": { "corec": [], "expr": { "expr": "1", "envs": {} } } },
+        "env2": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env3": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env4 ])",
+              "envs": {
+                "env4": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env2 ]) (5 - 1) (((r)[@env0 ]) * ((x)[@env1 ]))",
+      "envs": {
+        "env0": { "r": { "corec": [], "expr": { "expr": "1", "envs": {} } } },
+        "env1": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env2": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env3 ])",
+              "envs": {
+                "env3": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env1 ]) (5 - 1) (1 * ((x)[@env0 ]))",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env2 ])",
+              "envs": {
+                "env2": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env0 ]) (5 - 1) (1 * 3)",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env1 ])",
+              "envs": {
+                "env1": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env0 ]) (5 - 1) 3",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env1 ])",
+              "envs": {
+                "env1": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env0 ]) 4 3",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env1 ])",
+              "envs": {
+                "env1": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env0 ]))\n  [@env1 ]) 4 3",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env2 ])",
+              "envs": {
+                "env2": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun n -> ((fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env0 ]))\n   [@env1 ])) 4 3",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env2 ])",
+              "envs": {
+                "env2": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun n ->\n   fun r -> ((if n = 0 then r else ((loop (n - 1) (r * x))[@env0 ]))[@env1 ]))\n  4 3",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env2 ])",
+              "envs": {
+                "env2": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun n ->\n   fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env1 ][@env0 ])) 4\n  3",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env2 ])",
+              "envs": {
+                "env2": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((if n = 0 then r else ((loop (n - 1) (r * x))[@env1 ][@env0 ]))[@env2 ])",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env3 ])",
+              "envs": {
+                "env3": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        },
+        "env2": {
+          "r": { "corec": [], "expr": { "expr": "3", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "4", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "if ((n = 0)[@env4 ])\nthen ((r)[@env3 ])\nelse ((loop (n - 1) (r * x))[@env2 ][@env1 ][@env0 ])",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env5 ])",
+              "envs": {
+                "env5": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        },
+        "env2": {
+          "r": { "corec": [], "expr": { "expr": "3", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "4", "envs": {} } }
+        },
+        "env3": { "r": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env4": { "n": { "corec": [], "expr": { "expr": "4", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "if ((n)[@env4 ]) = 0\nthen ((r)[@env3 ])\nelse ((loop (n - 1) (r * x))[@env2 ][@env1 ][@env0 ])",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env5 ])",
+              "envs": {
+                "env5": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        },
+        "env2": {
+          "r": { "corec": [], "expr": { "expr": "3", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "4", "envs": {} } }
+        },
+        "env3": { "r": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env4": { "n": { "corec": [], "expr": { "expr": "4", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "if 4 = 0\nthen ((r)[@env3 ])\nelse ((loop (n - 1) (r * x))[@env2 ][@env1 ][@env0 ])",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env4 ])",
+              "envs": {
+                "env4": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        },
+        "env2": {
+          "r": { "corec": [], "expr": { "expr": "3", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "4", "envs": {} } }
+        },
+        "env3": { "r": { "corec": [], "expr": { "expr": "3", "envs": {} } } }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "if false\nthen ((r)[@env3 ])\nelse ((loop (n - 1) (r * x))[@env2 ][@env1 ][@env0 ])",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env4 ])",
+              "envs": {
+                "env4": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        },
+        "env2": {
+          "r": { "corec": [], "expr": { "expr": "3", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "4", "envs": {} } }
+        },
+        "env3": { "r": { "corec": [], "expr": { "expr": "3", "envs": {} } } }
+      }
+    },
+    "step": [ "If" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop (n - 1) (r * x))[@env2 ][@env1 ][@env0 ])",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env3 ])",
+              "envs": {
+                "env3": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        },
+        "env2": {
+          "r": { "corec": [], "expr": { "expr": "3", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "4", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "SubstCombine" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop (n - 1) (r * x))[@env1 ][@env0 ])",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "r": { "corec": [], "expr": { "expr": "3", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "4", "envs": {} } },
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env2 ])",
+              "envs": {
+                "env2": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstCombine" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop (n - 1) (r * x))[@env0 ])",
+      "envs": {
+        "env0": {
+          "x": { "corec": [], "expr": { "expr": "3", "envs": {} } },
+          "r": { "corec": [], "expr": { "expr": "3", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "4", "envs": {} } },
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env1 ])",
+              "envs": {
+                "env1": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env2 ]) ((n - 1)[@env0 ]) ((r * x)[@env1 ])",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "4", "envs": {} } } },
+        "env1": {
+          "x": { "corec": [], "expr": { "expr": "3", "envs": {} } },
+          "r": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+        },
+        "env2": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env3 ])",
+              "envs": {
+                "env3": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env2 ]) (((n)[@env0 ]) - 1) ((r * x)[@env1 ])",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "4", "envs": {} } } },
+        "env1": {
+          "x": { "corec": [], "expr": { "expr": "3", "envs": {} } },
+          "r": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+        },
+        "env2": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env3 ])",
+              "envs": {
+                "env3": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((loop)[@env3 ]) (((n)[@env0 ]) - 1) (((r)[@env1 ]) * ((x)[@env2 ]))",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "4", "envs": {} } } },
+        "env1": { "r": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env2": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env3": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env4 ])",
+              "envs": {
+                "env4": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env2 ]) (4 - 1) (((r)[@env0 ]) * ((x)[@env1 ]))",
+      "envs": {
+        "env0": { "r": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env2": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env3 ])",
+              "envs": {
+                "env3": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env1 ]) (4 - 1) (3 * ((x)[@env0 ]))",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env2 ])",
+              "envs": {
+                "env2": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env0 ]) (4 - 1) (3 * 3)",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env1 ])",
+              "envs": {
+                "env1": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env0 ]) (4 - 1) 9",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env1 ])",
+              "envs": {
+                "env1": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env0 ]) 3 9",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env1 ])",
+              "envs": {
+                "env1": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env0 ]))\n  [@env1 ]) 3 9",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env2 ])",
+              "envs": {
+                "env2": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun n -> ((fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env0 ]))\n   [@env1 ])) 3 9",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env2 ])",
+              "envs": {
+                "env2": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun n ->\n   fun r -> ((if n = 0 then r else ((loop (n - 1) (r * x))[@env0 ]))[@env1 ]))\n  3 9",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env2 ])",
+              "envs": {
+                "env2": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun n ->\n   fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env1 ][@env0 ])) 3\n  9",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env2 ])",
+              "envs": {
+                "env2": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((if n = 0 then r else ((loop (n - 1) (r * x))[@env1 ][@env0 ]))[@env2 ])",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env3 ])",
+              "envs": {
+                "env3": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        },
+        "env2": {
+          "r": { "corec": [], "expr": { "expr": "9", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "if ((n = 0)[@env4 ])\nthen ((r)[@env3 ])\nelse ((loop (n - 1) (r * x))[@env2 ][@env1 ][@env0 ])",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env5 ])",
+              "envs": {
+                "env5": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        },
+        "env2": {
+          "r": { "corec": [], "expr": { "expr": "9", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+        },
+        "env3": { "r": { "corec": [], "expr": { "expr": "9", "envs": {} } } },
+        "env4": { "n": { "corec": [], "expr": { "expr": "3", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "if ((n)[@env4 ]) = 0\nthen ((r)[@env3 ])\nelse ((loop (n - 1) (r * x))[@env2 ][@env1 ][@env0 ])",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env5 ])",
+              "envs": {
+                "env5": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        },
+        "env2": {
+          "r": { "corec": [], "expr": { "expr": "9", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+        },
+        "env3": { "r": { "corec": [], "expr": { "expr": "9", "envs": {} } } },
+        "env4": { "n": { "corec": [], "expr": { "expr": "3", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "if 3 = 0\nthen ((r)[@env3 ])\nelse ((loop (n - 1) (r * x))[@env2 ][@env1 ][@env0 ])",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env4 ])",
+              "envs": {
+                "env4": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        },
+        "env2": {
+          "r": { "corec": [], "expr": { "expr": "9", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+        },
+        "env3": { "r": { "corec": [], "expr": { "expr": "9", "envs": {} } } }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "if false\nthen ((r)[@env3 ])\nelse ((loop (n - 1) (r * x))[@env2 ][@env1 ][@env0 ])",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env4 ])",
+              "envs": {
+                "env4": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        },
+        "env2": {
+          "r": { "corec": [], "expr": { "expr": "9", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+        },
+        "env3": { "r": { "corec": [], "expr": { "expr": "9", "envs": {} } } }
+      }
+    },
+    "step": [ "If" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop (n - 1) (r * x))[@env2 ][@env1 ][@env0 ])",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env3 ])",
+              "envs": {
+                "env3": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        },
+        "env2": {
+          "r": { "corec": [], "expr": { "expr": "9", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "SubstCombine" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop (n - 1) (r * x))[@env1 ][@env0 ])",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "r": { "corec": [], "expr": { "expr": "9", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "3", "envs": {} } },
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env2 ])",
+              "envs": {
+                "env2": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstCombine" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop (n - 1) (r * x))[@env0 ])",
+      "envs": {
+        "env0": {
+          "x": { "corec": [], "expr": { "expr": "3", "envs": {} } },
+          "r": { "corec": [], "expr": { "expr": "9", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "3", "envs": {} } },
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env1 ])",
+              "envs": {
+                "env1": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env2 ]) ((n - 1)[@env0 ]) ((r * x)[@env1 ])",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "x": { "corec": [], "expr": { "expr": "3", "envs": {} } },
+          "r": { "corec": [], "expr": { "expr": "9", "envs": {} } }
+        },
+        "env2": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env3 ])",
+              "envs": {
+                "env3": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env2 ]) (((n)[@env0 ]) - 1) ((r * x)[@env1 ])",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "x": { "corec": [], "expr": { "expr": "3", "envs": {} } },
+          "r": { "corec": [], "expr": { "expr": "9", "envs": {} } }
+        },
+        "env2": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env3 ])",
+              "envs": {
+                "env3": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((loop)[@env3 ]) (((n)[@env0 ]) - 1) (((r)[@env1 ]) * ((x)[@env2 ]))",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": { "r": { "corec": [], "expr": { "expr": "9", "envs": {} } } },
+        "env2": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env3": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env4 ])",
+              "envs": {
+                "env4": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env2 ]) (3 - 1) (((r)[@env0 ]) * ((x)[@env1 ]))",
+      "envs": {
+        "env0": { "r": { "corec": [], "expr": { "expr": "9", "envs": {} } } },
+        "env1": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env2": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env3 ])",
+              "envs": {
+                "env3": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env1 ]) (3 - 1) (9 * ((x)[@env0 ]))",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env2 ])",
+              "envs": {
+                "env2": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env0 ]) (3 - 1) (9 * 3)",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env1 ])",
+              "envs": {
+                "env1": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env0 ]) (3 - 1) 27",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env1 ])",
+              "envs": {
+                "env1": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env0 ]) 2 27",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env1 ])",
+              "envs": {
+                "env1": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env0 ]))\n  [@env1 ]) 2 27",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env2 ])",
+              "envs": {
+                "env2": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun n -> ((fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env0 ]))\n   [@env1 ])) 2 27",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env2 ])",
+              "envs": {
+                "env2": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun n ->\n   fun r -> ((if n = 0 then r else ((loop (n - 1) (r * x))[@env0 ]))[@env1 ]))\n  2 27",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env2 ])",
+              "envs": {
+                "env2": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun n ->\n   fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env1 ][@env0 ])) 2\n  27",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env2 ])",
+              "envs": {
+                "env2": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((if n = 0 then r else ((loop (n - 1) (r * x))[@env1 ][@env0 ]))[@env2 ])",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env3 ])",
+              "envs": {
+                "env3": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        },
+        "env2": {
+          "r": { "corec": [], "expr": { "expr": "27", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "2", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "if ((n = 0)[@env4 ])\nthen ((r)[@env3 ])\nelse ((loop (n - 1) (r * x))[@env2 ][@env1 ][@env0 ])",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env5 ])",
+              "envs": {
+                "env5": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        },
+        "env2": {
+          "r": { "corec": [], "expr": { "expr": "27", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "2", "envs": {} } }
+        },
+        "env3": {
+          "r": { "corec": [], "expr": { "expr": "27", "envs": {} } }
+        },
+        "env4": { "n": { "corec": [], "expr": { "expr": "2", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "if ((n)[@env4 ]) = 0\nthen ((r)[@env3 ])\nelse ((loop (n - 1) (r * x))[@env2 ][@env1 ][@env0 ])",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env5 ])",
+              "envs": {
+                "env5": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        },
+        "env2": {
+          "r": { "corec": [], "expr": { "expr": "27", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "2", "envs": {} } }
+        },
+        "env3": {
+          "r": { "corec": [], "expr": { "expr": "27", "envs": {} } }
+        },
+        "env4": { "n": { "corec": [], "expr": { "expr": "2", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "if 2 = 0\nthen ((r)[@env3 ])\nelse ((loop (n - 1) (r * x))[@env2 ][@env1 ][@env0 ])",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env4 ])",
+              "envs": {
+                "env4": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        },
+        "env2": {
+          "r": { "corec": [], "expr": { "expr": "27", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "2", "envs": {} } }
+        },
+        "env3": {
+          "r": { "corec": [], "expr": { "expr": "27", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "if false\nthen ((r)[@env3 ])\nelse ((loop (n - 1) (r * x))[@env2 ][@env1 ][@env0 ])",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env4 ])",
+              "envs": {
+                "env4": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        },
+        "env2": {
+          "r": { "corec": [], "expr": { "expr": "27", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "2", "envs": {} } }
+        },
+        "env3": {
+          "r": { "corec": [], "expr": { "expr": "27", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "If" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop (n - 1) (r * x))[@env2 ][@env1 ][@env0 ])",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env3 ])",
+              "envs": {
+                "env3": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        },
+        "env2": {
+          "r": { "corec": [], "expr": { "expr": "27", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "2", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "SubstCombine" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop (n - 1) (r * x))[@env1 ][@env0 ])",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "r": { "corec": [], "expr": { "expr": "27", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "2", "envs": {} } },
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env2 ])",
+              "envs": {
+                "env2": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstCombine" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop (n - 1) (r * x))[@env0 ])",
+      "envs": {
+        "env0": {
+          "x": { "corec": [], "expr": { "expr": "3", "envs": {} } },
+          "r": { "corec": [], "expr": { "expr": "27", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "2", "envs": {} } },
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env1 ])",
+              "envs": {
+                "env1": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env2 ]) ((n - 1)[@env0 ]) ((r * x)[@env1 ])",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "2", "envs": {} } } },
+        "env1": {
+          "x": { "corec": [], "expr": { "expr": "3", "envs": {} } },
+          "r": { "corec": [], "expr": { "expr": "27", "envs": {} } }
+        },
+        "env2": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env3 ])",
+              "envs": {
+                "env3": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env2 ]) (((n)[@env0 ]) - 1) ((r * x)[@env1 ])",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "2", "envs": {} } } },
+        "env1": {
+          "x": { "corec": [], "expr": { "expr": "3", "envs": {} } },
+          "r": { "corec": [], "expr": { "expr": "27", "envs": {} } }
+        },
+        "env2": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env3 ])",
+              "envs": {
+                "env3": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((loop)[@env3 ]) (((n)[@env0 ]) - 1) (((r)[@env1 ]) * ((x)[@env2 ]))",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "2", "envs": {} } } },
+        "env1": {
+          "r": { "corec": [], "expr": { "expr": "27", "envs": {} } }
+        },
+        "env2": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env3": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env4 ])",
+              "envs": {
+                "env4": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env2 ]) (2 - 1) (((r)[@env0 ]) * ((x)[@env1 ]))",
+      "envs": {
+        "env0": {
+          "r": { "corec": [], "expr": { "expr": "27", "envs": {} } }
+        },
+        "env1": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env2": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env3 ])",
+              "envs": {
+                "env3": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env1 ]) (2 - 1) (27 * ((x)[@env0 ]))",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env2 ])",
+              "envs": {
+                "env2": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env0 ]) (2 - 1) (27 * 3)",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env1 ])",
+              "envs": {
+                "env1": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env0 ]) (2 - 1) 81",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env1 ])",
+              "envs": {
+                "env1": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env0 ]) 1 81",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env1 ])",
+              "envs": {
+                "env1": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env0 ]))\n  [@env1 ]) 1 81",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env2 ])",
+              "envs": {
+                "env2": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun n -> ((fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env0 ]))\n   [@env1 ])) 1 81",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env2 ])",
+              "envs": {
+                "env2": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun n ->\n   fun r -> ((if n = 0 then r else ((loop (n - 1) (r * x))[@env0 ]))[@env1 ]))\n  1 81",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env2 ])",
+              "envs": {
+                "env2": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun n ->\n   fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env1 ][@env0 ])) 1\n  81",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env2 ])",
+              "envs": {
+                "env2": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((if n = 0 then r else ((loop (n - 1) (r * x))[@env1 ][@env0 ]))[@env2 ])",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env3 ])",
+              "envs": {
+                "env3": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        },
+        "env2": {
+          "r": { "corec": [], "expr": { "expr": "81", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "1", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "if ((n = 0)[@env4 ])\nthen ((r)[@env3 ])\nelse ((loop (n - 1) (r * x))[@env2 ][@env1 ][@env0 ])",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env5 ])",
+              "envs": {
+                "env5": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        },
+        "env2": {
+          "r": { "corec": [], "expr": { "expr": "81", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "1", "envs": {} } }
+        },
+        "env3": {
+          "r": { "corec": [], "expr": { "expr": "81", "envs": {} } }
+        },
+        "env4": { "n": { "corec": [], "expr": { "expr": "1", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "if ((n)[@env4 ]) = 0\nthen ((r)[@env3 ])\nelse ((loop (n - 1) (r * x))[@env2 ][@env1 ][@env0 ])",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env5 ])",
+              "envs": {
+                "env5": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        },
+        "env2": {
+          "r": { "corec": [], "expr": { "expr": "81", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "1", "envs": {} } }
+        },
+        "env3": {
+          "r": { "corec": [], "expr": { "expr": "81", "envs": {} } }
+        },
+        "env4": { "n": { "corec": [], "expr": { "expr": "1", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "if 1 = 0\nthen ((r)[@env3 ])\nelse ((loop (n - 1) (r * x))[@env2 ][@env1 ][@env0 ])",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env4 ])",
+              "envs": {
+                "env4": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        },
+        "env2": {
+          "r": { "corec": [], "expr": { "expr": "81", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "1", "envs": {} } }
+        },
+        "env3": {
+          "r": { "corec": [], "expr": { "expr": "81", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "if false\nthen ((r)[@env3 ])\nelse ((loop (n - 1) (r * x))[@env2 ][@env1 ][@env0 ])",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env4 ])",
+              "envs": {
+                "env4": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        },
+        "env2": {
+          "r": { "corec": [], "expr": { "expr": "81", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "1", "envs": {} } }
+        },
+        "env3": {
+          "r": { "corec": [], "expr": { "expr": "81", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "If" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop (n - 1) (r * x))[@env2 ][@env1 ][@env0 ])",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env3 ])",
+              "envs": {
+                "env3": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        },
+        "env2": {
+          "r": { "corec": [], "expr": { "expr": "81", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "1", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "SubstCombine" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop (n - 1) (r * x))[@env1 ][@env0 ])",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "r": { "corec": [], "expr": { "expr": "81", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "1", "envs": {} } },
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env2 ])",
+              "envs": {
+                "env2": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstCombine" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop (n - 1) (r * x))[@env0 ])",
+      "envs": {
+        "env0": {
+          "x": { "corec": [], "expr": { "expr": "3", "envs": {} } },
+          "r": { "corec": [], "expr": { "expr": "81", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "1", "envs": {} } },
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env1 ])",
+              "envs": {
+                "env1": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env2 ]) ((n - 1)[@env0 ]) ((r * x)[@env1 ])",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "1", "envs": {} } } },
+        "env1": {
+          "x": { "corec": [], "expr": { "expr": "3", "envs": {} } },
+          "r": { "corec": [], "expr": { "expr": "81", "envs": {} } }
+        },
+        "env2": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env3 ])",
+              "envs": {
+                "env3": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env2 ]) (((n)[@env0 ]) - 1) ((r * x)[@env1 ])",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "1", "envs": {} } } },
+        "env1": {
+          "x": { "corec": [], "expr": { "expr": "3", "envs": {} } },
+          "r": { "corec": [], "expr": { "expr": "81", "envs": {} } }
+        },
+        "env2": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env3 ])",
+              "envs": {
+                "env3": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((loop)[@env3 ]) (((n)[@env0 ]) - 1) (((r)[@env1 ]) * ((x)[@env2 ]))",
+      "envs": {
+        "env0": { "n": { "corec": [], "expr": { "expr": "1", "envs": {} } } },
+        "env1": {
+          "r": { "corec": [], "expr": { "expr": "81", "envs": {} } }
+        },
+        "env2": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env3": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env4 ])",
+              "envs": {
+                "env4": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env2 ]) (1 - 1) (((r)[@env0 ]) * ((x)[@env1 ]))",
+      "envs": {
+        "env0": {
+          "r": { "corec": [], "expr": { "expr": "81", "envs": {} } }
+        },
+        "env1": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env2": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env3 ])",
+              "envs": {
+                "env3": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env1 ]) (1 - 1) (81 * ((x)[@env0 ]))",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env2 ])",
+              "envs": {
+                "env2": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env0 ]) (1 - 1) (81 * 3)",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env1 ])",
+              "envs": {
+                "env1": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env0 ]) (1 - 1) 243",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env1 ])",
+              "envs": {
+                "env1": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((loop)[@env0 ]) 0 243",
+      "envs": {
+        "env0": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env1 ])",
+              "envs": {
+                "env1": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "SubstFun" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env0 ]))\n  [@env1 ]) 0 243",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env2 ])",
+              "envs": {
+                "env2": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun n -> ((fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env0 ]))\n   [@env1 ])) 0 243",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env2 ])",
+              "envs": {
+                "env2": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun n ->\n   fun r -> ((if n = 0 then r else ((loop (n - 1) (r * x))[@env0 ]))[@env1 ]))\n  0 243",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env2 ])",
+              "envs": {
+                "env2": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "(fun n ->\n   fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env1 ][@env0 ])) 0\n  243",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env2 ])",
+              "envs": {
+                "env2": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "step": [ "ApplyFunComplete" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "((if n = 0 then r else ((loop (n - 1) (r * x))[@env1 ][@env0 ]))[@env2 ])",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env3 ])",
+              "envs": {
+                "env3": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        },
+        "env2": {
+          "r": { "corec": [], "expr": { "expr": "243", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "if ((n = 0)[@env4 ])\nthen ((r)[@env3 ])\nelse ((loop (n - 1) (r * x))[@env2 ][@env1 ][@env0 ])",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env5 ])",
+              "envs": {
+                "env5": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        },
+        "env2": {
+          "r": { "corec": [], "expr": { "expr": "243", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        },
+        "env3": {
+          "r": { "corec": [], "expr": { "expr": "243", "envs": {} } }
+        },
+        "env4": { "n": { "corec": [], "expr": { "expr": "0", "envs": {} } } }
+      }
+    },
+    "step": [ "MoveDownSubst" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "if ((n)[@env4 ]) = 0\nthen ((r)[@env3 ])\nelse ((loop (n - 1) (r * x))[@env2 ][@env1 ][@env0 ])",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env5 ])",
+              "envs": {
+                "env5": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        },
+        "env2": {
+          "r": { "corec": [], "expr": { "expr": "243", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        },
+        "env3": {
+          "r": { "corec": [], "expr": { "expr": "243", "envs": {} } }
+        },
+        "env4": { "n": { "corec": [], "expr": { "expr": "0", "envs": {} } } }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "if 0 = 0\nthen ((r)[@env3 ])\nelse ((loop (n - 1) (r * x))[@env2 ][@env1 ][@env0 ])",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env4 ])",
+              "envs": {
+                "env4": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        },
+        "env2": {
+          "r": { "corec": [], "expr": { "expr": "243", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        },
+        "env3": {
+          "r": { "corec": [], "expr": { "expr": "243", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "ApplyFunRuntime" ]
+  },
+  {
+    "current_expression": {
+      "expr":
+        "if true\nthen ((r)[@env3 ])\nelse ((loop (n - 1) (r * x))[@env2 ][@env1 ][@env0 ])",
+      "envs": {
+        "env0": { "x": { "corec": [], "expr": { "expr": "3", "envs": {} } } },
+        "env1": {
+          "loop": {
+            "corec": [ "loop" ],
+            "expr": {
+              "expr":
+                "fun n -> fun r -> if n = 0 then r else ((loop (n - 1) (r * x))[@env4 ])",
+              "envs": {
+                "env4": {
+                  "x": { "corec": [], "expr": { "expr": "3", "envs": {} } }
+                }
+              }
+            }
+          }
+        },
+        "env2": {
+          "r": { "corec": [], "expr": { "expr": "243", "envs": {} } },
+          "n": { "corec": [], "expr": { "expr": "0", "envs": {} } }
+        },
+        "env3": {
+          "r": { "corec": [], "expr": { "expr": "243", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "If" ]
+  },
+  {
+    "current_expression": {
+      "expr": "((r)[@env0 ])",
+      "envs": {
+        "env0": {
+          "r": { "corec": [], "expr": { "expr": "243", "envs": {} } }
+        }
+      }
+    },
+    "step": [ "SubstVar" ]
+  },
+  { "current_expression": { "expr": "243", "envs": {} }, "step": [] }
+]
