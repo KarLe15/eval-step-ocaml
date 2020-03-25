@@ -21,7 +21,7 @@ export class MainPageComponent implements OnInit {
   private expressions: IEvaluation;
 
   private options: Map<string, IOption>;
-  private listeOptionsAffichage = ["liste", "arbre"];
+  private listeOptionsAffichage = ['liste', 'arbre'];
   optionChoisi = this.listeOptionsAffichage[0];
 
   constructor(private evaluator: EvalService, private OptService: OptionsService) { }

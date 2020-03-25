@@ -10,7 +10,7 @@ export class OptionsService {
   }
 
   public getOptions(){
-    let mapOptions = new Map<string, IOption>();
+    const mapOptions = new Map<string, IOption>();
     mapOptions.set('MoveDownSubst', {name: 'MoveDownSubst', index: 0, valueDefault: true});
     mapOptions.set('SubstCombine', {name: 'SubstCombine', index: 1, valueDefault: true});
     mapOptions.set('SubstVar', {name: 'SubstVar', index: 2, valueDefault: true});

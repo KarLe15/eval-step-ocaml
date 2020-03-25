@@ -1,8 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import IEvaluation from '../../structures/IEvaluation';
-import {Observable, Subscription} from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import IStep from '../../structures/IStep';
-import {EvalService} from '../../services/eval.service';
+import { EvalService } from '../../services/eval.service';
 import IOption from '../../structures/IOption';
 
 @Component({
@@ -26,12 +26,13 @@ export class ResultComponent implements OnInit {
 
 
   ngOnInit() {
-    console.log(this.options);
+    // console.log(this.options);
     this.eventsSubscription = this.events.subscribe(() => this.initStep());
   }
 
   private initStep() {
     this.currentStep = this.evalService.getFirstStep(this.expressions);
+    // console.log('init_step', this.currentStep);
     this.listeEtape.push(this.currentStep);
     console.log('init', this.currentStep );
   }
@@ -43,7 +44,7 @@ export class ResultComponent implements OnInit {
 
   onNext() {
     let expr = this.currentStep;
-    while(this.options.get(expr.nexts[0].name).valueDefault != true){
+    while (this.options.get(expr.nexts[0].name).valueDefault !== true){
       if (expr.nexts !== null) {
         expr = expr.nexts[0].step;
       }

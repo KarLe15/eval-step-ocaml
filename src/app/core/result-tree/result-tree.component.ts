@@ -23,6 +23,6 @@ export class ResultTreeComponent implements OnInit {
       second_best: '{...}',
       top: '{...}',
       value: '{...}'
-    }
+    };
   }
 }

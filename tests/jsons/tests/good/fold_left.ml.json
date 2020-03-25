@@ -139,7 +139,7 @@
             "corec": [ "append" ],
             "expr": {
               "expr":
-                "fun l1 -> fun l2 -> match l1 with | p::q -> p :: (append q l2) | [] -> l2",
+                "fun l1 -> fun l2 -> match l1{...} with | p::q -> p :: (append q l2) | [] -> l2",
               "envs": {}
             }
           }

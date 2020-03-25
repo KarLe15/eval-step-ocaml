@@ -10,8 +10,6 @@ export class ResultListeComponent implements OnInit {
   @Input('currentStep') currentStep: IStep;
 
   response: HighlightResult;
-  
-
   constructor() { }
 
 
@@ -25,7 +23,7 @@ export class ResultListeComponent implements OnInit {
       second_best: '{...}',
       top: '{...}',
       value: '{...}'
-    }
+    };
   }
 
 }

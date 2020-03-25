@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Test Eval Step</title>
+  <script src="./eval_step.js"></script>
+  <script>
+    var funs = "let fact n =\n" +
+		"  let rec loop n acc =\n" +
+		"    if n = 0 then acc\n" +
+		"    else loop (n-1) (n * acc)\n" +
+		"  in\n" +
+		"  loop n 1\n";
+
+
+    function eval(value){
+	      var res = get_evaluation_steps(funs + "\n\nlet _ = " + value);
+        // console.log(res);
+        return JSON.parse(res);
+    }
+  </script>
+</head>
+<body>
+
+</body>
+</html>
