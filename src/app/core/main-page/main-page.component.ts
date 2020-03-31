@@ -14,10 +14,9 @@ import {OptionsService} from '../../services/options.service';
 })
 export class MainPageComponent implements OnInit {
   private defFun: string;
-  evaluate = false;
   private defMain: string;
-  private data: string;
-  private eventSubject: Subject<void> = new Subject<void>();
+  evaluate = false;
+  private eventSubject: Subject<IEvaluation> = new Subject<IEvaluation>();
   private expressions: IEvaluation;
 
   private options: Map<string, IOption>;
@@ -29,10 +28,11 @@ export class MainPageComponent implements OnInit {
     this.options = this.OptService.getOptions();
   }
 
-  onClick() {
+  onClick_evaluate() {
     const expression = this.defFun + '\n\nlet _ = ' + this.defMain;
     this.expressions = this.evaluator.getDataStructure(expression, this.defMain);
-    this.emitEventToChild();
+    console.log('main component is sending events to result component', this.expressions);
+    this.emitEventToChild(this.expressions);
     this.evaluate = true;
   }
 
@@ -48,8 +48,8 @@ export class MainPageComponent implements OnInit {
     this.options = eventArgs;
   }
 
-  emitEventToChild() {
-    this.eventSubject.next();
+  emitEventToChild(express: IEvaluation) {
+    this.eventSubject.next(express);
   }
 
   /* ---------- Changment de l'option d'affichage ------------------*/

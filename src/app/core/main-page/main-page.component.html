@@ -1,45 +1,60 @@
 <div class="container-fluid mb-5" >
   <div class="row mr-0">
     <div class="col-md-9">
-      <app-editor (changeFun)="onChangeFun($event)" (changeMain)="onChangeMain($event)" ></app-editor>
+      <app-editor
+        (changeFun)="onChangeFun($event)"
+        (changeMain)="onChangeMain($event)"
+      ></app-editor>
+      <div class="d-flex justify-content-between mb-4">
+        <div class="buttonEval">
+          <button
+            (mouseup)="onClick_evaluate()"
+            type="button"
+            [ngx-scroll-to]="'#destination'"
+            class="btn btn-outline-primary waves-effect mt-4 d-flex align-items-center rounded-pill"
+          >
+            <i class="fi flaticon-analyze"></i>
+            <span class="lead">Evaluer</span>
+          </button>
+        </div>
 
-        <div class="d-flex justify-content-between mb-4">
-          <div class="buttonEval">
-            <button
-              (mouseup)="onClick()"
-              type="button"
-              [ngx-scroll-to]="'#destination'"
-              class="btn btn-outline-primary waves-effect mt-4 d-flex align-items-center rounded-pill"
-            >
-              <i class="fi flaticon-analyze"></i>
-              <span class="lead">Evaluer</span>
-            </button>
-          </div>
-
-          <div class="btn-group">
-            <span class="text-option">Type d'affichage </span>
-            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                    aria-expanded="false">
-              <span class="btnOption">{{optionChoisi}}</span>
-            </button>
-            <div class="dropdown-menu dropdown-menu-right">
-              <div *ngFor="let item of listeOptionsAffichage">
-                <button class="dropdown-item" (click)="onChoisi(item)" type="button">{{item}}</button>
-              </div>
+        <div class="btn-group">
+          <span class="text-option">Type d'affichage </span>
+          <button
+            type="button"
+            class="btn btn-primary dropdown-toggle"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <span class="btnOption">{{optionChoisi}}</span>
+          </button>
+          <div class="dropdown-menu dropdown-menu-right">
+            <div *ngFor="let item of listeOptionsAffichage">
+              <button
+                class="dropdown-item"
+                (click)="onChoisi(item)"
+                type="button"
+              >{{item}}</button>
             </div>
           </div>
-
-
+        </div>
       </div>
     </div>
     <div class="col-md-3">
-      <app-options [options]="options" (changeOptions)="recuperateOption($event)" ></app-options>
+      <app-options
+        [options]="options"
+        (changeOptions)="recuperateOption($event)"
+      ></app-options>
     </div>
   </div>
 
-  <div *ngIf="evaluate"  class="row mt-2 mr-4 ml-4 border-top">
+  <div class="row mt-2 mr-4 ml-4 border-top">
     <div class="col-12" id="destination" #destinationRef>
-      <app-result [events]="eventSubject.asObservable()" [expressions]="expressions" [options]="options" [typeAffichage]="optionChoisi"></app-result>
+      <app-result
+        [events]="eventSubject.asObservable()"
+        [typeAffichage]="optionChoisi"
+      ></app-result>
     </div>
   </div>
 

@@ -6,10 +6,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class ReplaceNPipe implements PipeTransform {
 
   transform(value: string): string {
-    console.log(value);
+    // console.log(value);
     if (value) {
-      let newValue = value.replace(/@env*]/g, " ");
-      console.log(newValue);
+      // const newValue = value.replace(/@env*]/g, ' ');
+      const newValue = value;
+      // console.log(newValue);
       return `${newValue}`;
     }
   }

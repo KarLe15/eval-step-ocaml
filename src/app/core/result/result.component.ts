@@ -11,11 +11,11 @@ import IOption from '../../structures/IOption';
   styleUrls: ['./result.component.scss']
 })
 export class ResultComponent implements OnInit {
-  @Input('expressions') expressions: IEvaluation;
-  @Input('events') events: Observable<void>;
-  @Input('options') options: Map<string, IOption>;
+  @Input('events') events: Observable<IEvaluation>;
   @Input('typeAffichage') type: string;
 
+  private shouldDisplay: boolean;
+  private expressions: IEvaluation;
   private eventsSubscription: Subscription;
   private currentStep: IStep;
   etape = 0;
@@ -26,15 +26,15 @@ export class ResultComponent implements OnInit {
 
 
   ngOnInit() {
-    // console.log(this.options);
-    this.eventsSubscription = this.events.subscribe(() => this.initStep());
+    this.shouldDisplay = false;
+    this.eventsSubscription = this.events.subscribe((expressions) => this.initStep(expressions));
   }
 
-  private initStep() {
+  private initStep(expressions: IEvaluation) {
+    this.shouldDisplay = true;
+    this.expressions = expressions;
     this.currentStep = this.evalService.getFirstStep(this.expressions);
-    // console.log('init_step', this.currentStep);
     this.listeEtape.push(this.currentStep);
-    console.log('init', this.currentStep );
   }
 
   onPrevious() {
@@ -43,12 +43,12 @@ export class ResultComponent implements OnInit {
   }
 
   onNext() {
-    let expr = this.currentStep;
-    while (this.options.get(expr.nexts[0].name).valueDefault !== true){
-      if (expr.nexts !== null) {
-        expr = expr.nexts[0].step;
-      }
-    }
+    const expr = this.currentStep;
+    // while (this.options.get(expr.nexts[0].name).valueDefault !== true){
+    //   if (expr.nexts !== null) {
+    //     expr = expr.nexts[0].step;
+    //   }
+    // }
     this.currentStep = this.evalService.getNextStep(expr);
     this.listeEtape.push(this.currentStep);
     this.etape++;
