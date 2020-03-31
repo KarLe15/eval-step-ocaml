@@ -11,18 +11,19 @@ export class ResultListeComponent implements OnInit {
 
   response: HighlightResult;
   constructor() { }
-
-
   ngOnInit() {
   }
 
   onHighlight(e) {
+    // console.log('highlight', e);
     this.response = {
-      language: e.language,
+      language: 'ocaml',
+      // language: e.language,
       relevance: e.relevance,
       second_best: '{...}',
       top: '{...}',
-      value: '{...}'
+      value: e.value
+      // value: '{...}'
     };
   }
 

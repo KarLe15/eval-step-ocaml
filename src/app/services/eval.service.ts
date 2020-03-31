@@ -4,6 +4,7 @@ import IStep from '../structures/IStep';
 import {IEnvironment} from '../structures/IEnvironement';
 import IExpression from '../structures/IExpression';
 import IRange from '../structures/IRange';
+import IOption from '../structures/IOption';
 
 interface GlobalOptions {
   get_range: () => boolean;
@@ -110,7 +111,6 @@ export class EvalService {
     const range  = splits[2].match(regex);
     const start  = parseInt(range[0], 10);
     const end    = parseInt(range[1], 10);
-    console.log('lines ', start);
     return {
       line,
       start,
@@ -168,6 +168,9 @@ export class EvalService {
   public getDataStructure(expression: string, firstExpression: string): IEvaluation {
       const evals = get_evaluation_steps(expression);
       return this.parseJSONToIEvaluation(evals, firstExpression);
+  }
+  public getEvaluationsWithFilter(expressions: IEvaluation, options: Array<IOption>): IEvaluation{
+    return expressions;
   }
   // =======================================================================
   //

@@ -18,6 +18,7 @@ export class MainPageComponent implements OnInit {
   evaluate = false;
   private eventSubject: Subject<IEvaluation> = new Subject<IEvaluation>();
   private expressions: IEvaluation;
+  private filtredExpressions: IEvaluation;
 
   private options: Map<string, IOption>;
   private listeOptionsAffichage = ['liste', 'arbre'];
@@ -31,8 +32,9 @@ export class MainPageComponent implements OnInit {
   onClick_evaluate() {
     const expression = this.defFun + '\n\nlet _ = ' + this.defMain;
     this.expressions = this.evaluator.getDataStructure(expression, this.defMain);
-    console.log('main component is sending events to result component', this.expressions);
-    this.emitEventToChild(this.expressions);
+    const options = [];
+    this.filtredExpressions = this.evaluator.getEvaluationsWithFilter(this.expressions, options);
+    this.emitEventToChild(this.filtredExpressions);
     this.evaluate = true;
   }
 

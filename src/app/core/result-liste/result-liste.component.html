@@ -12,12 +12,15 @@
           </div>
           <div class="card-text result" >
             <pre>
-                <code  [highlight]="currentStep.currentExpression.toString | replaceN" (highlighted)="onHighlight($event)" [lineNumbers]="false "></code>
+                <code  
+                  [highlight]="currentStep.currentExpression.toString | replaceN"
+                  (highlighted)="onHighlight($event)"
+                  [lineNumbers]="false"
+                ></code>
             </pre>
           </div>
         </div>
       </div>
-
     </div>
 
     <!-- Environnement -->
