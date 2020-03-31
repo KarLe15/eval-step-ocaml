@@ -22,6 +22,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.lazyLoadService.loadScript('/assets/js/eval_step.js').subscribe(_ => {
       console.log('eval_step loaded!');
+      this.evalStep.setupOptions();
       this.isLoaded = true;
     });
     // console.log(this.evalStep.getDataStructure());

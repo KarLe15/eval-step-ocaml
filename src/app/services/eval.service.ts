@@ -1,22 +1,29 @@
 import { Injectable } from '@angular/core';
-import {first} from 'rxjs/operators';
 import IEvaluation from '../structures/IEvaluation';
 import IStep from '../structures/IStep';
 import {IEnvironment} from '../structures/IEnvironement';
 import IExpression from '../structures/IExpression';
+import IRange from '../structures/IRange';
 
+interface GlobalOptions {
+  get_range: () => boolean;
+  set_range: (value: boolean) => void;
+}
 
-declare var get_evaluation_steps: any;
+declare var get_evaluation_steps: (expression: string) => string;
+declare var global_options: GlobalOptions;
+declare var reload_libraries: (pervasives: any, otherlibraries: any) => any;
 
 @Injectable({
   providedIn: 'root'
 })
 export class EvalService {
 
-  constructor() { }
+  constructor() {}
   // =======================================================================
   //
   // =======================================================================
+  // TODO :: Add get range for subenvironment
   private getSubEnvironementsfromJson(expr: any): IExpression {
     const toString: string = expr.expr.expr;
     let environements = null;
@@ -64,6 +71,7 @@ export class EvalService {
       const res: Array<IEnvironment> = [];
       // tslint:disable-next-line:prefer-for-of
       for (let i = 0; i < keysIndex.length; i++) {
+        const range: IRange | null = this.getRangeFromEnvironementJSON(keysIndex[i]);
         const env = context[keysIndex[i]];
         const keysEnv = Object.keys(env);
         const itemsEnv = [];
@@ -78,7 +86,8 @@ export class EvalService {
           itemsEnv.push({
             corec,
             name: keysEnv[i],
-            expr
+            expr,
+            range
           });
         }
         res.push({
@@ -89,6 +98,24 @@ export class EvalService {
       return res;
     }
     return null;
+  }
+
+  private getRangeFromEnvironementJSON(s: string): IRange | null {
+    if (!s.includes('File') || !s.includes('line') || !s.includes('characters')) {
+      return null;
+    }
+    const regex  = /[0-9]+/g;
+    const splits = s.split(',');
+    const line   = parseInt(splits[1].substr(splits[1].length - 1), 10);
+    const range  = splits[2].match(regex);
+    const start  = parseInt(range[0], 10);
+    const end    = parseInt(range[1], 10);
+    console.log('lines ', start);
+    return {
+      line,
+      start,
+      end
+    };
   }
   // =======================================================================
   //
@@ -134,14 +161,6 @@ export class EvalService {
       firstStep
     };
   }
-  // temporary function
-  private jsonToIEvaluation(content, firstExpression: string): IEvaluation {
-    const firstStep = this.getStepFromJSONStep(content.default, 0, null);
-    return {
-      firstExpression,
-      firstStep
-    };
-  }
 
   /**
    * Public function available for this service
@@ -164,6 +183,7 @@ export class EvalService {
     if (current.nexts !== null) {
       next = current.nexts[0].step;
     }
+    // console.log(next);
     return next;
   }
   // =======================================================================
@@ -171,5 +191,8 @@ export class EvalService {
   // =======================================================================
   public getPreviousStep(current: IStep): IStep | null {
     return current.previous;
+  }
+  public setupOptions() {
+    global_options.set_range(true);
   }
 }
