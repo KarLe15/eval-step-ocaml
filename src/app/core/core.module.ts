@@ -18,6 +18,8 @@ import {HIGHLIGHT_OPTIONS, HighlightModule, HighlightOptions} from 'ngx-highligh
 import { ResultTreeComponent } from './result-tree/result-tree.component';
 import { SharedModule } from '../shared/shared.module';
 import { ResultListeComponent } from './result-liste/result-liste.component';
+import {GetAssetsFilesService} from '../services/get-assets-files.service';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 
 
 
@@ -48,9 +50,11 @@ import { ResultListeComponent } from './result-liste/result-liste.component';
     UiSwitchModule,
     HighlightModule,
     SharedModule,
+    HttpClientModule
   ],
   providers: [
     EvalService,
+    GetAssetsFilesService,
     ReplaceNPipe,
     {
       provide: HIGHLIGHT_OPTIONS,

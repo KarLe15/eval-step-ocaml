@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {EvalService} from './services/eval.service';
 import {LazyLoadScriptService} from './services/lazy-load-script.service';
+import {GetAssetsFilesService} from './services/get-assets-files.service';
 
 @Component({
   selector: 'app-root',

@@ -4,6 +4,7 @@ import IEvaluation from '../../structures/IEvaluation';
 import {Subject} from 'rxjs';
 import IOption from '../../structures/IOption';
 import {OptionsService} from '../../services/options.service';
+import {GetAssetsFilesService} from '../../services/get-assets-files.service';
 
 
 
@@ -24,9 +25,14 @@ export class MainPageComponent implements OnInit {
   private listeOptionsAffichage = ['liste', 'arbre'];
   optionChoisi = this.listeOptionsAffichage[0];
 
-  constructor(private evaluator: EvalService, private OptService: OptionsService) { }
+  constructor(
+    private evaluator: EvalService,
+    private OptService: OptionsService,
+    private filesService: GetAssetsFilesService
+  ) { }
   ngOnInit() {
     this.options = this.OptService.getOptions();
+    this.filesService.getAllSampleFiles();
   }
 
   onClick_evaluate() {
