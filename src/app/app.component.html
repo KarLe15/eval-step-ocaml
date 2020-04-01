@@ -1,9 +1,11 @@
 <!--<particles [style]="myStyle" [width]="width" [height]="height" [params]="myParams"></particles>-->
 <div *ngIf="isLoaded">
-  <app-nav-bar></app-nav-bar>
+  <app-nav-bar [filesObservable]="filesSubject.asObservable()"></app-nav-bar>
 
   <router-outlet></router-outlet>
 
   <app-footer></app-footer>
 </div>
-<ng-template #elseBlock>Loading eval_step</ng-template>
+<ng-template #elseBlock>
+  <h1>Loading eval_step</h1>
+</ng-template>

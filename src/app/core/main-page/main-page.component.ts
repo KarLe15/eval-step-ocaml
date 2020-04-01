@@ -32,7 +32,6 @@ export class MainPageComponent implements OnInit {
   ) { }
   ngOnInit() {
     this.options = this.OptService.getOptions();
-    this.filesService.getAllSampleFiles();
   }
 
   onClick_evaluate() {

@@ -203,16 +203,32 @@ export class EvalService {
   //                      Libraries functions
   // =======================================================================
   public setupOptions() {
-    this.getFilesService.getPervasive().then(pervasive => {
-        this.getFilesService.getList().then(listCode => {
-          reload_libraries(pervasive, [['list', listCode]]);
-          console.log('pervasive', pervasive);
-          console.log('liste ', listCode.length);
-          console.log('libraries are loaded');
-          this.isLibrariesLoaded.next(true);
-        });
-    });
     global_options.set_range(true);
+  }
+  public loadLibraries() {
+    this.getFilesService.getFile('assets/libs/contents.json').then(contents => {
+      const libsCharged: Array<[string, string]> = [];
+      const contentJSON: Array<{name: string, file: string}> = JSON.parse(contents); // ugly must change
+      const libCount  = contentJSON.length;
+      let libChargedCount = 0;
+      let pervasive = '';
+      for (let i = 0; i < libCount; i++) {
+        const filePath = 'assets/libs/' + contentJSON[i].file;
+        const name     = contentJSON[i].name;
+        this.getFilesService.getFile(filePath).then(contentFile => {
+          if (name === 'pervasives') {
+            pervasive = contentFile;
+          } else {
+            libsCharged.push([name, contentFile]);
+          }
+          libChargedCount++;
+          if (libChargedCount === libCount) {
+            reload_libraries(pervasive, libsCharged);
+            this.isLibrariesLoaded.next(true);
+          }
+        });
+      }
+    });
   }
   public getIsLoadedLibraries(): Observable<boolean> {
     return this.isLibrariesLoaded.asObservable();
