@@ -1,4 +1,4 @@
 [
-  {"name": "list", "file": "list.ml"},
-  {"name": "pervasives", "file": "pervasives.ml"}
+  {"name": "list", "path": "list.ml"},
+  {"name": "pervasives", "path": "pervasives.ml"}
 ]

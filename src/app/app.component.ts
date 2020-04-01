@@ -3,6 +3,7 @@ import {BehaviorSubject, ReplaySubject, Subject} from 'rxjs';
 import {EvalService} from './services/eval.service';
 import {LazyLoadScriptService} from './services/lazy-load-script.service';
 import {GetAssetsFilesService} from './services/get-assets-files.service';
+import {Strategy, StrategyFactory} from './structures/Strategy';
 
 
 interface ISampleFile {
@@ -24,8 +25,7 @@ export class AppComponent implements OnInit {
   title = 'evalStep';
   isLoaded = false;
   cptLoading = 0;
-
-  private filesSubject: ReplaySubject<Array<ISampleFile>> = new ReplaySubject<Array<ISampleFile>>();
+  private filesSubject      = new ReplaySubject<Array<ISampleFile>>();
   constructor(
     private evalStep: EvalService,
     private lazyLoadService: LazyLoadScriptService,
@@ -49,7 +49,6 @@ export class AppComponent implements OnInit {
       this.evalStep.loadLibraries();
     });
   }
-
   private getAllSampleFiles() {
     this.getAssetsFile.getFile('assets/codeSample/contents.json').then(contentsT => {
       const res: Array<ISampleFile> = [];

@@ -1,7 +1,9 @@
-import { NgModule } from '@angular/core';
+import {Input, NgModule} from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {MainPageComponent} from './core/main-page/main-page.component';
 import {NotFoundPageComponent} from './shared/not-found-page/not-found-page.component';
+import {Observable} from 'rxjs';
+import {Strategy} from './structures/Strategy';
 
 
 const routes: Routes = [
@@ -16,4 +18,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
