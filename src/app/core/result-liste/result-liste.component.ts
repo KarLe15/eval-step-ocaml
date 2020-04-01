@@ -8,6 +8,7 @@ import IStep from '../../structures/IStep';
 })
 export class ResultListeComponent implements OnInit {
   @Input('currentStep') currentStep: IStep;
+  @Input('etape') etape: number;
 
   response: HighlightResult;
   constructor() { }

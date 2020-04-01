@@ -52,6 +52,7 @@ export class ResultComponent implements OnInit {
     this.currentStep = this.evalService.getNextStep(expr);
     this.listeEtape.push(this.currentStep);
     this.etape++;
+    console.log(this.currentStep);
   }
 
 

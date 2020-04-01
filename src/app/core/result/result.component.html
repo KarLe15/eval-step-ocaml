@@ -1,6 +1,6 @@
 <div *ngIf="shouldDisplay" class="container-fluid mt-5">
   <div *ngIf="type == 'liste'">
-    <app-result-liste [currentStep]="currentStep"></app-result-liste>
+    <app-result-liste [currentStep]="currentStep" [etape] = "etape"></app-result-liste>
   </div>
 
   <div *ngIf="type == 'arbre'">

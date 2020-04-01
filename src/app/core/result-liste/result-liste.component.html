@@ -12,8 +12,8 @@
           </div>
           <div class="card-text result" >
             <pre>
-                <code  
-                  [highlight]="currentStep.currentExpression.toString | replaceN"
+                <code
+                  [highlight]="currentStep.currentExpression.toString "
                   (highlighted)="onHighlight($event)"
                   [lineNumbers]="false"
                 ></code>
@@ -31,7 +31,17 @@
             <h5 class="card-title">Environement</h5>
             <i class="fi flaticon-technical-support symbol"></i>
           </div>
-          <p class="card-text text-env">{{currentStep.currentExpression.environements.toString() | json }}</p>
+          <div class="jumbotron jumbotron-fluid card-text ">
+            <div class="container">
+              <div class="text-env">{{currentStep.currentExpression.environements[0].items[0].name}}</div>
+              <div *ngIf="currentStep.currentExpression.environements[0].items[0].corec == null">
+                <p class="lead"> Value = {{currentStep.currentExpression.environements[0].items[0].expr.toString}}</p>
+              </div>
+              <div *ngIf="currentStep.currentExpression.environements[0].items[0].corec != null">
+                <p class="lead"> {{currentStep.currentExpression.environements[0].items[0].expr.toString}}</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
