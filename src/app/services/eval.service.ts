@@ -5,6 +5,8 @@ import {IEnvironment} from '../structures/IEnvironement';
 import IExpression from '../structures/IExpression';
 import IRange from '../structures/IRange';
 import IOption from '../structures/IOption';
+import { GetAssetsFilesService } from './get-assets-files.service';
+import {Observable, Subject} from 'rxjs';
 
 interface GlobalOptions {
   get_range: () => boolean;
@@ -13,14 +15,15 @@ interface GlobalOptions {
 
 declare var get_evaluation_steps: (expression: string) => string;
 declare var global_options: GlobalOptions;
-declare var reload_libraries: (pervasives: any, otherlibraries: any) => any;
+declare var reload_libraries: (pervasives: string, otherlibraries: Array<[string, string]>) => void;
 
 @Injectable({
   providedIn: 'root'
 })
 export class EvalService {
 
-  constructor() {}
+  isLibrariesLoaded: Subject<boolean> = new Subject<boolean>();
+  constructor(private getFilesService: GetAssetsFilesService) {}
   // =======================================================================
   //
   // =======================================================================
@@ -169,7 +172,7 @@ export class EvalService {
       const evals = get_evaluation_steps(expression);
       return this.parseJSONToIEvaluation(evals, firstExpression);
   }
-  public getEvaluationsWithFilter(expressions: IEvaluation, options: Array<IOption>): IEvaluation{
+  public getEvaluationsWithFilter(expressions: IEvaluation, options: Array<IOption>): IEvaluation {
     return expressions;
   }
   // =======================================================================
@@ -196,7 +199,22 @@ export class EvalService {
   public getPreviousStep(current: IStep): IStep | null {
     return current.previous;
   }
+  // =======================================================================
+  //                      Libraries functions
+  // =======================================================================
   public setupOptions() {
+    this.getFilesService.getPervasive().then(pervasive => {
+        this.getFilesService.getList().then(listCode => {
+          reload_libraries(pervasive, [['list', listCode]]);
+          console.log('pervasive', pervasive);
+          console.log('liste ', listCode.length);
+          console.log('libraries are loaded');
+          this.isLibrariesLoaded.next(true);
+        });
+    });
     global_options.set_range(true);
+  }
+  public getIsLoadedLibraries(): Observable<boolean> {
+    return this.isLibrariesLoaded.asObservable();
   }
 }

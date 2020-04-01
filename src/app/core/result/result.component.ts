@@ -49,10 +49,13 @@ export class ResultComponent implements OnInit {
     //     expr = expr.nexts[0].step;
     //   }
     // }
-    this.currentStep = this.evalService.getNextStep(expr);
-    this.listeEtape.push(this.currentStep);
-    this.etape++;
-    console.log(this.currentStep);
+    const temp = this.evalService.getNextStep(expr);
+    if (temp != null) {
+      this.currentStep = temp;
+      this.listeEtape.push(this.currentStep);
+      this.etape++;
+    }
+    // console.log(this.currentStep);
   }
 
 
