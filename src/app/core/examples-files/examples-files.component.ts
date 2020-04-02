@@ -18,12 +18,12 @@ export class ExamplesFilesComponent implements OnInit {
   canNavigateUp = false;
 
   ngOnInit() {
-    const folder1 = this.fileService.add({ name: 'Cours 1', isFolder: true, parent: 'root' });
-    const folder2 = this.fileService.add({ name: 'Cours 2', isFolder: true, parent: 'root' });
-    this.fileService.add({ name: 'loop.ml', isFolder: false, parent: folder1.id });
-    this.fileService.add({ name: 'or.ml', isFolder: false, parent: folder1.id });
-    this.fileService.add({ name: 'fact.ml', isFolder: false, parent: folder2.id });
-    this.fileService.add({ name: 'and.ml', isFolder: false, parent: 'root' });
+    const folder1 = this.fileService.add({content: '', path: '', name: 'Cours 1', isFolder: true, parent: 'root', id: '1' });
+    const folder2 = this.fileService.add({content: '', path: '', name: 'Cours 2', isFolder: true, parent: 'root', id: '2' });
+    this.fileService.add({content: '', path: '', name: 'loop.ml', isFolder: false, parent: folder1.id,  id: '3' });
+    this.fileService.add({content: '', path: '', name: 'or.ml', isFolder: false, parent: folder1.id,  id: '4' });
+    this.fileService.add({content: '', path: '', name: 'fact.ml', isFolder: false, parent: folder2.id,  id: '5' });
+    this.fileService.add({content: '', path: '', name: 'and.ml', isFolder: false, parent: 'root',  id: '6' });
 
     this.updateFileElementQuery();
   }

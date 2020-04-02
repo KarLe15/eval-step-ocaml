@@ -22,7 +22,6 @@ export class FileService {
   private querySubject: BehaviorSubject<FileElement[]>;
 
   add(fileElement: FileElement) {
-    fileElement.id = v4();
     this.map.set(fileElement.id, this.clone(fileElement));
     return fileElement;
   }

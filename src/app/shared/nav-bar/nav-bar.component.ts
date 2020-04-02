@@ -1,10 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
+import {FileElement} from '../../file-manager/model/element';
 
-interface ISampleFile {
-  filepath: string;
-  content: string;
-}
 
 @Component({
   selector: 'app-nav-bar',
@@ -12,7 +9,7 @@ interface ISampleFile {
   styleUrls: ['./nav-bar.component.scss']
 })
 export class NavBarComponent implements OnInit {
-  @Input('filesObservable') filesObservable: Observable<Array<ISampleFile>>;
+  @Input('filesObservable') filesObservable: Observable<Array<FileElement>>;
 
   constructor() { }
 

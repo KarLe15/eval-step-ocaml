@@ -3,6 +3,7 @@ import {BehaviorSubject, ReplaySubject, Subject} from 'rxjs';
 import {EvalService} from './services/eval.service';
 import {LazyLoadScriptService} from './services/lazy-load-script.service';
 import {GetAssetsFilesService} from './services/get-assets-files.service';
+import {FileElement} from './file-manager/model/element';
 
 
 interface ISampleFile {
@@ -25,7 +26,7 @@ export class AppComponent implements OnInit {
   isLoaded = false;
   cptLoading = 0;
 
-  private filesSubject: ReplaySubject<Array<ISampleFile>> = new ReplaySubject<Array<ISampleFile>>();
+  private filesSubject: ReplaySubject<Array<FileElement>> = new ReplaySubject<Array<FileElement>>();
   constructor(
     private evalStep: EvalService,
     private lazyLoadService: LazyLoadScriptService,
@@ -52,18 +53,22 @@ export class AppComponent implements OnInit {
 
   private getAllSampleFiles() {
     this.getAssetsFile.getFile('assets/codeSample/contents.json').then(contentsT => {
-      const res: Array<ISampleFile> = [];
-      const content: Array<{name: string, path: string}> = JSON.parse(contentsT);
+      const res: Array<FileElement> = [];
+      const content: Array<FileElement> = JSON.parse(contentsT);
       for (const file of content) {
-        this.getAssetsFile.getFile('assets/codeSample/' + file.path).then(contentFile => {
-          res.push({filepath: file.path, content: contentFile});
-          if (res.length === content.length) {
-            this.filesSubject.next(res);
-            // this.addLoading();
-          }
-        }).catch(err => {
-          console.error('error while loading file', file.path, err);
-        });
+        if (! file.isFolder) {
+          this.getAssetsFile.getFile('assets/codeSample/' + file.path).then(contentFile => {
+            res.push({path: file.path, id: file.id, content: contentFile, isFolder: false, name: file.name, parent: file.parent});
+            if (res.length === content.length) {
+              this.filesSubject.next(res);
+              // this.addLoading();
+            }
+          }).catch(err => {
+            console.error('error while loading file', file.path, err);
+          });
+        } else {
+          res.push({path: file.path, id: file.id, content: '', isFolder: true, name: file.name, parent: file.parent});
+        }
       }
     }).catch(err => {
       console.error('error while loading contents file', err);

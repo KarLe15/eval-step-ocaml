@@ -1,4 +1,31 @@
 [
-  {"name": "modules.ml", "path": "modules.ml"},
-  {"name": "and.ml", "path": "good/and.ml"}
+  {
+    "id"      : "0",
+    "name"    : "modules.ml",
+    "parent"  : "root",
+    "isFolder": false,
+    "path"    : "modules.ml"
+  },
+  {
+    "id"      : "cours1",
+    "name"    : "cours1",
+    "parent"  : "root",
+    "isFolder": true,
+    "path"    : ""
+  },
+  {
+    "id"      : "2",
+    "name"    : "adder.ml",
+    "parent"  : "cours1",
+    "isFolder": false,
+    "path"    : "example_cours/cours1/adder.ml"
+  },
+  {
+    "id"      : "3",
+    "name"    : "xor_if.ml",
+    "parent"  : "cours1",
+    "isFolder": false,
+    "path"    : "example_cours/cours1/xor_if.ml"
+  }
+
 ]
