@@ -5,9 +5,12 @@
   height: 100%;
 }
 .card{
-
+  height : 100%;
   margin-left: 0px;
   margin-right: 200px;
+  overflow-x: hidden;
+  overflow-x: auto;
+  text-align:justify;
 }
 
 
