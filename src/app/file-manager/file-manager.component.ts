@@ -26,7 +26,7 @@ export class FileManagerComponent implements OnChanges  {
     if (element.isFolder) {
       this.navigatedDown.emit(element);
     } else {
-      console.log(element.name);
+      console.log(element.content);
     }
   }
 

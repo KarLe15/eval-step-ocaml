@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FileElement} from '../../file-manager/model/element';
 import {Observable} from 'rxjs';
 import {FileService} from '../../services/file.service';
+import { Router} from '@angular/router';
 
 @Component({
   selector: 'app-examples-files',
@@ -11,19 +12,34 @@ import {FileService} from '../../services/file.service';
 export class ExamplesFilesComponent implements OnInit {
   public fileElements: Observable<FileElement[]>;
 
-  constructor(public fileService: FileService) {}
+  constructor(public fileService: FileService, public router: Router) {
+    const navigation = this.router.getCurrentNavigation();
+    const state = navigation.extras.state as {
+      data: Array<FileElement>
+    };
+    for (const file of state.data) {
+      this.fileService.add({
+        content: file.content,
+        path: file.path,
+        name: file.name,
+        isFolder: file.isFolder,
+        parent: file.parent,
+        id: file.id
+      });
+    }
+  }
 
   currentRoot: FileElement;
   currentPath: string;
   canNavigateUp = false;
 
   ngOnInit() {
-    const folder1 = this.fileService.add({content: '', path: '', name: 'Cours 1', isFolder: true, parent: 'root', id: '1' });
-    const folder2 = this.fileService.add({content: '', path: '', name: 'Cours 2', isFolder: true, parent: 'root', id: '2' });
-    this.fileService.add({content: '', path: '', name: 'loop.ml', isFolder: false, parent: folder1.id,  id: '3' });
-    this.fileService.add({content: '', path: '', name: 'or.ml', isFolder: false, parent: folder1.id,  id: '4' });
-    this.fileService.add({content: '', path: '', name: 'fact.ml', isFolder: false, parent: folder2.id,  id: '5' });
-    this.fileService.add({content: '', path: '', name: 'and.ml', isFolder: false, parent: 'root',  id: '6' });
+    // this.fileService.add({content: '', path: '', name: 'Cours 1', isFolder: true, parent: 'root', id: '1' });
+    // this.fileService.add({content: '', path: '', name: 'Cours 2', isFolder: true, parent: 'root', id: '2' });
+    // this.fileService.add({content: '', path: '', name: 'loop.ml', isFolder: false, parent: '1',  id: '3' });
+    // this.fileService.add({content: '', path: '', name: 'or.ml', isFolder: false, parent: '1',  id: '4' });
+    // this.fileService.add({content: '', path: '', name: 'fact.ml', isFolder: false, parent: '2',  id: '5' });
+    // this.fileService.add({content: '', path: '', name: 'and.ml', isFolder: false, parent: 'root',  id: '6' });
 
     this.updateFileElementQuery();
   }
