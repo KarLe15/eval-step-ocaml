@@ -13,11 +13,8 @@ export class FileManagerComponent implements OnChanges  {
   @Input() canNavigateUp: string;
   @Input() path: string;
 
-  @Output() folderAdded = new EventEmitter<{ name: string }>();
-  @Output() elementRemoved = new EventEmitter<FileElement>();
-  @Output() elementRenamed = new EventEmitter<FileElement>();
+  @Output() selectExemple = new EventEmitter<FileElement>();
   @Output() navigatedDown = new EventEmitter<FileElement>();
-  @Output() elementMoved = new EventEmitter<{ element: FileElement; moveTo: FileElement }>();
   @Output() navigatedUp = new EventEmitter();
 
   ngOnChanges(changes: SimpleChanges): void {}
@@ -26,7 +23,7 @@ export class FileManagerComponent implements OnChanges  {
     if (element.isFolder) {
       this.navigatedDown.emit(element);
     } else {
-      console.log(element.content);
+      this.selectExemple.emit(element);
     }
   }
 

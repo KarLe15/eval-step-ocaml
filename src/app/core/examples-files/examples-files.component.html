@@ -6,8 +6,13 @@
       </div>
     </div>
     <div class="col card">
-      <app-file-manager [fileElements]="fileElements | async" [path]="currentPath" [canNavigateUp]="canNavigateUp"
-                        (navigatedDown)="navigateToFolder($event)" (navigatedUp)="navigateUp()"
+      <app-file-manager
+        [fileElements]="fileElements | async"
+        [path]="currentPath"
+        [canNavigateUp]="canNavigateUp"
+        (navigatedDown)="navigateToFolder($event)"
+        (navigatedUp)="navigateUp()"
+        (selectExemple) = "onSelect($event)"
       ></app-file-manager>
     </div>
   </div>

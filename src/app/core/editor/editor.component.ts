@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-editor',
@@ -9,11 +9,8 @@ export class EditorComponent implements OnInit {
   // tslint:disable-next-line:no-output-rename
   @Output('changeMain') changeMain = new EventEmitter();
   @Output('changeFun') changeFun = new EventEmitter();
-
+  @Input('codeFun') codeFun: string;
   editorOptions = {theme: 'vs-dark', fontSize: '18px', autoIndent: 'full', language: 'fsharp'};
-  codeFun = 'let rec fact n = \n' +
-    '  if n = 1 then 0\n' +
-    '  else fact (n - 1)\n';
   codeMain = 'fact 5';
   constructor() { }
 

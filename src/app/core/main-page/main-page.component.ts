@@ -5,6 +5,8 @@ import {Subject} from 'rxjs';
 import IOption from '../../structures/IOption';
 import {OptionsService} from '../../services/options.service';
 import {GetAssetsFilesService} from '../../services/get-assets-files.service';
+import {NavigationExtras, Router} from '@angular/router';
+import {FileElement} from '../../file-manager/model/element';
 
 
 
@@ -14,7 +16,9 @@ import {GetAssetsFilesService} from '../../services/get-assets-files.service';
   styleUrls: ['./main-page.component.scss']
 })
 export class MainPageComponent implements OnInit {
-  private defFun: string;
+  navigationExtras: NavigationExtras;
+
+  private defFun = 'Exemple';
   private defMain: string;
   evaluate = false;
   private eventSubject: Subject<IEvaluation> = new Subject<IEvaluation>();
@@ -28,8 +32,17 @@ export class MainPageComponent implements OnInit {
   constructor(
     private evaluator: EvalService,
     private OptService: OptionsService,
-    private filesService: GetAssetsFilesService
-  ) { }
+    private filesService: GetAssetsFilesService,
+    private router: Router
+  ) {
+    const navigation = this.router.getCurrentNavigation();
+    if (navigation != null) {
+      const state = navigation.extras.state as {
+        data: string
+      };
+      this.defFun = state.data;
+    }
+  }
   ngOnInit() {
     this.options = this.OptService.getOptions();
   }

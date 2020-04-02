@@ -26,6 +26,21 @@
     "parent"  : "cours1",
     "isFolder": false,
     "path"    : "example_cours/cours1/xor_if.ml"
-  }
+  },
 
+
+  {
+    "id"      : "cours2",
+    "name"    : "cours2",
+    "parent"  : "root",
+    "isFolder": true,
+    "path"    : ""
+  },
+  {
+  "id"      : "2_1",
+  "name"    : "fact",
+  "parent"  : "cours2",
+  "isFolder": false,
+  "path"    : "example_cours/cours2/fact.ml"
+  }
 ]

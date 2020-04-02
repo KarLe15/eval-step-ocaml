@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FileElement} from '../../file-manager/model/element';
 import {Observable} from 'rxjs';
 import {FileService} from '../../services/file.service';
-import { Router} from '@angular/router';
+import {NavigationExtras, Router} from '@angular/router';
 
 @Component({
   selector: 'app-examples-files',
@@ -11,6 +11,7 @@ import { Router} from '@angular/router';
 })
 export class ExamplesFilesComponent implements OnInit {
   public fileElements: Observable<FileElement[]>;
+  navigationExtras: NavigationExtras;
 
   constructor(public fileService: FileService, public router: Router) {
     const navigation = this.router.getCurrentNavigation();
@@ -81,4 +82,12 @@ export class ExamplesFilesComponent implements OnInit {
     return p;
   }
 
+  onSelect(e: FileElement) {
+    this.navigationExtras = {
+      state: {
+        data: e.content
+      }
+    };
+    this.router.navigate(['/eval'], this.navigationExtras);
+  }
 }
