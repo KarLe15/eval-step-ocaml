@@ -36,7 +36,7 @@ export class MainPageComponent implements OnInit {
     private router: Router
   ) {
     const navigation = this.router.getCurrentNavigation();
-    if (navigation != null) {
+    if (navigation != null && navigation.extras.state != null  ) {
       const state = navigation.extras.state as {
         data: string
       };
