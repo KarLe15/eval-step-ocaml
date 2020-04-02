@@ -20,6 +20,10 @@ import { SharedModule } from '../shared/shared.module';
 import { ResultListeComponent } from './result-liste/result-liste.component';
 import {GetAssetsFilesService} from '../services/get-assets-files.service';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
+import { ExamplesFilesComponent } from './examples-files/examples-files.component';
+import {MatCardModule} from '@angular/material';
+import {FileManagerModule} from '../file-manager/file-manager.module';
+import {RouterModule} from '@angular/router';
 
 
 
@@ -34,23 +38,28 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
     ResultComponent,
     ReplaceNPipe,
     ResultTreeComponent,
-    ResultListeComponent
+    ResultListeComponent,
+    ExamplesFilesComponent
   ],
   exports: [
     EditorComponent,
     OptionsComponent,
     MainPageComponent,
-    ReplaceNPipe
+    ReplaceNPipe,
+    ExamplesFilesComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
+    FileManagerModule,
     MonacoEditorModule,
     ScrollToModule.forRoot(),
     UiSwitchModule,
     HighlightModule,
     SharedModule,
-    HttpClientModule
+    HttpClientModule,
+    MatCardModule,
+    RouterModule
   ],
   providers: [
     EvalService,

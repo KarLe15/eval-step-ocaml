@@ -1,0 +1,16 @@
+<div class="container-fluid mb-5" >
+  <div class="row">
+    <div class="col-2 d-flex justify-content-center">
+      <div class="item">
+        <a routerLink="/eval" class="btnEditeur">  <i class="fi flaticon-back ml-4 icon"></i> Éditeur </a>
+      </div>
+    </div>
+    <div class="col card">
+      <app-file-manager [fileElements]="fileElements | async" [path]="currentPath" [canNavigateUp]="canNavigateUp"
+                        (navigatedDown)="navigateToFolder($event)" (navigatedUp)="navigateUp()"
+      ></app-file-manager>
+    </div>
+  </div>
+
+</div>
+
