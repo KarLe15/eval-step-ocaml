@@ -15,18 +15,20 @@ export class ExamplesFilesComponent implements OnInit {
 
   constructor(public fileService: FileService, public router: Router) {
     const navigation = this.router.getCurrentNavigation();
-    const state = navigation.extras.state as {
-      data: Array<FileElement>
-    };
-    for (const file of state.data) {
-      this.fileService.add({
-        content: file.content,
-        path: file.path,
-        name: file.name,
-        isFolder: file.isFolder,
-        parent: file.parent,
-        id: file.id
-      });
+    if (navigation != null) {
+      const state = navigation.extras.state as {
+        data: Array<FileElement>
+      };
+      for (const file of state.data) {
+        this.fileService.add({
+          content: file.content,
+          path: file.path,
+          name: file.name,
+          isFolder: file.isFolder,
+          parent: file.parent,
+          id: file.id
+        });
+      }
     }
   }
 
