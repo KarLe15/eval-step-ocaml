@@ -14,7 +14,7 @@ export class OptionsComponent implements OnInit {
   @Input('options') options: Map<string, IOption>;
   @Output('changeOptions') changeOptions = new EventEmitter();
   MoveDownSubst: true;
-  private  mode_basique = true;
+  private  modeBasique = true;
   constructor() {}
 
   ngOnInit() {

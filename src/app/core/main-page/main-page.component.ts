@@ -19,7 +19,7 @@ import {Strategy, StrategyFactory} from '../../structures/Strategy';
 export class MainPageComponent implements OnInit {
   navigationExtras: NavigationExtras;
 
-  private defFun = 'Exemple';
+  private defFun = 'Déclarations des fonctions ';
   private defMain: string;
   evaluate = false;
   private eventSubject: Subject<IEvaluation> = new Subject<IEvaluation>();

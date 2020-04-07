@@ -4,6 +4,3 @@ let fact n =
     else loop (n-1) (n * acc)
   in
   loop n 1
-
-let _ =
-  fact 5

@@ -7,7 +7,7 @@
     <div *ngFor="let item of listeEtape">
       <app-result-tree [currentStep]='item'></app-result-tree>
       <div class="d-flex justify-content-center"  >
-        <i class="fi flaticon-down-arrow"  [ngx-scroll-to]="'#destinationStep'" (click)="onNext()" > </i>
+        <i class="fi flaticon-down-arrow nextTree"  [ngx-scroll-to]="'#destinationStep'" (click)="onNext()" > </i>
       </div>
     </div>
   </div>

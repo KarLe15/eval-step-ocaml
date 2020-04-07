@@ -11,6 +11,7 @@ export class ResultTreeComponent implements OnInit {
   @Input('currentStep') currentStep: IStep;
 
   response: HighlightResult;
+  printEnv = false;
   constructor() { }
 
   ngOnInit() {
@@ -24,5 +25,9 @@ export class ResultTreeComponent implements OnInit {
       top: '{...}',
       value: '{...}'
     };
+  }
+
+  printEnvironement() {
+    this.printEnv = true;
   }
 }

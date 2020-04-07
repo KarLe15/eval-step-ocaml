@@ -11,7 +11,9 @@ import IOption from '../../structures/IOption';
   styleUrls: ['./result.component.scss']
 })
 export class ResultComponent implements OnInit {
+  // tslint:disable-next-line:no-input-rename
   @Input('events') events: Observable<IEvaluation>;
+  // tslint:disable-next-line:no-input-rename
   @Input('typeAffichage') type: string;
 
   private shouldDisplay: boolean;

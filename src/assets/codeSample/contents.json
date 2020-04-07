@@ -14,20 +14,26 @@
     "path"    : ""
   },
   {
-    "id"      : "2",
+    "id"      : "1_1",
     "name"    : "adder.ml",
     "parent"  : "cours1",
     "isFolder": false,
     "path"    : "example_cours/cours1/adder.ml"
   },
   {
-    "id"      : "3",
+    "id"      : "1_2",
     "name"    : "xor_if.ml",
     "parent"  : "cours1",
     "isFolder": false,
     "path"    : "example_cours/cours1/xor_if.ml"
   },
-
+  {
+    "id"      : "1_3",
+    "name"    : "xor_match.ml",
+    "parent"  : "cours1",
+    "isFolder": false,
+    "path"    : "example_cours/cours1/xor_match.ml"
+  },
 
   {
     "id"      : "cours2",
@@ -42,5 +48,19 @@
   "parent"  : "cours2",
   "isFolder": false,
   "path"    : "example_cours/cours2/fact.ml"
+  },
+  {
+    "id"      : "2_2",
+    "name"    : "fact_tr",
+    "parent"  : "cours2",
+    "isFolder": false,
+    "path"    : "example_cours/cours2/fact_tr.ml"
+  },
+  {
+    "id"      : "2_3",
+    "name"    : "pow",
+    "parent"  : "cours2",
+    "isFolder": false,
+    "path"    : "example_cours/cours2/pow.ml"
   }
 ]

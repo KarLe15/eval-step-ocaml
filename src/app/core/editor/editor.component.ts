@@ -10,8 +10,8 @@ export class EditorComponent implements OnInit {
   @Output('changeMain') changeMain = new EventEmitter();
   @Output('changeFun') changeFun = new EventEmitter();
   @Input('codeFun') codeFun: string;
-  editorOptions = {theme: 'vs-dark', fontSize: '18px', autoIndent: 'full', language: 'fsharp'};
-  codeMain = 'fact 5';
+  editorOptions = {theme: 'vs-dark', fontSize: '22px', autoIndent: 'full', language: 'fsharp'};
+  codeMain = 'Appel à la fonction ';
   constructor() { }
 
   ngOnInit() {
