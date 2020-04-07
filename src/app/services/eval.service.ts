@@ -7,6 +7,7 @@ import IRange from '../structures/IRange';
 import IOption from '../structures/IOption';
 import { GetAssetsFilesService } from './get-assets-files.service';
 import {Observable, Subject} from 'rxjs';
+import {Strategy} from '../structures/Strategy';
 
 interface GlobalOptions {
   get_range: () => boolean;
@@ -29,6 +30,7 @@ export class EvalService {
   // =======================================================================
   // TODO :: Add get range for subenvironment
   private getSubEnvironementsfromJson(expr: any): IExpression {
+    console.log('getting sub env', expr);
     const toString: string = expr.expr.expr;
     let environements = null;
     if (expr.expr.envs) {
@@ -86,6 +88,7 @@ export class EvalService {
           if (varEnv.corec.length !== 0) {
             corec = varEnv.corec;
           }
+          console.log('before subEnv', env);
           const expr = this.getSubEnvironementsfromJson(varEnv);
           itemsEnv.push({
             corec,
@@ -137,15 +140,25 @@ export class EvalService {
     const step: any = steps[index];
     const currentExpression = this.getExpressionFromJSONstep(step);
     let next = null;
+    let name = null;
+    let subst = null;
     if (index !== steps.length - 1) {
       next = this.getStepFromJSONStep(steps, (index + 1), undefined );
+    }
+    if (step.step.length !== 0) {
+      name = step.step[0].name;
+      const substsKey = Object.keys(step.step[0].args);// this is very format dependant
+      if (substsKey.length > 0) {
+        subst = step.step[0].args[substsKey[0]];
+      }
     }
     const res =  {
       currentExpression,
       previous,
       nexts: [{
-        name: step.step[0],
-        step: next
+        name,
+        step: next,
+        subst
       }]
     };
     if (next !== null) {
@@ -172,7 +185,12 @@ export class EvalService {
       const evals = get_evaluation_steps(expression);
       return this.parseJSONToIEvaluation(evals, firstExpression);
   }
-  public getEvaluationsWithFilter(expressions: IEvaluation, options: Array<IOption>): IEvaluation {
+  public getEvaluationsWithFilter(expressions: IEvaluation, strategy: Strategy | null): IEvaluation {
+    console.log('filtring ', expressions);
+    let currentStep = expressions.firstStep;
+    while (currentStep !== null) {
+      currentStep = this.getNextStep(currentStep);
+    }
     return expressions;
   }
   // =======================================================================
@@ -208,12 +226,12 @@ export class EvalService {
   public loadLibraries() {
     this.getFilesService.getFile('assets/libs/contents.json').then(contents => {
       const libsCharged: Array<[string, string]> = [];
-      const contentJSON: Array<{name: string, file: string}> = JSON.parse(contents); // ugly must change
+      const contentJSON: Array<{name: string, path: string}> = JSON.parse(contents); // ugly must change
       const libCount  = contentJSON.length;
       let libChargedCount = 0;
       let pervasive = '';
       for (let i = 0; i < libCount; i++) {
-        const filePath = 'assets/libs/' + contentJSON[i].file;
+        const filePath = 'assets/libs/' + contentJSON[i].path;
         const name     = contentJSON[i].name;
         this.getFilesService.getFile(filePath).then(contentFile => {
           if (name === 'pervasives') {
@@ -225,6 +243,7 @@ export class EvalService {
           if (libChargedCount === libCount) {
             reload_libraries(pervasive, libsCharged);
             this.isLibrariesLoaded.next(true);
+            console.log('libraries loaded');
           }
         });
       }

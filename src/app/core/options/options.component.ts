@@ -1,6 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {OptionsService} from '../../services/options.service';
 import IOption from '../../structures/IOption';
+import {Observable} from 'rxjs';
+import {Strategy} from '../../structures/Strategy';
 
 @Component({
   selector: 'app-options',
@@ -8,6 +10,7 @@ import IOption from '../../structures/IOption';
   styleUrls: ['./options.component.scss']
 })
 export class OptionsComponent implements OnInit {
+  @Input('strategiesObservable') strategiesObservable: Observable<Array<Strategy>>;
   @Input('options') options: Map<string, IOption>;
   @Output('changeOptions') changeOptions = new EventEmitter();
   MoveDownSubst: true;
@@ -15,6 +18,9 @@ export class OptionsComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
+    this.strategiesObservable.subscribe(strategies => {
+      console.log('options has received strategies', strategies);
+    });
   }
 
 
