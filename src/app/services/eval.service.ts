@@ -29,8 +29,8 @@ export class EvalService {
   //
   // =======================================================================
   // TODO :: Add get range for subenvironment
-  private getSubEnvironementsfromJson(expr: any): IExpression {
-    console.log('getting sub env', expr);
+  private getSubEnvironementsfromJson(expr: any, rangeString: string): IExpression {
+    // console.log('getting sub env', rangeString);
     const toString: string = expr.expr.expr;
     let environements = null;
     if (expr.expr.envs) {
@@ -49,7 +49,7 @@ export class EvalService {
           if (fun.corec.length !== 0) {
             corec = fun.corec;
           }
-          const funEnv = this.getSubEnvironementsfromJson(fun);
+          const funEnv = this.getSubEnvironementsfromJson(fun, 'nothing');
           funEnvs.push({
             corec,
             name: keyEnv[j],
@@ -88,8 +88,8 @@ export class EvalService {
           if (varEnv.corec.length !== 0) {
             corec = varEnv.corec;
           }
-          console.log('before subEnv', env);
-          const expr = this.getSubEnvironementsfromJson(varEnv);
+          // console.log('before subEnv', env);
+          const expr = this.getSubEnvironementsfromJson(varEnv, keysEnv[j]);
           itemsEnv.push({
             corec,
             name: keysEnv[i],
@@ -147,7 +147,7 @@ export class EvalService {
     }
     if (step.step.length !== 0) {
       name = step.step[0].name;
-      const substsKey = Object.keys(step.step[0].args);// this is very format dependant
+      const substsKey = Object.keys(step.step[0].args); // this is very format dependant
       if (substsKey.length > 0) {
         subst = step.step[0].args[substsKey[0]];
       }

@@ -1,17 +1,31 @@
 [
   {
-    "id"      : "0",
-    "name"    : "modules.ml",
-    "parent"  : "root",
-    "isFolder": false,
-    "path"    : "modules.ml"
-  },
-  {
     "id"      : "cours1",
     "name"    : "cours1",
     "parent"  : "root",
     "isFolder": true,
     "path"    : ""
+  },
+  {
+    "id"      : "cours2",
+    "name"    : "cours2",
+    "parent"  : "root",
+    "isFolder": true,
+    "path"    : ""
+  },
+  {
+    "id"      : "good",
+    "name"    : "good",
+    "parent"  : "root",
+    "isFolder": true,
+    "path"    : ""
+  },
+  {
+    "id"      : "0",
+    "name"    : "modules.ml",
+    "parent"  : "root",
+    "isFolder": false,
+    "path"    : "modules.ml"
   },
   {
     "id"      : "1_1",
@@ -34,14 +48,6 @@
     "isFolder": false,
     "path"    : "example_cours/cours1/xor_match.ml"
   },
-
-  {
-    "id"      : "cours2",
-    "name"    : "cours2",
-    "parent"  : "root",
-    "isFolder": true,
-    "path"    : ""
-  },
   {
   "id"      : "2_1",
   "name"    : "fact",
@@ -62,5 +68,12 @@
     "parent"  : "cours2",
     "isFolder": false,
     "path"    : "example_cours/cours2/pow.ml"
+  },
+  {
+    "id"      : "g_l",
+    "name"    : "fold_left",
+    "parent"  : "good",
+    "isFolder": false,
+    "path"    : "good/fold_left.ml"
   }
 ]
