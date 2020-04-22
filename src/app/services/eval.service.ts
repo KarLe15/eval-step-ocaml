@@ -7,7 +7,8 @@ import IRange from '../structures/IRange';
 import IOption from '../structures/IOption';
 import { GetAssetsFilesService } from './get-assets-files.service';
 import {Observable, Subject} from 'rxjs';
-import {Strategy} from '../structures/Strategy';
+import {Strategy, SubStrategy} from '../structures/Strategy';
+import {first} from 'rxjs/operators';
 
 interface GlobalOptions {
   get_range: () => boolean;
@@ -25,9 +26,7 @@ export class EvalService {
 
   isLibrariesLoaded: Subject<boolean> = new Subject<boolean>();
   constructor(private getFilesService: GetAssetsFilesService) {}
-  // =======================================================================
-  //
-  // =======================================================================
+
   // TODO :: Add get range for subenvironment
   private getSubEnvironementsfromJson(expr: any, rangeString: string): IExpression {
     // console.log('getting sub env', rangeString);
@@ -67,9 +66,7 @@ export class EvalService {
       environements
     };
   }
-  // =======================================================================
-  //
-  // =======================================================================
+
   private getEnvironementsFromJSONStep(step: any): Array<IEnvironment> | null {
     if (step.current_expression.envs) {
       const context = step.current_expression.envs;
@@ -123,9 +120,7 @@ export class EvalService {
       end
     };
   }
-  // =======================================================================
-  //
-  // =======================================================================
+
   private getExpressionFromJSONstep(step: any): IExpression {
     const environements = this.getEnvironementsFromJSONStep(step);
     return {
@@ -133,9 +128,7 @@ export class EvalService {
       environements
     };
   }
-  // =======================================================================
-  //
-  // =======================================================================
+
   private getStepFromJSONStep(steps: any, index: number, previous: IStep): IStep {
     const step: any = steps[index];
     const currentExpression = this.getExpressionFromJSONstep(step);
@@ -166,9 +159,7 @@ export class EvalService {
     }
     return res;
   }
-  // =======================================================================
-  //
-  // =======================================================================
+
   private parseJSONToIEvaluation(content: string, firstExpression: string): IEvaluation {
     const json: Array<any> = JSON.parse(content);
     const firstStep = this.getStepFromJSONStep(json, 0, null);
@@ -185,23 +176,82 @@ export class EvalService {
       const evals = get_evaluation_steps(expression);
       return this.parseJSONToIEvaluation(evals, firstExpression);
   }
+
   public getEvaluationsWithFilter(expressions: IEvaluation, strategy: Strategy | null): IEvaluation {
-    console.log('filtring ', expressions);
-    let currentStep = expressions.firstStep;
-    while (currentStep !== null) {
-      currentStep = this.getNextStep(currentStep);
+    console.log('filtring ', strategy);
+    if (strategy === null) {
+      return expressions;
     }
-    return expressions;
+    const firstExp = expressions.firstStep;
+    let stepResTemp = firstExp;
+    let currentContext = strategy.getContext(0);
+    stepResTemp = this.filterWithContext(
+      stepResTemp,
+      strategy.getSubStrategy(currentContext)
+    );
+    while (strategy.hasNextContext(currentContext)) {
+      currentContext = strategy.getNextContext(currentContext);
+      stepResTemp = this.filterWithContext(
+        stepResTemp,
+        strategy.getSubStrategy(currentContext)
+      );
+    }
+    return {
+      firstExpression: expressions.firstExpression,
+      firstStep: firstExp
+    };
   }
-  // =======================================================================
-  //
-  // =======================================================================
+
+  private getNextToWait(step: IStep, stepName: string, name: string|null): IStep | null {
+    let currentStep = step.nexts[0].step;
+    while (currentStep !== null) {
+      if (currentStep.nexts[0].name === stepName) {
+        if (name === null) {
+          return currentStep;
+        }// else todo with named wait
+      }
+      currentStep = currentStep.nexts[0].step;
+    }
+    return null;
+  }
+
+  private filterWithContext(step: IStep, subStrategy: SubStrategy): IStep {
+    let tmpStep = step;
+    let currentStep = step;
+    if (subStrategy.wait !== null) {
+      const nameToWait = subStrategy.wait[0].name;
+      console.log('waitin to', nameToWait);
+      while (tmpStep !== null) {
+        // this.printAllExpr(currentStep);
+        // TODO :: add naming
+        tmpStep = this.getNextToWait(tmpStep, nameToWait, null);
+        if (tmpStep !== null) {
+          currentStep.nexts[0].step = tmpStep;
+          tmpStep.previous = currentStep;
+          currentStep = currentStep.nexts[0].step;
+        }
+      }
+    }
+    if (subStrategy.skip !== null) {
+      // TODO :: make this true
+    }
+    return currentStep;
+  }
+
+  private printAllExpr(step: IStep) {
+    let currentStep = step;
+    while (currentStep !== null) {
+      console.log('curentStep', currentStep.currentExpression);
+      currentStep = currentStep.nexts[0].step;
+    }
+    console.log('==========================================================');
+    console.log('==========================================================');
+  }
+
   public getFirstStep(evaluations: IEvaluation): IStep {
     return evaluations.firstStep;
   }
-  // =======================================================================
-  //
-  // =======================================================================
+
   public getNextStep(current: IStep): IStep | null {
     let next: IStep | null = null;
     if (current.nexts !== null) {
@@ -210,10 +260,7 @@ export class EvalService {
     // console.log(next);
     return next;
   }
-  // =======================================================================
-  //
-  // =======================================================================
-  // TODO :: add Strategy
+
   public getPreviousStep(current: IStep): IStep | null {
     return current.previous;
   }
@@ -223,6 +270,7 @@ export class EvalService {
   public setupOptions() {
     global_options.set_range(true);
   }
+
   public loadLibraries() {
     this.getFilesService.getFile('assets/libs/contents.json').then(contents => {
       const libsCharged: Array<[string, string]> = [];
@@ -249,6 +297,7 @@ export class EvalService {
       }
     });
   }
+
   public getIsLoadedLibraries(): Observable<boolean> {
     return this.isLibrariesLoaded.asObservable();
   }
