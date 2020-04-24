@@ -196,10 +196,12 @@ export class EvalService {
         strategy.getSubStrategy(currentContext)
       );
     }
-    return {
+    const res =  {
       firstExpression: expressions.firstExpression,
       firstStep: firstExp
     };
+    console.log(res);
+    return res;
   }
 
   private getNextToWait(step: IStep, stepName: string, name: string|null): IStep | null {
