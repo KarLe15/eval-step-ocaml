@@ -24,6 +24,7 @@ import { ExamplesFilesComponent } from './examples-files/examples-files.componen
 import {MatCardModule} from '@angular/material';
 import {FileManagerModule} from '../file-manager/file-manager.module';
 import {RouterModule} from '@angular/router';
+import { NgxLoadingModule } from 'ngx-loading';
 
 
 
@@ -54,6 +55,7 @@ import {RouterModule} from '@angular/router';
     FileManagerModule,
     MonacoEditorModule,
     ScrollToModule.forRoot(),
+    NgxLoadingModule.forRoot({}),
     UiSwitchModule,
     HighlightModule,
     SharedModule,

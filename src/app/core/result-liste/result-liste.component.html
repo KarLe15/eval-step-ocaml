@@ -1,7 +1,7 @@
 <div class="container-fluid mt-5">
   <div class="row">
     <!-- Expression -->
-    <div class="col-sm-8 mb-3 mb-md-0">
+    <div class="col-md-8 mb-3 mb-md-0">
       <div class="card">
         <div class="card-body">
           <div class="card-title d-flex justify-content-between">
@@ -24,22 +24,32 @@
     </div>
 
     <!-- Environnement -->
-    <div class="col-sm-4">
+    <div class="col-md-4">
       <div class="card">
         <div class="card-body">
           <div class="card-title d-flex justify-content-between">
             <h5 class="card-title">Environement</h5>
             <i class="fi flaticon-technical-support symbol"></i>
           </div>
-          <div class="jumbotron jumbotron-fluid card-text ">
-            <div class="container">
-              <div class="text-env">{{currentStep.currentExpression.environements[0].items[0].name}}</div>
-              <div *ngIf="currentStep.currentExpression.environements[0].items[0].corec == null">
-                <p class="lead"> Value = {{currentStep.currentExpression.environements[0].items[0].expr.toString}}</p>
-              </div>
-              <div *ngIf="currentStep.currentExpression.environements[0].items[0].corec != null">
-                <p class="lead"> {{currentStep.currentExpression.environements[0].items[0].expr.toString}}</p>
-              </div>
+          <div *ngIf="isEnvEmpty() > 0" class="card-text ">
+            <div class="jumbotron jumbotron-fluid m--2" *ngFor="let item of this.currentStep.currentExpression.environements">
+                <div class="container">
+                  <div *ngFor="let itemEnv of item.items">
+                    <div class="text-env">{{nameEnv() }}</div>
+                    <div *ngIf="itemEnv.corec == null">
+                      <p class="lead"> Value = {{itemEnv.expr.toString}}</p>
+                    </div>
+                    <div *ngIf="itemEnv.corec != null">
+                      <p class="lead"> {{itemEnv.expr.toString}}</p>
+                    </div>
+                    <hr>
+                  </div>
+                </div>
+            </div>
+          </div>
+          <div *ngIf="isEnvEmpty() == 0" class="card-text ">
+            <div  class="flex-center">
+              <i class="fi flaticon-empty emptyEnv"></i>
             </div>
           </div>
         </div>

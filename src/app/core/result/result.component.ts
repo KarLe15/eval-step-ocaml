@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import IEvaluation from '../../structures/IEvaluation';
 import { Observable, Subscription } from 'rxjs';
 import IStep from '../../structures/IStep';
@@ -15,6 +15,7 @@ export class ResultComponent implements OnInit {
   @Input('events') events: Observable<IEvaluation>;
   // tslint:disable-next-line:no-input-rename
   @Input('typeAffichage') type: string;
+  @Output('displayResult') displayResult = new EventEmitter();
 
   private shouldDisplay: boolean;
   private expressions: IEvaluation;
@@ -33,10 +34,12 @@ export class ResultComponent implements OnInit {
   }
 
   private initStep(expressions: IEvaluation) {
+    this.etape = 0;
     this.shouldDisplay = true;
     this.expressions = expressions;
     this.currentStep = this.evalService.getFirstStep(this.expressions);
     this.listeEtape.push(this.currentStep);
+    this.displayResult.emit();
   }
 
   onPrevious() {
@@ -57,7 +60,7 @@ export class ResultComponent implements OnInit {
       this.listeEtape.push(this.currentStep);
       this.etape++;
     }
-    // console.log(this.currentStep);
+    console.log(this.currentStep.currentExpression.environements);
   }
 
 

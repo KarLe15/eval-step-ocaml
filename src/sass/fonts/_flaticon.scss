@@ -24,7 +24,6 @@ Creation date: 26/01/2020 20:00
   -webkit-font-smoothing: antialiased;
   font-smoothing: antialiased;
 }
-
 .flaticon-next:before { content: "\f100"; }
 .flaticon-analyze:before { content: "\f101"; }
 .flaticon-data:before { content: "\f102"; }
@@ -51,6 +50,19 @@ Creation date: 26/01/2020 20:00
 .flaticon-code:before { content: "\f117"; }
 .flaticon-file:before { content: "\f118"; }
 .flaticon-cloud:before { content: "\f119"; }
+.flaticon-delete:before { content: "\f11a"; }
+.flaticon-x-mark:before { content: "\f11b"; }
+.flaticon-trash:before { content: "\f11c"; }
+.flaticon-education:before { content: "\f11d"; }
+.flaticon-investigation:before { content: "\f11e"; }
+.flaticon-research:before { content: "\f11f"; }
+.flaticon-plus:before { content: "\f120"; }
+.flaticon-cancel:before { content: "\f121"; }
+.flaticon-clear:before { content: "\f122"; }
+.flaticon-empty:before { content: "\f123"; }
+.flaticon-more:before { content: "\f124"; }
+.flaticon-ellipsis:before { content: "\f125"; }
+.flaticon-expand-button:before { content: "\f126"; }
 
 $font-Flaticon-next: "\f100";
 $font-Flaticon-analyze: "\f101";
@@ -78,3 +90,16 @@ $font-Flaticon-add-button: "\f116";
 $font-Flaticon-code: "\f117";
 $font-Flaticon-file: "\f118";
 $font-Flaticon-cloud: "\f119";
+$font-Flaticon-delete: "\f11a";
+$font-Flaticon-x-mark: "\f11b";
+$font-Flaticon-trash: "\f11c";
+$font-Flaticon-education: "\f11d";
+$font-Flaticon-investigation: "\f11e";
+$font-Flaticon-research: "\f11f";
+$font-Flaticon-plus: "\f120";
+$font-Flaticon-cancel: "\f121";
+$font-Flaticon-clear: "\f122";
+$font-Flaticon-empty: "\f123";
+$font-Flaticon-more: "\f124";
+$font-Flaticon-ellipsis: "\f125";
+$font-Flaticon-expand-button: "\f126";

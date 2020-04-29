@@ -4,7 +4,12 @@
 }
 
 .card{
-  height: 400px;
+  min-height: 400px;
+  height: 100%;
+}
+.card-body{
+  min-height: 400px;
+  height: 100%;
 }
 
 /* expression */
@@ -25,7 +30,6 @@
 }
 .jumbotron{
   padding: 0rem;
-  padding-top: 1rem;
   padding-bottom: 0.5rem;
 }
 
@@ -44,4 +48,12 @@
 .stepText{
   font-size: 30px;
   font-family: 'Nunito';
+}
+
+.emptyEnv{
+  font-size: 100px;
+}
+
+.m--2{
+  margin-bottom: 15px;
 }
