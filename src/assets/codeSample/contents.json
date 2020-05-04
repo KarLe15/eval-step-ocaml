@@ -14,6 +14,20 @@
     "path"    : ""
   },
   {
+    "id"      : "cours3",
+    "name"    : "cours3",
+    "parent"  : "root",
+    "isFolder": true,
+    "path"    : ""
+  },
+  {
+    "id"      : "cours4",
+    "name"    : "cours4",
+    "parent"  : "root",
+    "isFolder": true,
+    "path"    : ""
+  },
+  {
     "id"      : "good",
     "name"    : "good",
     "parent"  : "root",
@@ -28,11 +42,32 @@
     "path"    : "modules.ml"
   },
   {
+    "id"      : "0_1",
+    "name"    : "nested_modules.ml",
+    "parent"  : "root",
+    "isFolder": false,
+    "path"    : "nested_modules.ml"
+  },
+  {
     "id"      : "1_1",
     "name"    : "adder.ml",
     "parent"  : "cours1",
     "isFolder": false,
     "path"    : "example_cours/cours1/adder.ml"
+  },
+  {
+    "id"      : "1_xf",
+    "name"    : "xor_fun.ml",
+    "parent"  : "cours1",
+    "isFolder": false,
+    "path"    : "example_cours/cours1/xor_fun.ml"
+  },
+  {
+    "id"      : "1_xf2",
+    "name"    : "xor_fun_2.ml",
+    "parent"  : "cours1",
+    "isFolder": false,
+    "path"    : "example_cours/cours1/xor_fun_2.ml"
   },
   {
     "id"      : "1_2",
@@ -63,6 +98,20 @@
     "path"    : "example_cours/cours2/fact_tr.ml"
   },
   {
+    "id"      : "2_iter",
+    "name"    : "iter",
+    "parent"  : "cours2",
+    "isFolder": false,
+    "path"    : "example_cours/cours2/iter.ml"
+  },
+  {
+    "id"      : "2_itr",
+    "name"    : "iter_tr",
+    "parent"  : "cours2",
+    "isFolder": false,
+    "path"    : "example_cours/cours2/iter_tr.ml"
+  },
+  {
     "id"      : "2_3",
     "name"    : "pow",
     "parent"  : "cours2",
@@ -70,10 +119,332 @@
     "path"    : "example_cours/cours2/pow.ml"
   },
   {
+    "id"      : "2_ps",
+    "name"    : "pow_safe",
+    "parent"  : "cours2",
+    "isFolder": false,
+    "path"    : "example_cours/cours2/pow_safe.ml"
+  },
+  {
+    "id"      : "2_pst",
+    "name"    : "pow_safe_tr",
+    "parent"  : "cours2",
+    "isFolder": false,
+    "path"    : "example_cours/cours2/pow_safe_tr.ml"
+  },
+  {
+    "id"      : "3_a",
+    "name"    : "app",
+    "parent"  : "cours3",
+    "isFolder": false,
+    "path"    : "example_cours/cours3/app.ml"
+  },
+  {
+    "id"      : "3_f",
+    "name"    : "find",
+    "parent"  : "cours3",
+    "isFolder": false,
+    "path"    : "example_cours/cours3/find.ml"
+  },
+  {
+    "id"      : "3_fm",
+    "name"    : "find_max",
+    "parent"  : "cours3",
+    "isFolder": false,
+    "path"    : "example_cours/cours3/find_max.ml"
+  },
+  {
+    "id"      : "3_fmtr",
+    "name"    : "find_max_tr",
+    "parent"  : "cours3",
+    "isFolder": false,
+    "path"    : "example_cours/cours3/find_max_tr.ml"
+  },
+  {
+    "id"      : "3_ie",
+    "name"    : "is_empty",
+    "parent"  : "cours3",
+    "isFolder": false,
+    "path"    : "example_cours/cours3/is_empty.ml"
+  },
+  {
+    "id"      : "3_l",
+    "name"    : "length",
+    "parent"  : "cours3",
+    "isFolder": false,
+    "path"    : "example_cours/cours3/length.ml"
+  },
+  {
+    "id"      : "3_ltr",
+    "name"    : "length_tr",
+    "parent"  : "cours3",
+    "isFolder": false,
+    "path"    : "example_cours/cours3/length_tr.ml"
+  },
+  {
+    "id"      : "3_m",
+    "name"    : "mem",
+    "parent"  : "cours3",
+    "isFolder": false,
+    "path"    : "example_cours/cours3/mem.ml"
+  },
+  {
+    "id"      : "3_mlo",
+    "name"    : "mem_lazy_or",
+    "parent"  : "cours3",
+    "isFolder": false,
+    "path"    : "example_cours/cours3/mem_lazy_or.ml"
+  },
+  {
+    "id"      : "3_n",
+    "name"    : "nth",
+    "parent"  : "cours3",
+    "isFolder": false,
+    "path"    : "example_cours/cours3/nth.ml"
+  },
+  {
+    "id"      : "3_r",
+    "name"    : "rev",
+    "parent"  : "cours3",
+    "isFolder": false,
+    "path"    : "example_cours/cours3/rev.ml"
+  },
+  {
+    "id"      : "3_rfl",
+    "name"    : "rev_fold_left",
+    "parent"  : "cours3",
+    "isFolder": false,
+    "path"    : "example_cours/cours3/rev_fold_left.ml"
+  },
+  {
+    "id"      : "3_t2",
+    "name"    : "times2",
+    "parent"  : "cours3",
+    "isFolder": false,
+    "path"    : "example_cours/cours3/times2.ml"
+  },
+  {
+    "id"      : "4_m",
+    "name"    : "mem",
+    "parent"  : "cours4",
+    "isFolder": false,
+    "path"    : "example_cours/cours4/mem.ml"
+  },
+  {
+    "id"      : "4_se",
+    "name"    : "search_exn",
+    "parent"  : "cours4",
+    "isFolder": false,
+    "path"    : "example_cours/cours4/search_exn.ml"
+  },
+  {
+    "id"      : "4_sl",
+    "name"    : "search_list",
+    "parent"  : "cours4",
+    "isFolder": false,
+    "path"    : "example_cours/cours4/search_list.ml"
+  },
+  {
+    "id"      : "4_so",
+    "name"    : "search_opt",
+    "parent"  : "cours4",
+    "isFolder": false,
+    "path"    : "example_cours/cours4/search_opt.ml"
+  },
+  {
+    "id"      : "4_si",
+    "name"    : "size",
+    "parent"  : "cours4",
+    "isFolder": false,
+    "path"    : "example_cours/cours4/size.ml"
+  },
+  {
+    "id"      : "4_sit1",
+    "name"    : "size_tr1",
+    "parent"  : "cours4",
+    "isFolder": false,
+    "path"    : "example_cours/cours4/size_tr1.ml"
+  },
+  {
+    "id"      : "4_sit2",
+    "name"    : "size_tr2",
+    "parent"  : "cours4",
+    "isFolder": false,
+    "path"    : "example_cours/cours4/size_tr2.ml"
+  },
+  {
     "id"      : "g_l",
     "name"    : "fold_left",
     "parent"  : "good",
     "isFolder": false,
     "path"    : "good/fold_left.ml"
+  },
+  {
+    "id"      : "g_a",
+    "name"    : "and",
+    "parent"  : "good",
+    "isFolder": false,
+    "path"    : "good/and.ml"
+  },
+  {
+    "id"      : "g_ap",
+    "name"    : "apply",
+    "parent"  : "good",
+    "isFolder": false,
+    "path"    : "good/apply.ml"
+  },
+  {
+    "id"      : "g_ar",
+    "name"    : "arith",
+    "parent"  : "good",
+    "isFolder": false,
+    "path"    : "good/arith.ml"
+  },
+  {
+    "id"      : "g_at",
+    "name"    : "att",
+    "parent"  : "good",
+    "isFolder": false,
+    "path"    : "good/att.ml"
+  },
+  {
+    "id"      : "g_cl",
+    "name"    : "cloture",
+    "parent"  : "good",
+    "isFolder": false,
+    "path"    : "good/cloture.ml"
+  },
+  {
+    "id"      : "g_cs",
+    "name"    : "constructor",
+    "parent"  : "good",
+    "isFolder": false,
+    "path"    : "good/constructor.ml"
+  },
+  {
+    "id"      : "g_ex",
+    "name"    : "exception",
+    "parent"  : "good",
+    "isFolder": false,
+    "path"    : "good/exception.ml"
+  },
+  {
+    "id"      : "g_ftr",
+    "name"    : "fact_tr",
+    "parent"  : "good",
+    "isFolder": false,
+    "path"    : "good/fact_tr.ml"
+  },
+  {
+    "id"      : "g_f",
+    "name"    : "fold",
+    "parent"  : "good",
+    "isFolder": false,
+    "path"    : "good/fold.ml"
+  },
+  {
+    "id"      : "g_fl",
+    "name"    : "fold_left",
+    "parent"  : "good",
+    "isFolder": false,
+    "path"    : "good/fold_left.ml"
+  },
+  {
+    "id"      : "g_fp",
+    "name"    : "fold_plus",
+    "parent"  : "good",
+    "isFolder": false,
+    "path"    : "good/fold_plus.ml"
+  },
+  {
+    "id"      : "g_fs",
+    "name"    : "fusion_sort",
+    "parent"  : "good",
+    "isFolder": false,
+    "path"    : "good/fusion_sort.ml"
+  },
+  {
+    "id"      : "g_if",
+    "name"    : "if",
+    "parent"  : "good",
+    "isFolder": false,
+    "path"    : "good/if.ml"
+  },
+  {
+    "id"      : "g_l",
+    "name"    : "lazy",
+    "parent"  : "good",
+    "isFolder": false,
+    "path"    : "good/lazy.ml"
+  },
+  {
+    "id"      : "g_let",
+    "name"    : "let",
+    "parent"  : "good",
+    "isFolder": false,
+    "path"    : "good/let.ml"
+  },
+  {
+    "id"      : "g_lib",
+    "name"    : "lib",
+    "parent"  : "good",
+    "isFolder": false,
+    "path"    : "good/lib.ml"
+  },
+  {
+    "id"      : "g_ls",
+    "name"    : "list_sort",
+    "parent"  : "good",
+    "isFolder": false,
+    "path"    : "good/list_sort.ml"
+  },
+  {
+    "id"      : "g_mtr",
+    "name"    : "map_tr",
+    "parent"  : "good",
+    "isFolder": false,
+    "path"    : "good/map_tr.ml"
+  },
+  {
+    "id"      : "g_ma",
+    "name"    : "match",
+    "parent"  : "good",
+    "isFolder": false,
+    "path"    : "good/match.ml"
+  },
+  {
+    "id"      : "g_p",
+    "name"    : "produit",
+    "parent"  : "good",
+    "isFolder": false,
+    "path"    : "good/produit.ml"
+  },
+  {
+    "id"      : "g_r",
+    "name"    : "rev",
+    "parent"  : "good",
+    "isFolder": false,
+    "path"    : "good/rev.ml"
+  },
+  {
+    "id"      : "g_s1",
+    "name"    : "shadow1",
+    "parent"  : "good",
+    "isFolder": false,
+    "path"    : "good/shadow1.ml"
+  },
+  {
+    "id"      : "g_s",
+    "name"    : "somme",
+    "parent"  : "good",
+    "isFolder": false,
+    "path"    : "good/somme.ml"
+  },
+  {
+    "id"      : "g_t",
+    "name"    : "tree",
+    "parent"  : "good",
+    "isFolder": false,
+    "path"    : "good/tree.ml"
   }
 ]
