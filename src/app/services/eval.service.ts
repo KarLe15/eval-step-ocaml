@@ -191,6 +191,7 @@ export class EvalService {
     );
     while (strategy.hasNextContext(currentContext)) {
       currentContext = strategy.getNextContext(currentContext);
+      console.log(stepResTemp);
       stepResTemp = this.filterWithContext(
         stepResTemp,
         strategy.getSubStrategy(currentContext)
@@ -200,7 +201,7 @@ export class EvalService {
       firstExpression: expressions.firstExpression,
       firstStep: firstExp
     };
-    console.log(res);
+    // console.log(res);
     return res;
   }
 
