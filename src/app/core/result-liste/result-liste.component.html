@@ -26,20 +26,35 @@
     <!-- Environnement -->
     <div class="col-md-4">
       <div class="card">
-        <div class="card-body">
-          <div class="card-title d-flex justify-content-between">
-            <h5 class="card-title">Environement</h5>
+        <div class="card-title titleEnv ">
+          <div class="d-flex justify-content-between">
+            <h5 class="titleEnvironment">Environement</h5>
             <i class="fi flaticon-technical-support symbol"></i>
           </div>
+          <div class="optionEnv">
+            <ui-switch
+              color="#0099CC" size="small"
+              checkedLabel="On" uncheckedLabel="Off"
+              [(ngModel)]="printDefinition"
+              (valueChange)="onValueChange()"
+            ></ui-switch>
+            <span class="label ml-4">Affichage des définitions</span>
+          </div>
+
+
+
+        </div>
+        <div class="card-body">
           <div *ngIf="isEnvEmpty() > 0" class="card-text ">
             <div class="jumbotron jumbotron-fluid m--2" *ngFor="let item of this.currentStep.currentExpression.environements">
                 <div class="container">
                   <div *ngFor="let itemEnv of item.items">
-                    <div class="text-env">{{nameEnv() }}</div>
                     <div *ngIf="itemEnv.corec == null">
+                      <div class="text-env-var">{{itemEnv.name}}</div>
                       <p class="lead"> Value = {{itemEnv.expr.toString}}</p>
                     </div>
-                    <div *ngIf="itemEnv.corec != null">
+                    <div *ngIf="itemEnv.corec != null && printDefinition ">
+                      <div class="text-env-def">{{itemEnv.name}}</div>
                       <p class="lead"> {{itemEnv.expr.toString}}</p>
                     </div>
                     <hr>

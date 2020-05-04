@@ -11,6 +11,7 @@ export class ResultListeComponent implements OnInit {
   @Input('etape') etape: number;
 
   response: HighlightResult;
+  printDefinition = false;
   constructor() { }
   ngOnInit() {
     this.etape = 0;
@@ -30,11 +31,13 @@ export class ResultListeComponent implements OnInit {
     };
   }
 
-  nameEnv() {
-    return this.currentStep.currentExpression.environements[0].items[0].name;
-  }
   isEnvEmpty() {
     // @ts-ignore
     return this.currentStep.currentExpression.environements.length;
+  }
+
+  onValueChange() {
+    this.printDefinition = !this.printDefinition;
+    console.log(this.printDefinition);
   }
 }

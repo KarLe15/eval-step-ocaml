@@ -89,7 +89,7 @@ export class EvalService {
           const expr = this.getSubEnvironementsfromJson(varEnv, keysEnv[j]);
           itemsEnv.push({
             corec,
-            name: keysEnv[i],
+            name: keysEnv[j],
             expr,
             range
           });
