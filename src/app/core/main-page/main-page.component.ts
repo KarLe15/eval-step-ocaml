@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, TemplateRef, ViewChild} from '@angular/core';
 import {EvalService} from '../../services/eval.service';
 import IEvaluation from '../../structures/IEvaluation';
 import {ReplaySubject, Subject} from 'rxjs';
@@ -18,6 +18,7 @@ import {Strategy, StrategyFactory} from '../../structures/Strategy';
 })
 export class MainPageComponent implements OnInit {
   navigationExtras: NavigationExtras;
+  @ViewChild('customLoadingTemplate', { static: false }) customLoadingTemplate: TemplateRef<any>;
 
   private defFun = 'Déclarations des fonctions ';
   private defMain: string;
@@ -31,6 +32,8 @@ export class MainPageComponent implements OnInit {
   private listeOptionsAffichage = ['liste', 'arbre'];
   optionChoisi = this.listeOptionsAffichage[0];
   private strategyChoosen: Strategy;
+
+  public loading = false;
 
   constructor(
     private evaluator: EvalService,
@@ -55,6 +58,7 @@ export class MainPageComponent implements OnInit {
   }
 
   onClick_evaluate() {
+    this.loading = false;
     const expression = this.defFun + '\n\nlet _ = ' + this.defMain;
     this.expressions = this.evaluator.getDataStructure(expression, this.defMain);
     this.filtredExpressions = this.evaluator.getEvaluationsWithFilter(this.expressions, this.strategyChoosen);
@@ -102,5 +106,13 @@ export class MainPageComponent implements OnInit {
     }).catch(err => {
       console.error('error while loading contents file strategies', err);
     });
+  }
+
+  load() {
+    this.loading = true;
+  }
+
+  endLoading() {
+    this.loading = false;
   }
 }

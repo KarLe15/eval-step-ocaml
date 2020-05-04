@@ -1,5 +1,6 @@
 <div class="container-fluid mb-5" >
   <div class="row mr-0">
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '5px' }" [template]="customLoadingTemplate"></ngx-loading>
     <div class="col-md-9">
       <app-editor
         (changeFun)="onChangeFun($event)"
@@ -9,7 +10,8 @@
       <div class="d-flex justify-content-between mb-4">
         <div class="buttonEval">
           <button
-            (mouseup)="onClick_evaluate()"
+            (mouseup)="load()"
+            (click)="onClick_evaluate()"
             type="button"
             [ngx-scroll-to]="'#destination'"
             class="btn btn-outline-primary waves-effect mt-4 d-flex align-items-center rounded-pill"
@@ -56,6 +58,7 @@
       <app-result
         [events]="eventSubject.asObservable()"
         [typeAffichage]="optionChoisi"
+        (displayResult)="endLoading()"
       ></app-result>
     </div>
   </div>

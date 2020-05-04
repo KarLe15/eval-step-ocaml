@@ -13,7 +13,9 @@ export class ResultListeComponent implements OnInit {
   response: HighlightResult;
   constructor() { }
   ngOnInit() {
+    this.etape = 0;
   }
+
 
   onHighlight(e) {
     // console.log('highlight', e);
@@ -28,4 +30,11 @@ export class ResultListeComponent implements OnInit {
     };
   }
 
+  nameEnv() {
+    return this.currentStep.currentExpression.environements[0].items[0].name;
+  }
+  isEnvEmpty() {
+    // @ts-ignore
+    return this.currentStep.currentExpression.environements.length;
+  }
 }
