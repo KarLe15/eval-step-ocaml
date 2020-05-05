@@ -105,6 +105,7 @@ export class MainPageComponent implements OnInit {
           strategies.push(strategy);
           if (strategies.length === content.length) {
             this.strategiesSubject.next(strategies);
+            console.log('strategies', strategies);
           }
         }).catch(err => {
           console.error('error while loading file', file.path, err);

@@ -43,8 +43,11 @@ export class ResultComponent implements OnInit {
   }
 
   onPrevious() {
-    this.currentStep = this.evalService.getPreviousStep(this.currentStep);
-    this.etape--;
+    const prev = this.evalService.getPreviousStep(this.currentStep);
+    if (prev != null) {
+      this.currentStep = prev;
+      this.etape--;
+    }
   }
 
   onNext() {
@@ -60,7 +63,7 @@ export class ResultComponent implements OnInit {
       this.listeEtape.push(this.currentStep);
       this.etape++;
     }
-    console.log(this.currentStep.currentExpression.environements);
+    // console.log(this.currentStep.currentExpression.environements);
   }
 
 

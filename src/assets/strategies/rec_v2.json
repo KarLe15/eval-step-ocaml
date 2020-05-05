@@ -9,23 +9,20 @@
     "wait": [
       {"name": "SubstFun"}
     ],
-    "naming_wait": true,
-    "wait_until": false
+    "naming_wait": true
   },
   "remonte_rec": {
     "skip": null,
     "wait": [
       {"name": "ApplyFunRuntime"}
     ],
-    "naming_wait": false,
-    "wait_until": true
+    "naming_wait": false
   },
   "resolution": {
     "skip": [
       {"name": "MoveDownSubst"}
     ],
     "wait": null,
-    "naming_wait": false,
-    "wait_until": false
+    "naming_wait": false
   }
 }
