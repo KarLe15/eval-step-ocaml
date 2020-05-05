@@ -182,7 +182,7 @@ export class EvalService {
     strategy: Strategy | null,
     functionToFollow: string | null
   ): IEvaluation {
-    console.log('filtring ', expressions);
+    console.log('filtring ', strategy);
     if (strategy === null) {
       return expressions;
     }
@@ -234,37 +234,53 @@ export class EvalService {
     subStrategy: SubStrategy,
     functionToFollow: string | null
   ): IStep {
-    console.log('before filter context ', step);
     let tmpStep = step;
     let currentStep = step;
     if (subStrategy.wait !== null) {
+    // if (subStrategy.hasToWait()) {
       const nameToWait = subStrategy.wait[0].name;
-      while (tmpStep !== null) {
-        this.printAllExpr(currentStep);
-        // TODO :: add naming
-        tmpStep = this.getNextToWait(tmpStep, nameToWait, functionToFollow);
-        if (tmpStep !== null) {
-          currentStep.nexts[0].step = tmpStep;
-          tmpStep.previous = currentStep;
-          currentStep = currentStep.nexts[0].step;
+      // @ts-ignore
+      if (subStrategy.wait_until) {
+        while (! this.onlyLeft(tmpStep, nameToWait)) {
+          tmpStep = tmpStep.nexts[0].step;
+        }
+        // this.printAllExpr(tmpStep);
+        step.nexts[0].step = tmpStep;
+        tmpStep.previous = step;
+      } else {
+        while (tmpStep !== null) {
+          // this.printAllExpr(currentStep);
+          // TODO :: add naming
+          tmpStep = this.getNextToWait(tmpStep, nameToWait, functionToFollow);
+          if (tmpStep !== null) {
+            currentStep.nexts[0].step = tmpStep;
+            tmpStep.previous = currentStep;
+            currentStep = currentStep.nexts[0].step;
+          }
         }
       }
-    }
-    if (subStrategy.skip !== null) {
+    } else if (subStrategy.skip !== null) {
       // TODO :: make this true
     }
-    console.log('after filter context ', currentStep);
     return currentStep;
+  }
+
+  private onlyLeft(tmpStep: IStep, nameToWait: string) {
+    let curStep = tmpStep;
+    while (curStep.nexts[0].step != null) {
+      if (curStep.nexts[0].name !== nameToWait) {
+        return false;
+      }
+      curStep = curStep.nexts[0].step;
+    }
+    return true;
   }
 
   private printAllExpr(step: IStep) {
     let currentStep = step;
     while (currentStep !== null) {
-      console.log('curentStep', currentStep.nexts[0].name, currentStep.currentExpression);
       currentStep = currentStep.nexts[0].step;
     }
-    console.log('==========================================================');
-    console.log('==========================================================');
   }
 
   public getFirstStep(evaluations: IEvaluation): IStep {

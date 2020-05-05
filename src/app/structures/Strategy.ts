@@ -10,15 +10,16 @@ class SubStrategy {
   private _wait: Array<SubStrategyEntry> | null;
   private _skip: Array<SubStrategyEntry> | null;
   private _mustNameWait: boolean;
+  private _waitUntil: boolean;
 
-  public hasToWait(): boolean {
-    return this._wait !== null;
+  public hasToWait = () => this._wait !== null;
+
+  public hasToSkip = () => this._skip !== null;
+
+
+  public waitUntil(): boolean {
+    return this._waitUntil;
   }
-
-  public hasToSkip(): boolean {
-    return this._skip !== null;
-  }
-
 
   get wait(): Array<SubStrategyEntry> | null {
     return this._wait;
