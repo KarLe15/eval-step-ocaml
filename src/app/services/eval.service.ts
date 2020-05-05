@@ -299,9 +299,11 @@ export class EvalService {
   public getPreviousStep(current: IStep): IStep | null {
     return current.previous;
   }
+
   // =======================================================================
   //                      Libraries functions
   // =======================================================================
+
   public setupOptions() {
     global_options.set_range(true);
   }
