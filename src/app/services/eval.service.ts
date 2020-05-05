@@ -177,8 +177,12 @@ export class EvalService {
       return this.parseJSONToIEvaluation(evals, firstExpression);
   }
 
-  public getEvaluationsWithFilter(expressions: IEvaluation, strategy: Strategy | null): IEvaluation {
-    console.log('filtring ', strategy);
+  public getEvaluationsWithFilter(
+    expressions: IEvaluation,
+    strategy: Strategy | null,
+    functionToFollow: string | null
+  ): IEvaluation {
+    console.log('filtring ', expressions);
     if (strategy === null) {
       return expressions;
     }
@@ -187,19 +191,24 @@ export class EvalService {
     let currentContext = strategy.getContext(0);
     stepResTemp = this.filterWithContext(
       stepResTemp,
-      strategy.getSubStrategy(currentContext)
+      strategy.getSubStrategy(currentContext),
+      functionToFollow
     );
     while (strategy.hasNextContext(currentContext)) {
       currentContext = strategy.getNextContext(currentContext);
       stepResTemp = this.filterWithContext(
         stepResTemp,
-        strategy.getSubStrategy(currentContext)
+        strategy.getSubStrategy(currentContext),
+        functionToFollow
       );
     }
-    return {
+    const res =  {
       firstExpression: expressions.firstExpression,
       firstStep: firstExp
     };
+    // console.log(res);
+    // this.printAllExpr(res.firstStep);
+    return res;
   }
 
   private getNextToWait(step: IStep, stepName: string, name: string|null): IStep | null {
@@ -208,6 +217,11 @@ export class EvalService {
       if (currentStep.nexts[0].name === stepName) {
         if (name === null) {
           return currentStep;
+        } else {
+          console.log('current', currentStep.nexts[0].subst, 'toFollow', name);
+          if (currentStep.nexts[0].subst === name) {
+            return currentStep;
+          }
         }// else todo with named wait
       }
       currentStep = currentStep.nexts[0].step;
@@ -215,16 +229,20 @@ export class EvalService {
     return null;
   }
 
-  private filterWithContext(step: IStep, subStrategy: SubStrategy): IStep {
+  private filterWithContext(
+    step: IStep,
+    subStrategy: SubStrategy,
+    functionToFollow: string | null
+  ): IStep {
+    console.log('before filter context ', step);
     let tmpStep = step;
     let currentStep = step;
     if (subStrategy.wait !== null) {
       const nameToWait = subStrategy.wait[0].name;
-      console.log('waitin to', nameToWait);
       while (tmpStep !== null) {
-        // this.printAllExpr(currentStep);
+        this.printAllExpr(currentStep);
         // TODO :: add naming
-        tmpStep = this.getNextToWait(tmpStep, nameToWait, null);
+        tmpStep = this.getNextToWait(tmpStep, nameToWait, functionToFollow);
         if (tmpStep !== null) {
           currentStep.nexts[0].step = tmpStep;
           tmpStep.previous = currentStep;
@@ -235,13 +253,14 @@ export class EvalService {
     if (subStrategy.skip !== null) {
       // TODO :: make this true
     }
+    console.log('after filter context ', currentStep);
     return currentStep;
   }
 
   private printAllExpr(step: IStep) {
     let currentStep = step;
     while (currentStep !== null) {
-      console.log('curentStep', currentStep.currentExpression);
+      console.log('curentStep', currentStep.nexts[0].name, currentStep.currentExpression);
       currentStep = currentStep.nexts[0].step;
     }
     console.log('==========================================================');

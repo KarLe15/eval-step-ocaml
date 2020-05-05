@@ -61,7 +61,14 @@ export class MainPageComponent implements OnInit {
     this.loading = false;
     const expression = this.defFun + '\n\nlet _ = ' + this.defMain;
     this.expressions = this.evaluator.getDataStructure(expression, this.defMain);
-    this.filtredExpressions = this.evaluator.getEvaluationsWithFilter(this.expressions, this.strategyChoosen);
+    const functionToFollowElem = document.getElementById('exampleFormControlTextarea5') as HTMLTextAreaElement;
+    const functionToFollow: string | null = functionToFollowElem.value === '' ? null : functionToFollowElem.value;
+    this.filtredExpressions =
+      this.evaluator.getEvaluationsWithFilter(
+        this.expressions,
+        this.strategyChoosen,
+        functionToFollow
+      );
     this.emitEventToChild(this.filtredExpressions);
     this.evaluate = true;
   }
