@@ -1,3 +1,4 @@
 [
+  {"name": "simple", "path": "simple.json"},
   {"name": "recurrence", "path": "rec.json"}
 ]

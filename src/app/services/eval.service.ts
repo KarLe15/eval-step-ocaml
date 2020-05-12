@@ -4,11 +4,9 @@ import IStep from '../structures/IStep';
 import {IEnvironment} from '../structures/IEnvironement';
 import IExpression from '../structures/IExpression';
 import IRange from '../structures/IRange';
-import IOption from '../structures/IOption';
 import { GetAssetsFilesService } from './get-assets-files.service';
 import {Observable, Subject} from 'rxjs';
 import {Strategy, SubStrategy} from '../structures/Strategy';
-import {first} from 'rxjs/operators';
 
 interface GlobalOptions {
   get_range: () => boolean;
@@ -182,7 +180,7 @@ export class EvalService {
     strategy: Strategy | null,
     functionToFollow: string | null
   ): IEvaluation {
-    console.log('filtring ', strategy);
+    // this.printAllExpr(expressions.firstStep);
     if (strategy === null) {
       return expressions;
     }
@@ -218,7 +216,7 @@ export class EvalService {
         if (name === null) {
           return currentStep;
         } else {
-          console.log('current', currentStep.nexts[0].subst, 'toFollow', name);
+          // console.log('current', currentStep.nexts[0].subst, 'toFollow', name);
           if (currentStep.nexts[0].subst === name) {
             return currentStep;
           }
@@ -237,20 +235,16 @@ export class EvalService {
     let tmpStep = step;
     let currentStep = step;
     if (subStrategy.wait !== null) {
-    // if (subStrategy.hasToWait()) {
       const nameToWait = subStrategy.wait[0].name;
       // @ts-ignore
       if (subStrategy.wait_until) {
         while (! this.onlyLeft(tmpStep, nameToWait)) {
           tmpStep = tmpStep.nexts[0].step;
         }
-        // this.printAllExpr(tmpStep);
         step.nexts[0].step = tmpStep;
         tmpStep.previous = step;
       } else {
         while (tmpStep !== null) {
-          // this.printAllExpr(currentStep);
-          // TODO :: add naming
           tmpStep = this.getNextToWait(tmpStep, nameToWait, functionToFollow);
           if (tmpStep !== null) {
             currentStep.nexts[0].step = tmpStep;
@@ -260,6 +254,16 @@ export class EvalService {
         }
       }
     } else if (subStrategy.skip !== null) {
+      const namesToSkip = subStrategy.skip.map(entry => entry.name);
+      while (tmpStep != null) {
+        if (namesToSkip.includes(tmpStep.nexts[0].name)) {
+          if (tmpStep.previous !== null) {
+            tmpStep.previous.nexts[0].step = tmpStep.nexts[0].step;
+          }
+          tmpStep.nexts[0].step.previous = tmpStep.previous;
+        }
+        tmpStep = tmpStep.nexts[0].step;
+      }
       // TODO :: make this true
     }
     return currentStep;
@@ -279,8 +283,11 @@ export class EvalService {
   private printAllExpr(step: IStep) {
     let currentStep = step;
     while (currentStep !== null) {
+      console.log(currentStep.nexts[0].name, ' | ', currentStep.currentExpression.toString);
       currentStep = currentStep.nexts[0].step;
     }
+    console.log('################################################################');
+    console.log('################################################################');
   }
 
   public getFirstStep(evaluations: IEvaluation): IStep {

@@ -1,5 +1,4 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {OptionsService} from '../../services/options.service';
 import IOption from '../../structures/IOption';
 import {Observable} from 'rxjs';
 import {Strategy} from '../../structures/Strategy';
@@ -13,13 +12,15 @@ export class OptionsComponent implements OnInit {
   @Input('strategiesObservable') strategiesObservable: Observable<Array<Strategy>>;
   @Input('options') options: Map<string, IOption>;
   @Output('changeOptions') changeOptions = new EventEmitter();
+  private strategies: Strategy[];
   MoveDownSubst: true;
-  private  modeBasique = true;
+  private currentStrategy = 0;
   constructor() {}
 
   ngOnInit() {
     this.strategiesObservable.subscribe(strategies => {
       console.log('options has received strategies', strategies);
+      this.strategies = strategies;
     });
   }
 
@@ -31,5 +32,12 @@ export class OptionsComponent implements OnInit {
 
   onChangeOption() {
     this.changeOptions.emit(this.options);
+  }
+
+  onChangeStrategy($event: boolean, currentStrategy: number) {
+    if ($event) {
+      this.currentStrategy = currentStrategy;
+      this.changeOptions.emit(this.strategies[this.currentStrategy]);
+    }
   }
 }

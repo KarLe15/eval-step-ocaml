@@ -1,0 +1,14 @@
+{
+  "steps": [
+    "resolution"
+  ],
+  "resolution": {
+    "skip": [
+      {"name": "MoveDownSubst"},
+      {"name": "SubstCombine"}
+    ],
+    "wait": null,
+    "naming_wait": false,
+    "wait_until": false
+  }
+}

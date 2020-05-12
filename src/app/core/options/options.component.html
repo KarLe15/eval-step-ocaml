@@ -36,12 +36,13 @@
 
 
     <div class="tab-pane fade  show active" id="pills-mode" role="tabpanel" aria-labelledby="pills-mode-tab">
-      <div class="d-flex justify-content-between align-self-center">
-        <p class="labelOption">Mode basique</p>
+      <div *ngFor="let item of strategies | keyvalue" class="d-flex justify-content-between align-self-center">
+        <p class="labelOption">{{item.value.name}}</p>
         <ui-switch
           color="#0099CC" size="small"
           checkedLabel="On" uncheckedLabel="Off"
-          [(ngModel)]="modeBasique"
+          (change)="onChangeStrategy($event, item.key)"
+          [checked]="this.currentStrategy === item.key"
         ></ui-switch>
       </div>
     </div>
@@ -51,7 +52,7 @@
 
   <hr class="mr-4 ml-4">
   <div class="form-group green-border-focus mr-2 ml-2 ">
-    <label for="exampleFormControlTextarea5" class="h4">Fonctions à suivre :</label>
+    <label for="exampleFormControlTextarea5" class="h4">Fonction à suivre :</label>
     <textarea class="form-control" id="exampleFormControlTextarea5" rows="2" placeholder="Par exemple: Pair, Impair"></textarea>
   </div>
 

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {BehaviorSubject, ReplaySubject, Subject} from 'rxjs';
+import {ReplaySubject} from 'rxjs';
 import {EvalService} from './services/eval.service';
 import {LazyLoadScriptService} from './services/lazy-load-script.service';
 import {GetAssetsFilesService} from './services/get-assets-files.service';

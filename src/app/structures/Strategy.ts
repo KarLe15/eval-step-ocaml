@@ -37,10 +37,12 @@ class SubStrategy {
 class Strategy {
   private _contexts: Array<string>;
   private _strategies: Map<string, SubStrategy>;
+  public name: string;
 
-  constructor(contexts: Array<string>, strategies: Map<string, SubStrategy>) {
+  constructor(contexts: Array<string>, strategies: Map<string, SubStrategy>, name: string) {
     this._contexts = contexts;
     this._strategies = strategies;
+    this.name = name;
   }
 
   get contexts(): Array<string> {
@@ -66,14 +68,14 @@ class Strategy {
   }
 }
 
-const StrategyFactory = (json: DescriptionFile): Strategy => {
+const StrategyFactory = (json: DescriptionFile, path: string): Strategy => {
   const cons: Array<string> = json.steps;
   const strategies: Map<string, SubStrategy> = new Map<string, SubStrategy>();
   for (const context of cons) {
     const subStrategy: SubStrategy = json[context];
     strategies.set(context, subStrategy);
   }
-  return new Strategy(cons, strategies);
+  return new Strategy(cons, strategies, path.slice(0, -5));
 };
 
 

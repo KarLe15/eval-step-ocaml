@@ -82,7 +82,8 @@ export class MainPageComponent implements OnInit {
   }
 
   recuperateOption(eventArgs) {
-    this.options = eventArgs;
+    this.strategyChoosen = eventArgs;
+    // this.options = eventArgs;
   }
 
   emitEventToChild(express: IEvaluation) {
@@ -101,7 +102,7 @@ export class MainPageComponent implements OnInit {
       for (const file of content) {
         this.filesService.getFile('assets/strategies/' + file.path).then(contentF => {
           const jsonContent = JSON.parse(contentF);
-          const strategy: Strategy = StrategyFactory(jsonContent);
+          const strategy: Strategy = StrategyFactory(jsonContent, file.path);
           strategies.push(strategy);
           if (strategies.length === content.length) {
             this.strategiesSubject.next(strategies);
