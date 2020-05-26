@@ -20,18 +20,18 @@ export class MainPageComponent implements OnInit {
   navigationExtras: NavigationExtras;
   @ViewChild('customLoadingTemplate', { static: false }) customLoadingTemplate: TemplateRef<any>;
 
-  private defFun = 'Déclarations des fonctions ';
-  private defMain: string;
+  public defFun = 'Déclarations des fonctions ';
+  public defMain: string;
   evaluate = false;
-  private eventSubject: Subject<IEvaluation> = new Subject<IEvaluation>();
-  private strategiesSubject = new ReplaySubject<Array<Strategy>>();
-  private expressions: IEvaluation;
-  private filtredExpressions: IEvaluation;
+  public eventSubject: Subject<IEvaluation> = new Subject<IEvaluation>();
+  public strategiesSubject = new ReplaySubject<Array<Strategy>>();
+  public expressions: IEvaluation;
+  public filtredExpressions: IEvaluation;
 
-  private options: Map<string, IOption>;
-  private listeOptionsAffichage = ['liste', 'arbre'];
+  public options: Map<string, IOption>;
+  public listeOptionsAffichage = ['liste', 'arbre'];
   optionChoisi = this.listeOptionsAffichage[0];
-  private strategyChoosen: Strategy;
+  public strategyChoosen: Strategy;
 
   public loading = false;
 

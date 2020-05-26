@@ -12,9 +12,9 @@ export class OptionsComponent implements OnInit {
   @Input('strategiesObservable') strategiesObservable: Observable<Array<Strategy>>;
   @Input('options') options: Map<string, IOption>;
   @Output('changeOptions') changeOptions = new EventEmitter();
-  private strategies: Strategy[];
+  public strategies: Strategy[];
   MoveDownSubst: true;
-  private currentStrategy = 0;
+  public currentStrategy = 0;
   constructor() {}
 
   ngOnInit() {

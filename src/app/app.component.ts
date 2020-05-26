@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
   isLoaded = false;
   cptLoading = 0;
 
-  private filesSubject: ReplaySubject<Array<FileElement>> = new ReplaySubject<Array<FileElement>>();
+  public filesSubject: ReplaySubject<Array<FileElement>> = new ReplaySubject<Array<FileElement>>();
   constructor(
     private evalStep: EvalService,
     private lazyLoadService: LazyLoadScriptService,

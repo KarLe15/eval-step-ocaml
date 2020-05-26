@@ -6,7 +6,7 @@
         <app-node>
           <div exp class="result" >
             <pre>
-                <code  [highlight]="currentStep.currentExpression.toString | replaceN" (highlighted)="onHighlight($event)" [lineNumbers]="false "></code>
+                <code  [highlight]="currentStep.currentExpression.toString " (highlighted)="onHighlight($event)" [lineNumbers]="false "></code>
             </pre>
           </div>
         </app-node>
@@ -16,7 +16,7 @@
     <div *ngIf="printEnv" class="offset-1 col-sm-4 mb-3 mb-md-0">
       <div >
         <app-node>
-          <div exp class= "result card-text" >
+          <div exp class= "result< card-text" >
             <div class="container">
               <div class="text-env">{{currentStep.currentExpression.environements[0].items[0].name}}</div>
               <div *ngIf="currentStep.currentExpression.environements[0].items[0].corec == null">

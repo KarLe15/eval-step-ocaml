@@ -50,12 +50,15 @@
                 <div class="container">
                   <div *ngFor="let itemEnv of item.items">
                     <div *ngIf="itemEnv.corec == null">
-                      <div class="text-env-var">{{itemEnv.name}}</div>
-                      <p class="lead"> Value = {{itemEnv.expr.toString}}</p>
+                      <div class="row d-flex justify-content-between">
+                        <div class="ml-4 text-env-var">xa{{itemEnv.name}}</div>
+                        <div class="mr-3 text-env-range">{{itemEnv.range.start }}-{{itemEnv.range.end}} </div>
+                      </div>
+                      <pre class="lead"> Value = {{itemEnv.expr.toString }}</pre>
                     </div>
                     <div *ngIf="itemEnv.corec != null && printDefinition ">
                       <div class="text-env-def">{{itemEnv.name}}</div>
-                      <p class="lead"> {{itemEnv.expr.toString}}</p>
+                      <pre class="lead"> {{itemEnv.expr.toString }}</pre>
                     </div>
                     <hr>
                   </div>

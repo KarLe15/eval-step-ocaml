@@ -17,10 +17,10 @@ export class ResultComponent implements OnInit {
   @Input('typeAffichage') type: string;
   @Output('displayResult') displayResult = new EventEmitter();
 
-  private shouldDisplay: boolean;
-  private expressions: IEvaluation;
-  private eventsSubscription: Subscription;
-  private currentStep: IStep;
+  public shouldDisplay: boolean;
+  public expressions: IEvaluation;
+  public eventsSubscription: Subscription;
+  public currentStep: IStep;
   etape = 0;
   listeEtape = [];
 

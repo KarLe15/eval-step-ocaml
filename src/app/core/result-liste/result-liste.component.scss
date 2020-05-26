@@ -39,6 +39,11 @@
   font-size: 31px !important;
   font-family: 'Nunito';
 }
+.text-env-range{
+  color: #0099CC;
+  font-size: 20px !important;
+  font-family: 'Nunito';
+}
 .text-env-def{
   font-size: 30px !important;
   font-family: 'Nunito';
@@ -50,6 +55,10 @@
 
 .hljs{
   background: white;
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  color: #333;
 }
 
 
@@ -82,4 +91,8 @@
 
 .optionEnv{
   margin-top: -14px;
+}
+.undeline{
+  text-decoration: underline;
+  color: red;
 }
