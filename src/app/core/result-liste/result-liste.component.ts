@@ -20,15 +20,15 @@ export class ResultListeComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    // for (const item of this.currentStep.currentExpression.environements) {
-    //   for (const e of item.items) {
-    //     console.log(e.name);
-    //     const regex = new RegExp(e.name, 'g');
-    //     this.currentStep.currentExpression.toString = this.currentStep.currentExpression.toString.replace(regex, '<span class="undeline">'.concat(e.name).concat('</span>'));
-    //   }
-    //   // const regex = new RegExp('[a-z]', 'g');
-    //   // this.currentStep.currentExpression.toString = this.currentStep.currentExpression.toString.replace(regex, '\n-');
-    // }
+    // const str = this.currentStep.currentExpression.toString;
+    // this.currentStep.currentExpression.environements.forEach((item, index) => {
+    //   this.currentStep.currentExpression.toString =
+    //     ((str.slice(0, item.items[0].range.end)).concat(String("[",index,"]"))).concat((str.slice(item.items[0].range.end, str.length )));
+    // });
+  }
+
+  replaceAt = function(str, index, replacement) {
+    return str.substr(0, index) + replacement + this.substr(index + replacement.length);
   }
 
   onHighlight(e) {
@@ -53,8 +53,11 @@ export class ResultListeComponent implements OnInit, OnChanges {
     console.log(this.printDefinition);
   }
 
-  me(e: ItemEnvironement) {
-    const pipe = new ReplaceNPipe();
-    console.log(pipe.transform(this.currentStep.currentExpression.toString, e.range.start, e.range.end));
+  checkFun(s: string) {
+    return s.startsWith('fun');
+  }
+
+  select(e: MouseEvent) {
+    console.log(e);
   }
 }

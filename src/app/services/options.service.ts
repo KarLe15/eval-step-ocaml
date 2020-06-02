@@ -9,7 +9,7 @@ export class OptionsService {
   constructor() {
   }
 
-  public getOptions(){
+  public getOptions() {
     const mapOptions = new Map<string, IOption>();
     // mapOptions.set('MoveDownSubst', {name: 'MoveDownSubst', index: 0, valueDefault: true});
     // mapOptions.set('SubstCombine', {name: 'SubstCombine', index: 1, valueDefault: true});

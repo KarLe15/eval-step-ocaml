@@ -15,10 +15,12 @@ export class ResultTreeComponent implements OnInit, OnChanges {
   constructor() { }
 
   ngOnInit() {
+
   }
 
   ngOnChanges() {
     console.log('here');
+    //this.currentStep.currentExpression.toString
     //this.currentStep.currentExpression.toString = '<span tooltip="Tooltip text" placement="top">Tooltip on top</span>';
   }
 

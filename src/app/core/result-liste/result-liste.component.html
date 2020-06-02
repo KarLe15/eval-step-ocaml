@@ -13,6 +13,7 @@
           <div class="card-text result" >
             <pre>
                 <code
+                  (click)="select($event)"
                   [highlight]="currentStep.currentExpression.toString "
                   (highlighted)="onHighlight($event)"
                   [lineNumbers]="false"
@@ -41,22 +42,20 @@
             <span class="label ml-4">Affichage des définitions</span>
           </div>
 
-
-
         </div>
         <div class="card-body">
           <div *ngIf="isEnvEmpty() > 0" class="card-text ">
             <div class="jumbotron jumbotron-fluid m--2" *ngFor="let item of this.currentStep.currentExpression.environements">
                 <div class="container">
                   <div *ngFor="let itemEnv of item.items">
-                    <div *ngIf="itemEnv.corec == null">
+                    <div *ngIf="!checkFun(itemEnv.expr.toString)">
                       <div class="row d-flex justify-content-between">
-                        <div class="ml-4 text-env-var">xa{{itemEnv.name}}</div>
+                        <div class="ml-4 text-env-var">{{itemEnv.name}}</div>
                         <div class="mr-3 text-env-range">{{itemEnv.range.start }}-{{itemEnv.range.end}} </div>
                       </div>
                       <pre class="lead"> Value = {{itemEnv.expr.toString }}</pre>
                     </div>
-                    <div *ngIf="itemEnv.corec != null && printDefinition ">
+                    <div *ngIf="checkFun(itemEnv.expr.toString) && printDefinition ">
                       <div class="text-env-def">{{itemEnv.name}}</div>
                       <pre class="lead"> {{itemEnv.expr.toString }}</pre>
                     </div>
