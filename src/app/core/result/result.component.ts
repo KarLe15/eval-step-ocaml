@@ -38,6 +38,7 @@ export class ResultComponent implements OnInit {
     this.shouldDisplay = true;
     this.expressions = expressions;
     this.currentStep = this.evalService.getFirstStep(this.expressions);
+    this.listeEtape = [];
     this.listeEtape.push(this.currentStep);
     this.displayResult.emit();
   }

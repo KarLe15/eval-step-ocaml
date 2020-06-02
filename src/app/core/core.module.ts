@@ -25,6 +25,8 @@ import {MatCardModule} from '@angular/material';
 import {FileManagerModule} from '../file-manager/file-manager.module';
 import {RouterModule} from '@angular/router';
 import { NgxLoadingModule } from 'ngx-loading';
+import {TooltipModule, TooltipOptions} from 'ng2-tooltip-directive';
+import {MyDefaultTooltipOptions} from '../structures/MyDefaultTooltipOptions';
 
 
 
@@ -61,7 +63,9 @@ import { NgxLoadingModule } from 'ngx-loading';
     SharedModule,
     HttpClientModule,
     MatCardModule,
-    RouterModule
+    RouterModule,
+    TooltipModule,
+    TooltipModule.forRoot(MyDefaultTooltipOptions as TooltipOptions)
   ],
   providers: [
     EvalService,

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import IStep from '../../structures/IStep';
 import {HighlightResult} from 'ngx-highlightjs';
 
@@ -7,7 +7,7 @@ import {HighlightResult} from 'ngx-highlightjs';
   templateUrl: './result-tree.component.html',
   styleUrls: ['./result-tree.component.scss']
 })
-export class ResultTreeComponent implements OnInit {
+export class ResultTreeComponent implements OnInit, OnChanges {
   @Input('currentStep') currentStep: IStep;
 
   response: HighlightResult;
@@ -15,6 +15,11 @@ export class ResultTreeComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  ngOnChanges() {
+    console.log('here');
+    //this.currentStep.currentExpression.toString = '<span tooltip="Tooltip text" placement="top">Tooltip on top</span>';
   }
 
   onHighlight(e) {
