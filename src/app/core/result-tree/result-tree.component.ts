@@ -37,4 +37,8 @@ export class ResultTreeComponent implements OnInit, OnChanges {
   printEnvironement() {
     this.printEnv = true;
   }
+
+  checkFun(s: string) {
+    return s.startsWith('fun');
+  }
 }

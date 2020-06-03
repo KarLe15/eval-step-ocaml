@@ -3,9 +3,9 @@
     <!-- Expression -->
     <div class="col-sm-7 mb-3 mb-md-0">
       <div (click)="printEnvironement()">
-        <app-node>
-          <div exp class="result" >
-            <pre >
+        <div class="jumbotron ">
+          <div exp class="result">
+            <pre class="container-exp">
                 <code
                   [highlight]="currentStep.currentExpression.toString "
                   (highlighted)="onHighlight($event)"
@@ -13,21 +13,30 @@
                 </code>
             </pre>
           </div>
-        </app-node>
+        </div>
       </div>
     </div>
 
     <div *ngIf="printEnv" class="offset-1 col-sm-4 mb-3 mb-md-0">
       <div >
         <app-node>
-          <div exp class= "result< card-text" >
-            <div class="container">
-              <div class="text-env">{{currentStep.currentExpression.environements[0].items[0].name}}</div>
-              <div *ngIf="currentStep.currentExpression.environements[0].items[0].corec == null">
-                <p class="lead"> Value = {{currentStep.currentExpression.environements[0].items[0].expr.toString}}</p>
-              </div>
-              <div *ngIf="currentStep.currentExpression.environements[0].items[0].corec != null">
-                <p class="lead"> {{currentStep.currentExpression.environements[0].items[0].expr.toString}}</p>
+          <div exp class= "result card-text" >
+            <div  *ngFor="let item of this.currentStep.currentExpression.environements">
+              <div class="container-env">
+                <div *ngFor="let itemEnv of item.items">
+                  <div *ngIf="!checkFun(itemEnv.expr.toString)">
+                    <div class="row d-flex justify-content-between">
+                      <div class="ml-4 text-env-var">{{itemEnv.name}}</div>
+                      <div class="mr-3 text-env-range">{{itemEnv.range.start }}-{{itemEnv.range.end}} </div>
+                    </div>
+                    <pre class="lead"> Value = {{itemEnv.expr.toString }}</pre>
+                  </div>
+                  <div *ngIf="checkFun(itemEnv.expr.toString) ">
+                    <div class="text-env-def">{{itemEnv.name}}</div>
+                    <pre class="lead"> {{itemEnv.expr.toString }}</pre>
+                  </div>
+                  <hr>
+                </div>
               </div>
             </div>
           </div>
