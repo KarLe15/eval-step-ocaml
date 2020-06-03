@@ -55,7 +55,7 @@ process.stdin.on('keypress', (str, key) => {
     }
       */
     let step = json[i].step[0];
-    if(isSubstFunOf(json,i, "fact")){
+   /* if(isSubstFunOf(json,i, "fact")){
       console.log("a");
       while (step !== "SubstFun" ) {
         i++;
@@ -68,13 +68,13 @@ process.stdin.on('keypress', (str, key) => {
         step = json[i].step[0];
       }
     }
-
+    */
     // console.log(step);
-    console.log("==================================================");
-    console.log(json[i].current_expression.expr);
+    // console.log("==================================================");
+    console.log("=> ",json[i].current_expression.expr);
     // console.log(json[i].current_expression.envs.env0);
-    console.log(json[i].step);
-    console.log("==================================================");
+    // console.log(json[i].step);
+    // console.log("==================================================");
     i++;
   }
 });

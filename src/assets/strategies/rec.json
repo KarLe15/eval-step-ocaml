@@ -1,7 +1,6 @@
 {
   "steps": [
     "descente_rec",
-    "remonte_rec",
     "resolution"
   ],
   "descente_rec": {
@@ -12,20 +11,12 @@
     "naming_wait": true,
     "wait_until": false
   },
-  "remonte_rec": {
+  "resolution": {
     "skip": null,
     "wait": [
       {"name": "ApplyFunRuntime"}
     ],
     "naming_wait": false,
     "wait_until": true
-  },
-  "resolution": {
-    "skip": [
-      {"name": "MoveDownSubst"}
-    ],
-    "wait": null,
-    "naming_wait": false,
-    "wait_until": false
   }
 }
